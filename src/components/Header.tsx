@@ -81,7 +81,7 @@ const Header: React.FC = () => {
             aria-label='ET Auto Švara - grįžti į pagrindinį puslapį'
           >
             <img
-              src='/logo.png'
+              src='/logo.svg'
               alt='ET Auto Švara'
               width='120'
               height='54'
