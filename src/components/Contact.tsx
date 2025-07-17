@@ -179,9 +179,10 @@ const Contact: React.FC = () => {
                 <Image
                   src='/kur_mus_rasti.jpg'
                   alt='Kaip mus rasti'
-                  fill
-                  className='object-cover object-center'
+                  className='object-cover object-center w-full h-full'
                   loading='lazy'
+                  width={720}
+                  height={720}
                 />
               </div>
             </div>
