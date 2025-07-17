@@ -41,6 +41,11 @@ const Header: React.FC = () => {
       href: 'testimonials',
       ariaLabel: 'Skaityti klientų atsiliepimus',
     },
+    {
+      name: 'DUK',
+      href: 'faq',
+      ariaLabel: 'Dažnai užduodami klausimai',
+    },
     { name: 'Kontaktai', href: 'contact', ariaLabel: 'Susisiekti su mumis' },
   ];
 
