@@ -41,30 +41,30 @@ const BeforeAfter: React.FC = () => {
       afterImage: '/after.jpeg',
       description: 'Giluminis automobilio salono valymas',
     },
-    {
-      id: 4,
-      title: 'Nano dangos padengimas',
-      service: 'coating',
-      beforeImage: '/before.jpeg',
-      afterImage: '/after.jpeg',
-      description: 'Apsauginio nano dangos padengimas',
-    },
-    {
-      id: 5,
-      title: 'Ratų poliravimas',
-      service: 'wheels',
-      beforeImage: '/before.jpeg',
-      afterImage: '/after.jpeg',
-      description: 'Ratų valymas ir poliravimas',
-    },
-    {
-      id: 6,
-      title: 'PPF plėvelės padengimas',
-      service: 'ppf',
-      beforeImage: '/before.jpeg',
-      afterImage: '/after.jpeg',
-      description: 'Apsauginės plėvelės padengimas',
-    },
+    // {
+    //   id: 4,
+    //   title: 'Nano dangos padengimas',
+    //   service: 'coating',
+    //   beforeImage: '/before.jpeg',
+    //   afterImage: '/after.jpeg',
+    //   description: 'Apsauginio nano dangos padengimas',
+    // },
+    // {
+    //   id: 5,
+    //   title: 'Ratų poliravimas',
+    //   service: 'wheels',
+    //   beforeImage: '/before.jpeg',
+    //   afterImage: '/after.jpeg',
+    //   description: 'Ratų valymas ir poliravimas',
+    // },
+    // {
+    //   id: 6,
+    //   title: 'PPF plėvelės padengimas',
+    //   service: 'ppf',
+    //   beforeImage: '/before.jpeg',
+    //   afterImage: '/after.jpeg',
+    //   description: 'Apsauginės plėvelės padengimas',
+    // },
   ];
 
   const filterOptions = [
@@ -72,9 +72,9 @@ const BeforeAfter: React.FC = () => {
     { value: 'polishing', label: 'Poliravimas' },
     { value: 'headlights', label: 'Žibintai' },
     { value: 'interior', label: 'Interjeras' },
-    { value: 'coating', label: 'Dangos' },
-    { value: 'wheels', label: 'Ratai' },
-    { value: 'ppf', label: 'PPF plėvelė' },
+    // { value: 'coating', label: 'Dangos' },
+    // { value: 'wheels', label: 'Ratai' },
+    // { value: 'ppf', label: 'PPF plėvelė' },
   ];
 
   const filteredExamples =

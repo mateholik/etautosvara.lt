@@ -8,6 +8,7 @@ import {
   ClockIcon,
   GlobeAltIcon,
 } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 
 const Contact: React.FC = () => {
   const handlePhoneClick = (phoneNumber: string) => {
@@ -160,18 +161,28 @@ const Contact: React.FC = () => {
             Kaip mus rasti
           </h3>
           <div className='bg-gray-800 rounded-xl p-6'>
-            <div className='aspect-video bg-gray-700 rounded-lg overflow-hidden'>
-              <iframe
-                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2294.5!2d25.2!3d54.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dd94c0e0a0a0a0%3A0x0!2sSaul%C4%97toji%20g.%208%2C%20Li%C5%BEi%C5%A1k%C4%97s%2C%20Vilnius!5e0!3m2!1sen!2slt!4v1620000000000!5m2!1sen!2slt'
-                width='100%'
-                height='100%'
-                style={{ border: 0 }}
-                allowFullScreen
-                loading='lazy'
-                referrerPolicy='no-referrer-when-downgrade'
-                title='ET Auto Švara lokacija - Saulėtoji g. 8, Ližiškės, Vilnius'
-                className='rounded-lg'
-              />
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+              <div className='aspect-square bg-gray-700 rounded-lg overflow-hidden'>
+                <iframe
+                  src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2294.5!2d25.2!3d54.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dd94c0e0a0a0a0%3A0x0!2sSaul%C4%97toji%20g.%208%2C%20Li%C5%BEi%C5%A1k%C4%97s%2C%20Vilnius!5e0!3m2!1sen!2slt!4v1620000000000!5m2!1sen!2slt'
+                  width='100%'
+                  height='100%'
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading='lazy'
+                  referrerPolicy='no-referrer-when-downgrade'
+                  title='ET Auto Švara lokacija - Saulėtoji g. 8, Ližiškės, Vilnius'
+                  className='rounded-lg'
+                />
+              </div>
+              <div className='aspect-square bg-gray-700 rounded-lg overflow-hidden'>
+                <img
+                  src='/kur_mus_rasti.jpg'
+                  alt='Kaip mus rasti'
+                  className='w-full !h-full object-cover object-center'
+                  loading='lazy'
+                />
+              </div>
             </div>
             <div className='mt-4 text-center'>
               <p className='text-gray-300 mb-4'>
