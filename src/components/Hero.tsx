@@ -49,7 +49,7 @@ const Hero: React.FC = () => {
           </p>
 
           {/* Key Benefits */}
-          <div className='flex flex-wrap justify-center gap-4 md:gap-8 mb-12 animate-fade-in'>
+          {/* <div className='flex flex-wrap justify-center gap-4 md:gap-8 mb-12 animate-fade-in'>
             <div className='flex items-center text-white'>
               <span className='text-accent mr-2'>✓</span>
               <span className='text-sm md:text-base'>
@@ -64,7 +64,7 @@ const Hero: React.FC = () => {
               <span className='text-accent mr-2'>✓</span>
               <span className='text-sm md:text-base'>Modernūs įrengimai</span>
             </div>
-          </div>
+          </div> */}
 
           {/* CTA Buttons */}
           <div className='flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-fade-in'>

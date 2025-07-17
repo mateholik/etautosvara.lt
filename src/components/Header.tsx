@@ -78,14 +78,19 @@ const Header: React.FC = () => {
           {/* Logo */}
           <button
             onClick={() => handleNavClick('hero')}
-            className='text-2xl font-bold text-white hover:text-accent transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary'
             aria-label='ET Auto Švara - grįžti į pagrindinį puslapį'
           >
-            ET Auto <span className='text-accent'>Švara</span>
+            <img
+              src='/logo.png'
+              alt='ET Auto Švara'
+              width='120'
+              height='54'
+              className='w-28 md:w-32 h-auto'
+            />
           </button>
 
           {/* Desktop Navigation */}
-          <div className='hidden md:flex items-center space-x-8'>
+          <div className='hidden md:flex items-center space-x-8 '>
             <ul className='flex items-center space-x-8' role='menubar'>
               {navigationItems.map((item) => (
                 <li key={item.href} role='none'>
