@@ -176,10 +176,11 @@ const Contact: React.FC = () => {
                 />
               </div>
               <div className='aspect-square bg-gray-700 rounded-lg overflow-hidden'>
-                <img
+                <Image
                   src='/kur_mus_rasti.jpg'
                   alt='Kaip mus rasti'
-                  className='w-full !h-full object-cover object-center'
+                  fill
+                  className='object-cover object-center'
                   loading='lazy'
                 />
               </div>

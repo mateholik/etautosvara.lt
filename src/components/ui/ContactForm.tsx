@@ -27,19 +27,7 @@ const ContactForm: React.FC = () => {
     },
   });
 
-  const services = [
-    'Automobilio vaškavimas',
-    'Žibintų poliravimas',
-    'Nano dangos dengimas',
-    'Automobilio kėbulo poliravimas',
-    'Interjero bei kitų blizgių detalių poliravimas',
-    'Hibridinių/nano/keramikinių dangų aplikavimas',
-    'Cheminis interjero valymas',
-    'Detalus išorės valymas ir komplektas',
-    'Kėbulo dengimas apsaugine PPF plėvele',
-    'Meninis lyginimas',
-    'Kita paslauga',
-  ];
+  // Services list removed as it's not used in the simplified form
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setIsSubmitting(true);

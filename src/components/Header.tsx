@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './ui/Button';
 import { Bars3Icon, XMarkIcon, PhoneIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 import { scrollToSection } from '@/lib/utils';
 
 const Header: React.FC = () => {
@@ -80,11 +81,11 @@ const Header: React.FC = () => {
             onClick={() => handleNavClick('hero')}
             aria-label='ET Auto Švara - grįžti į pagrindinį puslapį'
           >
-            <img
+            <Image
               src='/logo.svg'
               alt='ET Auto Švara'
-              width='120'
-              height='54'
+              width={120}
+              height={54}
               className='w-28 md:w-32 h-auto'
             />
           </button>
