@@ -76,12 +76,30 @@ const Header: React.FC = () => {
       role='banner'
     >
       <nav
-        className='container mx-auto px-4 py-4'
+        className='w-full px-4 py-4'
         role='navigation'
         aria-label='Pagrindinis navigacijos meniu'
       >
-        <div className='flex items-center justify-between'>
-          {/* Logo */}
+        <div className='relative flex items-center justify-center'>
+          {/* Desktop Navigation - Left Side */}
+          <div className='hidden lg:flex items-center absolute left-4'>
+            <ul className='flex items-center space-x-4' role='menubar'>
+              {navigationItems.slice(0, 3).map((item) => (
+                <li key={item.href} role='none'>
+                  <button
+                    onClick={() => handleNavClick(item.href)}
+                    className='text-white hover:text-accent transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary rounded-md px-2 py-1 text-sm'
+                    role='menuitem'
+                    aria-label={item.ariaLabel}
+                  >
+                    {item.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Logo - Center */}
           <button
             onClick={() => handleNavClick('hero')}
             aria-label='ET Auto Švara - grįžti į pagrindinį puslapį'
@@ -95,14 +113,14 @@ const Header: React.FC = () => {
             />
           </button>
 
-          {/* Desktop Navigation */}
-          <div className='hidden md:flex items-center space-x-8 '>
-            <ul className='flex items-center space-x-8' role='menubar'>
-              {navigationItems.map((item) => (
+          {/* Right Side Navigation + CTA (Desktop) */}
+          <div className='hidden lg:flex items-center space-x-4 absolute right-4'>
+            <ul className='flex items-center space-x-4' role='menubar'>
+              {navigationItems.slice(3).map((item) => (
                 <li key={item.href} role='none'>
                   <button
                     onClick={() => handleNavClick(item.href)}
-                    className='text-white hover:text-accent transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary rounded-md px-2 py-1'
+                    className='text-white hover:text-accent transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary rounded-md px-2 py-1 text-sm'
                     role='menuitem'
                     aria-label={item.ariaLabel}
                   >
@@ -111,8 +129,6 @@ const Header: React.FC = () => {
                 </li>
               ))}
             </ul>
-
-            {/* Phone Button */}
             <Button
               onClick={handlePhoneClick}
               variant='primary'
@@ -121,14 +137,14 @@ const Header: React.FC = () => {
               aria-label='Skambinti telefonu +370 6 06 47 967'
             >
               <PhoneIcon className='w-4 h-4' aria-hidden='true' />
-              <span className='hidden lg:inline'>+370 6 06 47 967</span>
+              <span className='hidden xl:inline'>+370 6 06 47 967</span>
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className='md:hidden text-white hover:text-accent transition-colors p-2 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary rounded-md'
+            className='lg:hidden text-white hover:text-accent transition-colors p-2 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary rounded-md absolute right-4'
             aria-label={isMobileMenuOpen ? 'Uždaryti meniu' : 'Atidaryti meniu'}
             aria-expanded={isMobileMenuOpen}
             aria-controls='mobile-menu'
@@ -144,38 +160,40 @@ const Header: React.FC = () => {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div
-            className='md:hidden mt-4 pb-4'
+            className='lg:hidden absolute top-full left-0 right-0 bg-primary/95 backdrop-blur-md shadow-lg border-t border-gray-700 z-50'
             id='mobile-menu'
             role='menu'
             aria-label='Mobilusis navigacijos meniu'
           >
-            <ul className='space-y-2' role='none'>
-              {navigationItems.map((item) => (
-                <li key={item.href} role='none'>
-                  <button
-                    onClick={() => handleNavClick(item.href)}
-                    className='block w-full text-left px-4 py-2 text-white hover:text-accent hover:bg-white/10 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary'
-                    role='menuitem'
-                    aria-label={item.ariaLabel}
-                  >
-                    {item.name}
-                  </button>
-                </li>
-              ))}
-            </ul>
+            <div className='p-4'>
+              <ul className='space-y-2' role='none'>
+                {navigationItems.map((item) => (
+                  <li key={item.href} role='none'>
+                    <button
+                      onClick={() => handleNavClick(item.href)}
+                      className='block w-full text-left px-4 py-3 text-white hover:text-accent hover:bg-white/10 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary'
+                      role='menuitem'
+                      aria-label={item.ariaLabel}
+                    >
+                      {item.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
 
-            {/* Mobile Phone Button */}
-            <div className='mt-4 px-4'>
-              <Button
-                onClick={handlePhoneClick}
-                variant='primary'
-                size='sm'
-                className='w-full flex items-center justify-center gap-2'
-                aria-label='Skambinti telefonu +370 6 06 47 967'
-              >
-                <PhoneIcon className='w-4 h-4' aria-hidden='true' />
-                +370 6 06 47 967
-              </Button>
+              {/* Mobile Phone Button */}
+              <div className='mt-4'>
+                <Button
+                  onClick={handlePhoneClick}
+                  variant='primary'
+                  size='sm'
+                  className='w-full flex items-center justify-center gap-2'
+                  aria-label='Skambinti telefonu +370 6 06 47 967'
+                >
+                  <PhoneIcon className='w-4 h-4' aria-hidden='true' />
+                  +370 6 06 47 967
+                </Button>
+              </div>
             </div>
           </div>
         )}
