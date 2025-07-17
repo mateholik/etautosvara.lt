@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 interface ImageComparisonProps {
@@ -22,19 +23,17 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const updateSliderPosition = useCallback((clientX: number) => {
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      const position = ((clientX - rect.left) / rect.width) * 100;
+      setSliderPosition(Math.max(0, Math.min(100, position)));
+    }
+  }, []);
+
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
     updateSliderPosition(e.clientX);
-  };
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (isDragging) {
-      updateSliderPosition(e.clientX);
-    }
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -42,26 +41,28 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
     updateSliderPosition(e.touches[0].clientX);
   };
 
-  const handleTouchMove = (e: TouchEvent) => {
-    if (isDragging) {
-      e.preventDefault();
-      updateSliderPosition(e.touches[0].clientX);
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-  };
-
-  const updateSliderPosition = (clientX: number) => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      const position = ((clientX - rect.left) / rect.width) * 100;
-      setSliderPosition(Math.max(0, Math.min(100, position)));
-    }
-  };
-
   useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (isDragging) {
+        updateSliderPosition(e.clientX);
+      }
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (isDragging) {
+        e.preventDefault();
+        updateSliderPosition(e.touches[0].clientX);
+      }
+    };
+
+    const handleTouchEnd = () => {
+      setIsDragging(false);
+    };
+
     if (isDragging) {
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
@@ -77,7 +78,7 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
       document.removeEventListener('touchmove', handleTouchMove);
       document.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [isDragging]);
+  }, [isDragging, updateSliderPosition]);
 
   return (
     <div
@@ -89,13 +90,16 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
     >
       {/* Before Image */}
       <div className='absolute inset-0'>
-        <img
+        <Image
           src={beforeImage}
           alt={beforeAlt}
-          className='w-full h-full object-cover'
+          fill
+          className='object-cover'
           draggable={false}
+          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+          priority={false}
         />
-        <div className='absolute top-4 left-4 bg-black bg-opacity-70 text-white px-3 py-1 rounded-full text-sm font-medium'>
+        <div className='absolute top-4 left-4 bg-black bg-opacity-70 text-white px-3 py-1 rounded-full text-sm font-medium z-10'>
           Prieš
         </div>
       </div>
@@ -105,20 +109,23 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
         className='absolute inset-0 overflow-hidden'
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
-        <img
+        <Image
           src={afterImage}
           alt={afterAlt}
-          className='w-full h-full object-cover'
+          fill
+          className='object-cover'
           draggable={false}
+          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+          priority={false}
         />
-        <div className='absolute top-4 right-4 bg-accent bg-opacity-90 text-white px-3 py-1 rounded-full text-sm font-medium'>
+        <div className='absolute top-4 right-4 bg-accent bg-opacity-90 text-white px-3 py-1 rounded-full text-sm font-medium z-10'>
           Po
         </div>
       </div>
 
       {/* Slider Line */}
       <div
-        className='absolute top-0 bottom-0 w-1 bg-white shadow-lg cursor-ew-resize'
+        className='absolute top-0 bottom-0 w-1 bg-white shadow-lg cursor-ew-resize z-20'
         style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
@@ -144,7 +151,7 @@ const ImageComparison: React.FC<ImageComparisonProps> = ({
       </div>
 
       {/* Instructions */}
-      <div className='absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 text-white px-4 py-2 rounded-full text-sm'>
+      <div className='absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 text-white px-4 py-2 rounded-full text-sm z-10'>
         Vilkite slankiklį
       </div>
     </div>

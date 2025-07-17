@@ -134,7 +134,7 @@ const Testimonials: React.FC = () => {
 
                   {/* Comment */}
                   <p className='text-muted mb-6 leading-relaxed'>
-                    "{testimonial.comment}"
+                    &quot;{testimonial.comment}&quot;
                   </p>
 
                   {/* Customer Info */}

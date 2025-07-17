@@ -1,35 +1,31 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button } from './Button';
 
 interface FormData {
   name: string;
-  phone: string;
   email: string;
-  service: string;
   message: string;
 }
 
-interface FormErrors {
-  name?: string;
-  phone?: string;
-  email?: string;
-  message?: string;
-}
-
 const ContactForm: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    phone: '',
-    email: '',
-    service: '',
-    message: '',
-  });
-
-  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<FormData>({
+    defaultValues: {
+      name: '',
+      email: '',
+      message: '',
+    },
+  });
 
   const services = [
     'Automobilio vaškavimas',
@@ -45,52 +41,7 @@ const ContactForm: React.FC = () => {
     'Kita paslauga',
   ];
 
-  const validateForm = (): boolean => {
-    const newErrors: FormErrors = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = 'Vardas yra privalomas';
-    }
-
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Telefono numeris yra privalomas';
-    } else if (!/^\+?[\d\s\-\(\)]+$/.test(formData.phone)) {
-      newErrors.phone = 'Neteisingas telefono numerio formatas';
-    }
-
-    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Neteisingas el. pašto formatas';
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = 'Žinutė yra privaloma';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-
-    // Clear error when user starts typing
-    if (errors[name as keyof FormErrors]) {
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
     setIsSubmitting(true);
 
     try {
@@ -98,16 +49,19 @@ const ContactForm: React.FC = () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       // In real implementation, you would send the data to your backend
-      console.log('Form submitted:', formData);
+      console.log('Form submitted:', data);
+
+      // Track form submission for analytics
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'form_submit', {
+          event_category: 'contact',
+          event_label: 'contact_form',
+          value: 1,
+        });
+      }
 
       setIsSubmitted(true);
-      setFormData({
-        name: '',
-        phone: '',
-        email: '',
-        service: '',
-        message: '',
-      });
+      reset();
 
       // Reset success message after 5 seconds
       setTimeout(() => setIsSubmitted(false), 5000);
@@ -133,7 +87,7 @@ const ContactForm: React.FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='space-y-6'>
+    <form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
       {/* Name Field */}
       <div>
         <label
@@ -145,40 +99,20 @@ const ContactForm: React.FC = () => {
         <input
           type='text'
           id='name'
-          name='name'
-          value={formData.name}
-          onChange={handleInputChange}
+          {...register('name', {
+            required: 'Vardas yra privalomas',
+            minLength: {
+              value: 2,
+              message: 'Vardas turi būti bent 2 simbolių ilgio',
+            },
+          })}
           className={`w-full p-3 rounded-lg text-primary bg-white border ${
             errors.name ? 'border-red-500' : 'border-gray-300'
           } focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
           placeholder='Jūsų vardas'
         />
         {errors.name && (
-          <p className='text-red-300 text-sm mt-1'>{errors.name}</p>
-        )}
-      </div>
-
-      {/* Phone Field */}
-      <div>
-        <label
-          htmlFor='phone'
-          className='block text-sm font-medium text-white mb-2'
-        >
-          Telefono numeris *
-        </label>
-        <input
-          type='tel'
-          id='phone'
-          name='phone'
-          value={formData.phone}
-          onChange={handleInputChange}
-          className={`w-full p-3 rounded-lg text-primary bg-white border ${
-            errors.phone ? 'border-red-500' : 'border-gray-300'
-          } focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
-          placeholder='+370 xxx xxxxx'
-        />
-        {errors.phone && (
-          <p className='text-red-300 text-sm mt-1'>{errors.phone}</p>
+          <p className='text-red-300 text-sm mt-1'>{errors.name.message}</p>
         )}
       </div>
 
@@ -193,41 +127,20 @@ const ContactForm: React.FC = () => {
         <input
           type='email'
           id='email'
-          name='email'
-          value={formData.email}
-          onChange={handleInputChange}
+          {...register('email', {
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: 'Įveskite teisingą el. pašto adresą',
+            },
+          })}
           className={`w-full p-3 rounded-lg text-primary bg-white border ${
             errors.email ? 'border-red-500' : 'border-gray-300'
           } focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
           placeholder='jusu@email.com'
         />
         {errors.email && (
-          <p className='text-red-300 text-sm mt-1'>{errors.email}</p>
+          <p className='text-red-300 text-sm mt-1'>{errors.email.message}</p>
         )}
-      </div>
-
-      {/* Service Field */}
-      <div>
-        <label
-          htmlFor='service'
-          className='block text-sm font-medium text-white mb-2'
-        >
-          Paslauga
-        </label>
-        <select
-          id='service'
-          name='service'
-          value={formData.service}
-          onChange={handleInputChange}
-          className='w-full p-3 rounded-lg text-primary bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent'
-        >
-          <option value=''>Pasirinkite paslaugą</option>
-          {services.map((service) => (
-            <option key={service} value={service}>
-              {service}
-            </option>
-          ))}
-        </select>
       </div>
 
       {/* Message Field */}
@@ -240,9 +153,13 @@ const ContactForm: React.FC = () => {
         </label>
         <textarea
           id='message'
-          name='message'
-          value={formData.message}
-          onChange={handleInputChange}
+          {...register('message', {
+            required: 'Žinutė yra privaloma',
+            minLength: {
+              value: 10,
+              message: 'Žinutė turi būti bent 10 simbolių ilgio',
+            },
+          })}
           rows={4}
           className={`w-full p-3 rounded-lg text-primary bg-white border ${
             errors.message ? 'border-red-500' : 'border-gray-300'
@@ -250,7 +167,7 @@ const ContactForm: React.FC = () => {
           placeholder='Aprašykite savo poreikius...'
         />
         {errors.message && (
-          <p className='text-red-300 text-sm mt-1'>{errors.message}</p>
+          <p className='text-red-300 text-sm mt-1'>{errors.message.message}</p>
         )}
       </div>
 
@@ -268,7 +185,18 @@ const ContactForm: React.FC = () => {
 
       {/* Privacy Notice */}
       <p className='text-sm text-gray-300 text-center'>
-        Paspaudę "Siųsti užklausą" sutinkate su asmens duomenų tvarkymu.
+        Paspaudę &quot;Siųsti užklausą&quot; sutinkate su{' '}
+        <a
+          href='#'
+          className='text-accent hover:text-red-300 underline'
+          onClick={(e) => {
+            e.preventDefault();
+            // Add privacy policy modal or page
+          }}
+        >
+          asmens duomenų tvarkymu
+        </a>
+        .
       </p>
     </form>
   );

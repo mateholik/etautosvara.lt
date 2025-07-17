@@ -10,6 +10,17 @@ import {
 } from '@heroicons/react/24/outline';
 
 const Contact: React.FC = () => {
+  const handlePhoneClick = (phoneNumber: string) => {
+    // Track phone clicks for analytics
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'phone_call', {
+        event_category: 'contact',
+        event_label: phoneNumber,
+        value: 1,
+      });
+    }
+  };
+
   const contactInfo = [
     {
       icon: <PhoneIcon className='w-6 h-6' />,
@@ -86,6 +97,11 @@ const Contact: React.FC = () => {
                             ? 'noopener noreferrer'
                             : undefined
                         }
+                        onClick={() => {
+                          if (item.link?.startsWith('tel:')) {
+                            handlePhoneClick(item.value);
+                          }
+                        }}
                       >
                         {item.value}
                       </a>
@@ -121,6 +137,7 @@ const Contact: React.FC = () => {
               <a
                 href='tel:+370606047967'
                 className='bg-accent hover:bg-red-700 text-white px-6 py-3 rounded-lg font-medium transition-colors inline-flex items-center'
+                onClick={() => handlePhoneClick('+370606047967')}
               >
                 <PhoneIcon className='w-5 h-5 mr-2' />
                 Skambinti dabar
@@ -143,22 +160,32 @@ const Contact: React.FC = () => {
             Kaip mus rasti
           </h3>
           <div className='bg-gray-800 rounded-xl p-6'>
-            <div className='aspect-video bg-gray-700 rounded-lg flex items-center justify-center'>
-              <div className='text-center'>
-                <MapPinIcon className='w-16 h-16 text-accent mx-auto mb-4' />
-                <p className='text-gray-300 mb-4'>
-                  Interaktyvus žemėlapis bus įdėtas čia
-                </p>
-                <a
-                  href='https://maps.google.com?q=Saulėtoji+g.+8,+Ližiškės,+Vilnius'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='bg-accent hover:bg-red-700 text-white px-6 py-3 rounded-lg font-medium transition-colors inline-flex items-center'
-                >
-                  <MapPinIcon className='w-5 h-5 mr-2' />
-                  Atidaryti žemėlapyje
-                </a>
-              </div>
+            <div className='aspect-video bg-gray-700 rounded-lg overflow-hidden'>
+              <iframe
+                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2294.5!2d25.2!3d54.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dd94c0e0a0a0a0%3A0x0!2sSaul%C4%97toji%20g.%208%2C%20Li%C5%BEi%C5%A1k%C4%97s%2C%20Vilnius!5e0!3m2!1sen!2slt!4v1620000000000!5m2!1sen!2slt'
+                width='100%'
+                height='100%'
+                style={{ border: 0 }}
+                allowFullScreen
+                loading='lazy'
+                referrerPolicy='no-referrer-when-downgrade'
+                title='ET Auto Švara lokacija - Saulėtoji g. 8, Ližiškės, Vilnius'
+                className='rounded-lg'
+              />
+            </div>
+            <div className='mt-4 text-center'>
+              <p className='text-gray-300 mb-4'>
+                Saulėtoji g. 8, Ližiškės, Vilnius
+              </p>
+              <a
+                href='https://maps.google.com?q=Saulėtoji+g.+8,+Ližiškės,+Vilnius'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='bg-accent hover:bg-red-700 text-white px-6 py-3 rounded-lg font-medium transition-colors inline-flex items-center'
+              >
+                <MapPinIcon className='w-5 h-5 mr-2' />
+                Atidaryti žemėlapyje
+              </a>
             </div>
           </div>
         </div>
@@ -177,6 +204,7 @@ const Contact: React.FC = () => {
               <a
                 href='tel:+370606047967'
                 className='bg-accent hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center'
+                onClick={() => handlePhoneClick('+370606047967')}
               >
                 📞 Skambinti dabar
               </a>

@@ -152,9 +152,9 @@ const Services: React.FC = () => {
     },
   ];
 
-  const handleBookService = (serviceTitle: string) => {
+  const handleBookService = () => {
     const phoneNumber = '+370 6 06 47 967';
-    const message = `Sveiki! Norėčiau užsisakyti "${serviceTitle}" paslaugą.`;
+    // Future enhancement: could include service-specific messaging
     window.location.href = `tel:${phoneNumber}`;
   };
 
@@ -212,7 +212,7 @@ const Services: React.FC = () => {
 
               <CardFooter>
                 <Button
-                  onClick={() => handleBookService(service.title)}
+                  onClick={() => handleBookService()}
                   variant='primary'
                   size='md'
                   className='w-full'
@@ -235,7 +235,7 @@ const Services: React.FC = () => {
               projektams sudarome specialias sąlygas.
             </p>
             <Button
-              onClick={() => handleBookService('Individuali konsultacija')}
+              onClick={() => handleBookService()}
               variant='primary'
               size='lg'
               className='mx-auto'
