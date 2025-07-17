@@ -71,7 +71,7 @@ export default function RootLayout({
   return (
     <html lang='lt' className={`${inter.variable} scroll-smooth`}>
       <head>
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/favicon.png' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <meta name='theme-color' content='#1a1a1a' />
       </head>

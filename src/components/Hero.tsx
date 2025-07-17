@@ -39,9 +39,7 @@ const Hero: React.FC = () => {
           {/* Main Heading */}
           <h1 className='text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 animate-fade-in'>
             Profesionalus{' '}
-            <span className='text-gradient bg-gradient-to-r from-accent to-red-400 bg-clip-text text-transparent'>
-              automobilio valymas
-            </span>
+            <span className='text-accent'>automobilio valymas</span>
           </h1>
 
           {/* Subheading */}

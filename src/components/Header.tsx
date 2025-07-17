@@ -10,7 +10,6 @@ const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigationItems = [
-    { label: 'Pagrindinis', href: '#hero' },
     { label: 'Paslaugos', href: '#services' },
     { label: 'Kodėl mes', href: '#why-us' },
     { label: 'Prieš/Po', href: '#before-after' },
@@ -50,11 +49,14 @@ const Header: React.FC = () => {
         <div className='flex items-center justify-between h-20'>
           {/* Logo */}
           <div className='flex items-center'>
-            <button
-              onClick={() => handleNavClick('#hero')}
-              className='text-white font-bold text-xl md:text-2xl hover:text-accent transition-colors'
-            >
-              ET AUTO ŠVARA
+            <button onClick={() => handleNavClick('#hero')}>
+              <img
+                src='/logo.png'
+                alt='ET Auto Švara'
+                width='120'
+                height='54'
+                className='w-28 md:w-32 h-auto'
+              />
             </button>
           </div>
 
