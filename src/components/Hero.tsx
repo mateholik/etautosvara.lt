@@ -37,34 +37,23 @@ const Hero: React.FC = () => {
       <div className='relative z-10 container mx-auto px-4 py-20 text-center'>
         <div className='max-w-4xl mx-auto'>
           {/* Main Heading */}
-          <h1 className='text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 animate-fade-in'>
+          <h1 className='text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 animate-fade-in'>
             Profesionalus{' '}
             <span className='text-accent'>automobilio valymas</span>
           </h1>
 
+          {/* Detailing Studio Badge */}
+          <div className='mb-8 animate-fade-in'>
+            <span className='inline-block bg-accent/10 backdrop-blur-sm border border-accent/20 rounded-full px-4 py-2 text-accent font-medium text-sm uppercase tracking-wider'>
+              Detailing Studio
+            </span>
+          </div>
+
           {/* Subheading */}
-          <p className='text-xl md:text-2xl lg:text-3xl text-gray-300 mb-8 animate-fade-in max-w-3xl mx-auto'>
+          <p className='text-xl md:text-2xl lg:text-3xl text-gray-300 mb-12 animate-fade-in max-w-3xl mx-auto'>
             Kokybė, kuri matoma. Patikimas partneris jūsų automobilio
             priežiūrai.
           </p>
-
-          {/* Key Benefits */}
-          {/* <div className='flex flex-wrap justify-center gap-4 md:gap-8 mb-12 animate-fade-in'>
-            <div className='flex items-center text-white'>
-              <span className='text-accent mr-2'>✓</span>
-              <span className='text-sm md:text-base'>
-                Profesionalūs specialistai
-              </span>
-            </div>
-            <div className='flex items-center text-white'>
-              <span className='text-accent mr-2'>✓</span>
-              <span className='text-sm md:text-base'>Kokybės garantija</span>
-            </div>
-            <div className='flex items-center text-white'>
-              <span className='text-accent mr-2'>✓</span>
-              <span className='text-sm md:text-base'>Modernūs įrengimai</span>
-            </div>
-          </div> */}
 
           {/* CTA Buttons */}
           <div className='flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-fade-in'>

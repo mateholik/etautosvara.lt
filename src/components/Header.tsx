@@ -20,11 +20,11 @@ const Header: React.FC = () => {
   }, []);
 
   const navigationItems = [
-    // {
-    //   name: 'Pagrindinis',
-    //   href: 'hero',
-    //   ariaLabel: 'Eiti į pagrindinį puslapį',
-    // },
+    {
+      name: 'Apie mus',
+      href: 'about',
+      ariaLabel: 'Sužinoti apie mūsų komandą',
+    },
     { name: 'Paslaugos', href: 'services', ariaLabel: 'Peržiūrėti paslaugas' },
     {
       name: 'Kodėl mes',

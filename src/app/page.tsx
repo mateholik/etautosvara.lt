@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
+import About from '@/components/About';
 import Services from '@/components/Services';
 import WhyUs from '@/components/WhyUs';
 import BeforeAfter from '@/components/BeforeAfter';
@@ -13,6 +14,7 @@ export default function Home() {
     <main className='min-h-screen bg-background'>
       <Header />
       <Hero />
+      <About />
       <Services />
       <FAQ />
       <WhyUs />
