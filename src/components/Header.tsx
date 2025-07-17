@@ -133,11 +133,10 @@ const Header: React.FC = () => {
               onClick={handlePhoneClick}
               variant='primary'
               size='sm'
-              className='flex items-center gap-2'
+              className='flex items-center justify-center w-10 h-10 p-0'
               aria-label='Skambinti telefonu +370 6 06 47 967'
             >
-              <PhoneIcon className='w-4 h-4' aria-hidden='true' />
-              <span className='hidden xl:inline'>+370 6 06 47 967</span>
+              <PhoneIcon className='w-5 h-5' aria-hidden='true' />
             </Button>
           </div>
 
