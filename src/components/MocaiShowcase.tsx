@@ -219,7 +219,7 @@ const MocaiShowcase: React.FC = () => {
       />
 
       <div className='container mx-auto px-4'>
-        <div className='grid lg:grid-cols-2 gap-12 items-center'>
+        <div className='flex flex-col-reverse lg:grid lg:grid-cols-2 gap-12 items-center'>
           {/* Image Slider Side */}
           <div
             className={`relative ${
