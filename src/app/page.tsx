@@ -11,6 +11,7 @@ import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import MercedesShowcase from '@/components/MercedesShowcase';
 import MocaiShowcase from '@/components/MocaiShowcase';
+import VideoShowcase from '@/components/VideoShowcase';
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
       <FAQ />
       <MercedesShowcase />
       <MocaiShowcase />
+      <VideoShowcase />
       <WhyUs />
       <BeforeAfter />
       <Testimonials />

@@ -19,6 +19,14 @@ const MercedesShowcase: React.FC = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [particles, setParticles] = useState<
+    Array<{
+      left: string;
+      top: string;
+      animationDelay: string;
+      animationDuration: string;
+    }>
+  >([]);
 
   // Array of images for the slider - you can add more images here
   const images = [
@@ -39,6 +47,17 @@ const MercedesShowcase: React.FC = () => {
     //   title: 'Classic BMW'
     // },
   ];
+
+  // Generate particles on client side only to avoid hydration mismatch
+  useEffect(() => {
+    const generatedParticles = [...Array(6)].map(() => ({
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 2}s`,
+      animationDuration: `${2 + Math.random() * 3}s`,
+    }));
+    setParticles(generatedParticles);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -357,15 +376,15 @@ const MercedesShowcase: React.FC = () => {
 
       {/* Animated particles */}
       <div className='absolute inset-0 pointer-events-none'>
-        {[...Array(6)].map((_, i) => (
+        {particles.map((particle, i) => (
           <div
             key={i}
             className='absolute w-1 h-1 bg-accent rounded-full animate-pulse'
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 2}s`,
-              animationDuration: `${2 + Math.random() * 3}s`,
+              left: particle.left,
+              top: particle.top,
+              animationDelay: particle.animationDelay,
+              animationDuration: particle.animationDuration,
             }}
           />
         ))}
