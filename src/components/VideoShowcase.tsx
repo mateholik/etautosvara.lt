@@ -1,12 +1,6 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  PlayIcon,
-  PauseIcon,
-  SpeakerWaveIcon,
-  SpeakerXMarkIcon,
-} from '@heroicons/react/24/outline';
 
 interface VideoItem {
   id: number;
@@ -17,8 +11,6 @@ interface VideoItem {
 
 const VideoShowcase: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   // Array of cleaning process videos
@@ -54,20 +46,15 @@ const VideoShowcase: React.FC = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          // Start playing videos when section becomes visible
+          // Simple autoplay for all browsers
           videoRefs.current.forEach((video) => {
             if (video) {
-              // Ensure video is ready before playing
-              if (video.readyState >= 2) {
-                video.play().catch(console.error);
-              } else {
-                video.addEventListener(
-                  'loadeddata',
-                  () => {
-                    video.play().catch(console.error);
-                  },
-                  { once: true }
-                );
+              video.muted = true; // Ensure muted for autoplay
+              const playPromise = video.play();
+              if (playPromise !== undefined) {
+                playPromise.catch((error) => {
+                  console.log('Autoplay failed:', error);
+                });
               }
             }
           });
@@ -91,43 +78,6 @@ const VideoShowcase: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  const togglePlayPause = () => {
-    const newPlayState = !isPlaying;
-    setIsPlaying(newPlayState);
-
-    videoRefs.current.forEach((video) => {
-      if (video) {
-        if (newPlayState) {
-          // Ensure video is ready before playing
-          if (video.readyState >= 2) {
-            video.play().catch(console.error);
-          } else {
-            video.addEventListener(
-              'loadeddata',
-              () => {
-                video.play().catch(console.error);
-              },
-              { once: true }
-            );
-          }
-        } else {
-          video.pause();
-        }
-      }
-    });
-  };
-
-  const toggleMute = () => {
-    const newMuteState = !isMuted;
-    setIsMuted(newMuteState);
-
-    videoRefs.current.forEach((video) => {
-      if (video) {
-        video.muted = newMuteState;
-      }
-    });
-  };
-
   return (
     <section
       id='video-showcase'
@@ -150,48 +100,11 @@ const VideoShowcase: React.FC = () => {
             Pažiūrėkite, kaip vyksta profesionalus automobilio valymas.
             Kiekvienas žingsnis kruopščiai atliekamas.
           </p>
-
-          {/* Control buttons */}
-          <div className='flex justify-center gap-4 mb-8'>
-            <button
-              onClick={togglePlayPause}
-              className='flex items-center gap-2 bg-accent hover:bg-red-700 text-white px-6 py-3 rounded-lg font-medium transition-colors'
-            >
-              {isPlaying ? (
-                <>
-                  <PauseIcon className='w-5 h-5' />
-                  Pristabdyti
-                </>
-              ) : (
-                <>
-                  <PlayIcon className='w-5 h-5' />
-                  Paleisti
-                </>
-              )}
-            </button>
-
-            <button
-              onClick={toggleMute}
-              className='flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg font-medium transition-colors'
-            >
-              {isMuted ? (
-                <>
-                  <SpeakerXMarkIcon className='w-5 h-5' />
-                  Įjungti garsą
-                </>
-              ) : (
-                <>
-                  <SpeakerWaveIcon className='w-5 h-5' />
-                  Išjungti garsą
-                </>
-              )}
-            </button>
-          </div>
         </div>
 
         {/* Videos Grid */}
         <div
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ${
+          className={`grid grid-cols-2 lg:grid-cols-4 gap-6 ${
             isVisible ? 'animate-fade-in' : 'opacity-0'
           }`}
         >
@@ -209,33 +122,38 @@ const VideoShowcase: React.FC = () => {
                   ref={(el) => {
                     videoRefs.current[index] = el;
                   }}
-                  src={video.src}
                   className='w-full h-full object-cover'
                   loop
-                  muted={isMuted}
+                  muted
                   playsInline
+                  autoPlay
                   preload='metadata'
                   webkit-playsinline='true'
                   x5-playsinline='true'
                   x5-video-player-type='h5'
                   x5-video-player-fullscreen='true'
-                  x5-video-orientation='portraint'
+                  x5-video-orientation='portrait'
                   controls={false}
                   disablePictureInPicture
                   disableRemotePlayback
-                />
+                  onError={(e) => {
+                    console.error('Video error:', e);
+                  }}
+                >
+                  <source src={video.src} type='video/mp4' />
+                  <source
+                    src={video.src.replace('.MP4', '.webm')}
+                    type='video/webm'
+                  />
+                  <source
+                    src={video.src.replace('.MP4', '.mov')}
+                    type='video/quicktime'
+                  />
+                  Your browser does not support the video tag.
+                </video>
 
                 {/* Gradient overlay */}
                 <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
-
-                {/* Play indicator */}
-                <div className='absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
-                  {isPlaying ? (
-                    <PauseIcon className='w-4 h-4 text-white' />
-                  ) : (
-                    <PlayIcon className='w-4 h-4 text-white' />
-                  )}
-                </div>
               </div>
 
               {/* Video info */}
