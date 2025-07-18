@@ -1,23 +1,12 @@
 'use client';
 
 import React from 'react';
-import { Button } from './ui/Button';
-import { PhoneIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
-import { scrollToSection, formatPhoneNumber } from '@/lib/utils';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import { scrollToSection } from '@/lib/utils';
 
 const Hero: React.FC = () => {
-  const phoneNumber = '+370 6 06 47 967';
-
-  const handlePhoneClick = () => {
-    window.location.href = `tel:${phoneNumber}`;
-  };
-
-  const handleLearnMoreClick = () => {
-    scrollToSection('services');
-  };
-
   const handleScrollDown = () => {
-    scrollToSection('services');
+    scrollToSection('about');
   };
 
   return (
@@ -34,59 +23,26 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Content Container */}
-      <div className='relative z-10 container mx-auto px-4 py-20 text-center'>
+      <div className='relative z-10 container mx-auto px-4 py-12 md:py-16 text-center'>
         <div className='max-w-4xl mx-auto'>
           {/* Main Heading */}
-          <h1 className='text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 animate-fade-in'>
-            Profesionalus{' '}
+          <h1 className='text-3xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-white mb-6 animate-fade-in leading-tight'>
+            <span className='block mb-1'>Profesionalus</span>
             <span className='text-accent'>automobilio valymas</span>
           </h1>
 
           {/* Detailing Studio Badge */}
-          <div className='mb-8 animate-fade-in'>
-            <span className='inline-block bg-accent/10 backdrop-blur-sm border border-accent/20 rounded-full px-4 py-2 text-accent font-medium text-sm uppercase tracking-wider'>
+          <div className='mb-6 md:mb-8 animate-fade-in'>
+            <span className='inline-block bg-accent/10 backdrop-blur-sm border border-accent/20 rounded-full px-3 py-1.5 md:px-4 md:py-2 text-accent font-medium text-xs md:text-xs uppercase tracking-wider'>
               Detailing Studio
             </span>
           </div>
 
           {/* Subheading */}
-          <p className='text-xl md:text-2xl lg:text-3xl text-gray-300 mb-12 animate-fade-in max-w-3xl mx-auto'>
-            Kokybė, kuri matoma. Patikimas partneris jūsų automobilio
-            priežiūrai.
+          <p className='text-lg md:text-lg lg:text-xl xl:text-2xl text-gray-300 mb-0 animate-fade-in max-w-3xl mx-auto leading-relaxed px-4'>
+            Kokybė, kuri matoma. <br />
+            Patikimas partneris jūsų automobilio priežiūrai.
           </p>
-
-          {/* CTA Buttons */}
-          <div className='flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-fade-in'>
-            <Button
-              onClick={handlePhoneClick}
-              variant='primary'
-              size='lg'
-              className='flex items-center gap-3 text-lg px-8 py-4 shadow-2xl hover:shadow-accent/20 transition-all duration-300 transform hover:scale-105'
-            >
-              <PhoneIcon className='w-6 h-6' />
-              Skambinti dabar
-            </Button>
-
-            <Button
-              onClick={handleLearnMoreClick}
-              variant='outline'
-              size='lg'
-              className='border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-4 transition-all duration-300 transform hover:scale-105'
-            >
-              Sužinoti daugiau
-            </Button>
-          </div>
-
-          {/* Contact Info */}
-          <div className='text-center animate-fade-in'>
-            <p className='text-gray-400 mb-2'>Skambinkite dabar:</p>
-            <a
-              href={`tel:${phoneNumber}`}
-              className='text-2xl md:text-3xl font-bold text-white hover:text-accent transition-colors'
-            >
-              {formatPhoneNumber(phoneNumber)}
-            </a>
-          </div>
         </div>
       </div>
 
