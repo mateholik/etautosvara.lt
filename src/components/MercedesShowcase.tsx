@@ -243,24 +243,6 @@ const MercedesShowcase: React.FC = () => {
               </p>
             </div>
 
-            {/* Stats */}
-            <div className='grid grid-cols-3 gap-6'>
-              <div className='text-center p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10'>
-                <div className='text-2xl font-bold text-accent'>30+</div>
-                <div className='text-sm text-gray-400'>Metų patirtis</div>
-              </div>
-              <div className='text-center p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10'>
-                <div className='text-2xl font-bold text-accent'>100%</div>
-                <div className='text-sm text-gray-400'>Autentiškumas</div>
-              </div>
-              <div className='text-center p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10'>
-                <div className='text-2xl font-bold text-accent'>200+</div>
-                <div className='text-sm text-gray-400'>
-                  Klasikinių automobilių
-                </div>
-              </div>
-            </div>
-
             {/* Features */}
             <div className='space-y-3'>
               {[
