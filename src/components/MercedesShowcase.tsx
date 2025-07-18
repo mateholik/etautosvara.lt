@@ -1,11 +1,42 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { StarIcon, SparklesIcon } from '@heroicons/react/24/solid';
+import {
+  StarIcon,
+  SparklesIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from '@heroicons/react/24/solid';
 
 const MercedesShowcase: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [mouseStart, setMouseStart] = useState(0);
+  const [mouseEnd, setMouseEnd] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+
+  // Array of images for the slider - you can add more images here
+  const images = [
+    {
+      src: '/mercedes.jpeg',
+      alt: 'Klasikinis Mercedes-Benz restauravimas',
+      title: 'Mercedes-Benz W124',
+    },
+    {
+      src: '/mercedes2.jpeg',
+      alt: 'Klasikinis Mercedes-Benz restauravimas',
+      title: 'Mercedes-Benz W124',
+    },
+    // Add more images as needed
+    // {
+    //   src: '/vintage-car-2.jpg',
+    //   alt: 'Vintage car restoration',
+    //   title: 'Classic BMW'
+    // },
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -25,7 +56,7 @@ const MercedesShowcase: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleSpotlightMove = (e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setMousePosition({
       x: e.clientX - rect.left,
@@ -33,11 +64,80 @@ const MercedesShowcase: React.FC = () => {
     });
   };
 
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % images.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  // Autoplay is disabled as requested
+
+  // Touch/swipe handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(0); // Reset touchEnd
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe && images.length > 1) {
+      nextSlide();
+    }
+    if (isRightSwipe && images.length > 1) {
+      prevSlide();
+    }
+  };
+
+  // Mouse drag handlers for desktop
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setMouseEnd(0);
+    setMouseStart(e.clientX);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    setMouseEnd(e.clientX);
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+
+    if (!mouseStart || !mouseEnd) return;
+
+    const distance = mouseStart - mouseEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe && images.length > 1) {
+      nextSlide();
+    }
+    if (isRightSwipe && images.length > 1) {
+      prevSlide();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
+
   return (
     <section
       id='mercedes-showcase'
       className='relative py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-black overflow-hidden'
-      onMouseMove={handleMouseMove}
+      onMouseMove={handleSpotlightMove}
     >
       {/* Animated background elements */}
       <div className='absolute inset-0'>
@@ -73,45 +173,47 @@ const MercedesShowcase: React.FC = () => {
               <div className='flex items-center space-x-2'>
                 <SparklesIcon className='w-6 h-6 text-accent' />
                 <span className='text-accent font-semibold uppercase tracking-wider text-sm'>
-                  Mūsų Darbo Pavyzdys
+                  Retro Automobilių Estetikos Paslaugos
                 </span>
               </div>
 
               <h2 className='text-4xl lg:text-5xl font-bold text-white leading-tight'>
-                Klasikinis
-                <span className='block text-accent'>Mercedes-Benz</span>
+                Istorinių Automobilių
+                <span className='block text-accent'>Restauravimas</span>
               </h2>
 
               <p className='text-xl text-gray-300 leading-relaxed'>
-                Štai kaip mes grąžiname blizgesį ir elegancją legendiniams
-                automobiliams. Kiekvienas detalas yra kruopščiai išvalytas ir
-                atnaujintas.
+                Specializuojamės retro automobilių estetikos atnaujinime - ne
+                tik prabangiems automobiliams, bet ir istoriniams modeliams.
+                Grąžiname originalų blizgesį ir autentiškumą.
               </p>
             </div>
 
             {/* Stats */}
             <div className='grid grid-cols-3 gap-6'>
               <div className='text-center p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10'>
-                <div className='text-2xl font-bold text-accent'>25+</div>
+                <div className='text-2xl font-bold text-accent'>30+</div>
                 <div className='text-sm text-gray-400'>Metų patirtis</div>
               </div>
               <div className='text-center p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10'>
                 <div className='text-2xl font-bold text-accent'>100%</div>
-                <div className='text-sm text-gray-400'>Kokybės garantija</div>
+                <div className='text-sm text-gray-400'>Autentiškumas</div>
               </div>
               <div className='text-center p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10'>
-                <div className='text-2xl font-bold text-accent'>500+</div>
-                <div className='text-sm text-gray-400'>Patenkintų klientų</div>
+                <div className='text-2xl font-bold text-accent'>200+</div>
+                <div className='text-sm text-gray-400'>
+                  Klasikinių automobilių
+                </div>
               </div>
             </div>
 
             {/* Features */}
             <div className='space-y-3'>
               {[
-                'Profesionalūs valymo produktai',
-                'Detalus vidaus valymas',
-                'Išorės poliravimas ir apsauga',
-                'Odos priežiūra ir kondicionavimas',
+                'Originalių medžiagų atkūrimas',
+                'Istorinių spalvų atstatymas',
+                'Chromo detalių restauravimas',
+                'Retro interjero atnaujinimas',
               ].map((feature, index) => (
                 <div key={index} className='flex items-center space-x-3'>
                   <StarIcon className='w-5 h-5 text-accent' />
@@ -121,29 +223,82 @@ const MercedesShowcase: React.FC = () => {
             </div>
           </div>
 
-          {/* Image Side */}
+          {/* Image Slider Side */}
           <div
             className={`relative ${
               isVisible ? 'animate-fade-in' : 'opacity-0'
             }`}
           >
             <div className='relative'>
-              {/* Main image with hover effects */}
-              <div className='relative overflow-hidden rounded-2xl shadow-2xl group'>
-                <img
-                  src='/mercedes.jpeg'
-                  alt='Mercedes-Benz detailing result'
-                  className='w-full h-auto transform group-hover:scale-105 transition-transform duration-700'
-                />
+              {/* Image Slider */}
+              <div
+                className='relative overflow-hidden rounded-2xl shadow-2xl group cursor-grab active:cursor-grabbing'
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseLeave}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
+                <div className='relative'>
+                  <img
+                    src={images[currentSlide].src}
+                    alt={images[currentSlide].alt}
+                    className='w-full h-auto'
+                  />
 
-                {/* Overlay gradient */}
-                <div className='absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
+                  {/* Overlay gradient */}
+                  <div className='absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
 
-                {/* Floating elements */}
-                <div className='absolute top-4 right-4 bg-accent/90 backdrop-blur-sm rounded-full p-2 transform group-hover:scale-110 transition-transform duration-300'>
-                  <SparklesIcon className='w-5 h-5 text-white' />
+                  {/* Image title */}
+                  <div className='absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm rounded-lg px-3 py-2'>
+                    <span className='text-white font-medium text-sm'>
+                      {images[currentSlide].title}
+                    </span>
+                  </div>
+
+                  {/* Floating elements */}
+                  <div className='absolute top-4 right-4 bg-accent/90 backdrop-blur-sm rounded-full p-2'>
+                    <SparklesIcon className='w-5 h-5 text-white' />
+                  </div>
                 </div>
+
+                {/* Navigation arrows (only show if more than 1 image) */}
+                {images.length > 1 && (
+                  <>
+                    <button
+                      onClick={prevSlide}
+                      className='absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full p-2 transition-colors'
+                    >
+                      <ChevronLeftIcon className='w-5 h-5 text-white' />
+                    </button>
+                    <button
+                      onClick={nextSlide}
+                      className='absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full p-2 transition-colors'
+                    >
+                      <ChevronRightIcon className='w-5 h-5 text-white' />
+                    </button>
+                  </>
+                )}
               </div>
+
+              {/* Slide indicators (only show if more than 1 image) */}
+              {images.length > 1 && (
+                <div className='flex justify-center mt-4 space-x-2'>
+                  {images.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentSlide(index)}
+                      className={`w-3 h-3 rounded-full transition-colors ${
+                        index === currentSlide
+                          ? 'bg-accent'
+                          : 'bg-white/30 hover:bg-white/50'
+                      }`}
+                    />
+                  ))}
+                </div>
+              )}
 
               {/* Decorative elements */}
               <div className='absolute -top-4 -left-4 w-24 h-24 bg-accent/20 rounded-full blur-xl animate-pulse' />
@@ -151,17 +306,6 @@ const MercedesShowcase: React.FC = () => {
 
               {/* Shine effect */}
               <div className='absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none' />
-            </div>
-
-            {/* Quote bubble */}
-            <div className='absolute -bottom-8 left-8 bg-white rounded-2xl p-4 shadow-xl max-w-xs transform group-hover:scale-105 transition-transform duration-300'>
-              <div className='text-gray-800 text-sm font-medium'>
-                "Puikus darbas! Automobilis atrodo kaip naujas!"
-              </div>
-              <div className='text-gray-500 text-xs mt-1'>
-                - Patenkintų klientų atsiliepimas
-              </div>
-              <div className='absolute -top-2 left-6 w-4 h-4 bg-white transform rotate-45'></div>
             </div>
           </div>
         </div>
