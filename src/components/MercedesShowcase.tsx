@@ -127,9 +127,9 @@ const MercedesShowcase: React.FC = () => {
               isVisible ? 'animate-fade-in' : 'opacity-0'
             }`}
           >
-            <div className='relative group'>
+            <div className='relative'>
               {/* Main image with hover effects */}
-              <div className='relative overflow-hidden rounded-2xl shadow-2xl'>
+              <div className='relative overflow-hidden rounded-2xl shadow-2xl group'>
                 <img
                   src='/mercedes.jpeg'
                   alt='Mercedes-Benz detailing result'
@@ -150,7 +150,7 @@ const MercedesShowcase: React.FC = () => {
               <div className='absolute -bottom-6 -right-6 w-32 h-32 bg-blue-500/20 rounded-full blur-xl animate-pulse delay-1000' />
 
               {/* Shine effect */}
-              <div className='absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000' />
+              <div className='absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none' />
             </div>
 
             {/* Quote bubble */}
