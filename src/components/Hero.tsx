@@ -40,8 +40,8 @@ const Hero: React.FC = () => {
 
           {/* Subheading */}
           <p className='text-lg md:text-lg lg:text-xl xl:text-2xl text-gray-300 mb-0 animate-fade-in max-w-3xl mx-auto leading-relaxed px-4'>
-            Kokybė, kuri matoma. <br />
-            Patikimas partneris jūsų automobilio priežiūrai.
+            Kokybė, kuri matoma. <br /> Patikimas partneris jūsų automobilio
+            priežiūrai.
           </p>
         </div>
       </div>
