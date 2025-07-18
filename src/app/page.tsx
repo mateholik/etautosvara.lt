@@ -10,6 +10,7 @@ import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import MercedesShowcase from '@/components/MercedesShowcase';
+import MocaiShowcase from '@/components/MocaiShowcase';
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <Services />
       <FAQ />
       <MercedesShowcase />
+      <MocaiShowcase />
       <WhyUs />
       <BeforeAfter />
       <Testimonials />
