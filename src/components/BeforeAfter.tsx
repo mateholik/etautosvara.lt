@@ -19,6 +19,8 @@ const BeforeAfter: React.FC = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
   // Array of before/after images from pries-po folder
   // All 16 images included
@@ -173,6 +175,29 @@ const BeforeAfter: React.FC = () => {
     setCurrentImageIndex((prev) => (prev + 1) % images.length);
   }, [images.length]);
 
+  // Touch handlers for swipe navigation
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      goToNext();
+    } else if (isRightSwipe) {
+      goToPrevious();
+    }
+  };
+
   // Keyboard navigation
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -320,38 +345,47 @@ const BeforeAfter: React.FC = () => {
 
             {/* Main content area */}
             <div className='flex-1 flex items-center justify-center relative p-4'>
-              {/* Navigation buttons */}
+              {/* Navigation buttons - Enhanced for mobile */}
               <button
                 onClick={goToPrevious}
-                className='absolute left-4 top-1/2 transform -translate-y-1/2 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10'
+                className='absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 p-3 md:p-2 bg-black/60 hover:bg-black/80 rounded-full transition-colors z-10 border-2 border-white/20 hover:border-white/40'
               >
-                <ChevronLeftIcon className='w-6 h-6 text-white' />
+                <ChevronLeftIcon className='w-8 h-8 md:w-6 md:h-6 text-white' />
               </button>
 
               <button
                 onClick={goToNext}
-                className='absolute right-4 top-1/2 transform -translate-y-1/2 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10'
+                className='absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 p-3 md:p-2 bg-black/60 hover:bg-black/80 rounded-full transition-colors z-10 border-2 border-white/20 hover:border-white/40'
               >
-                <ChevronRightIcon className='w-6 h-6 text-white' />
+                <ChevronRightIcon className='w-8 h-8 md:w-6 md:h-6 text-white' />
               </button>
 
-              {/* Main image */}
-              <div className='relative max-w-full max-h-full flex items-center justify-center'>
+              {/* Main image with swipe support */}
+              <div
+                className='relative max-w-full max-h-full flex items-center justify-center'
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
                 <img
                   src={images[currentImageIndex].src}
                   alt={images[currentImageIndex].alt}
-                  className='max-w-full max-h-full object-contain'
+                  className='max-w-full max-h-full object-contain select-none'
                   style={{ maxHeight: '90vh', maxWidth: '100%' }}
+                  draggable={false}
                 />
               </div>
 
               {/* Image info */}
-              <div className='absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 backdrop-blur-sm rounded-lg px-4 py-2'>
+              <div className='absolute bottom-20 md:bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 backdrop-blur-sm rounded-lg px-4 py-2'>
                 <h3 className='text-white font-semibold text-center'>
                   {images[currentImageIndex].title}
                 </h3>
                 <p className='text-white/80 text-sm text-center mt-1'>
                   {currentImageIndex + 1} / {images.length}
+                </p>
+                <p className='text-white/60 text-xs text-center mt-1 md:hidden'>
+                  👆 Swipe left/right to navigate
                 </p>
               </div>
             </div>

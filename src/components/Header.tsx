@@ -109,7 +109,9 @@ const Header: React.FC = () => {
               alt='ET Auto Švara'
               width={120}
               height={54}
-              className='w-28 md:w-32 h-auto'
+              className='w-28 md:w-32'
+              style={{ height: 'auto' }}
+              priority
             />
           </button>
 
