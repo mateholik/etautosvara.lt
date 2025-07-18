@@ -18,6 +18,7 @@ const BeforeAfter: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Array of before/after images from pries-po folder
   // All 16 images included
@@ -132,6 +133,26 @@ const BeforeAfter: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Mobile detection and force re-render
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    // Force re-render on mobile after component mount
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      setTimeout(() => {
+        setIsVisible(false);
+        setTimeout(() => setIsVisible(true), 50);
+      }, 100);
+    }
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Lightbox functions
   const openLightbox = (index: number) => {
     setCurrentImageIndex(index);
@@ -190,7 +211,8 @@ const BeforeAfter: React.FC = () => {
 
         {/* Images Gallery */}
         <div
-          className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-16 ${
+          key={isMobile ? 'mobile' : 'desktop'}
+          className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4 mb-16 ${
             isVisible ? 'animate-fade-in' : 'opacity-0'
           }`}
         >
@@ -203,12 +225,26 @@ const BeforeAfter: React.FC = () => {
               }}
               onClick={() => openLightbox(index)}
             >
-              <div className='relative overflow-hidden bg-gray-100'>
+              <div className='relative overflow-hidden bg-gray-100 aspect-square'>
                 <img
                   src={image.src}
                   alt={image.alt}
-                  className='w-full h-auto object-contain transition-transform duration-500 group-hover:scale-110'
-                  style={{ minHeight: '200px' }}
+                  className='w-full h-full object-cover transition-transform duration-500 group-hover:scale-110'
+                  loading='lazy'
+                  style={{
+                    minWidth: '100%',
+                    minHeight: '100%',
+                    display: 'block',
+                  }}
+                  onLoad={(e) => {
+                    // Ensure image is visible after load
+                    e.currentTarget.style.opacity = '1';
+                  }}
+                  onError={(e) => {
+                    console.error('Image failed to load:', image.src);
+                    e.currentTarget.style.display = 'block';
+                    e.currentTarget.style.backgroundColor = '#f3f4f6';
+                  }}
                 />
               </div>
 
