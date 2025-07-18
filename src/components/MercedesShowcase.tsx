@@ -17,6 +17,8 @@ const MercedesShowcase: React.FC = () => {
   const [mouseStart, setMouseStart] = useState(0);
   const [mouseEnd, setMouseEnd] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Array of images for the slider - you can add more images here
   const images = [
@@ -81,20 +83,35 @@ const MercedesShowcase: React.FC = () => {
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
+    const currentX = e.targetTouches[0].clientX;
+    setTouchEnd(currentX);
+
+    // Calculate drag offset for visual feedback
+    const offset = currentX - touchStart;
+    setDragOffset(Math.max(-200, Math.min(200, offset))); // Limit drag distance
   };
 
   const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
+    if (!touchStart || !touchEnd) {
+      setDragOffset(0);
+      return;
+    }
 
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > 50;
     const isRightSwipe = distance < -50;
 
+    // Animate back to position
+    setIsTransitioning(true);
+    setDragOffset(0);
+
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 300);
+
     if (isLeftSwipe && images.length > 1) {
       nextSlide();
-    }
-    if (isRightSwipe && images.length > 1) {
+    } else if (isRightSwipe && images.length > 1) {
       prevSlide();
     }
   };
@@ -108,29 +125,47 @@ const MercedesShowcase: React.FC = () => {
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging) return;
-    setMouseEnd(e.clientX);
+    const currentX = e.clientX;
+    setMouseEnd(currentX);
+
+    // Calculate drag offset for visual feedback
+    const offset = currentX - mouseStart;
+    setDragOffset(Math.max(-200, Math.min(200, offset))); // Limit drag distance
   };
 
   const handleMouseUp = () => {
     if (!isDragging) return;
     setIsDragging(false);
 
-    if (!mouseStart || !mouseEnd) return;
+    if (!mouseStart || !mouseEnd) {
+      setDragOffset(0);
+      return;
+    }
 
     const distance = mouseStart - mouseEnd;
     const isLeftSwipe = distance > 50;
     const isRightSwipe = distance < -50;
 
+    // Animate back to position
+    setIsTransitioning(true);
+    setDragOffset(0);
+
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 300);
+
     if (isLeftSwipe && images.length > 1) {
       nextSlide();
-    }
-    if (isRightSwipe && images.length > 1) {
+    } else if (isRightSwipe && images.length > 1) {
       prevSlide();
     }
   };
 
   const handleMouseLeave = () => {
-    setIsDragging(false);
+    if (isDragging) {
+      setIsDragging(false);
+      setDragOffset(0);
+    }
   };
 
   return (
@@ -241,11 +276,20 @@ const MercedesShowcase: React.FC = () => {
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
               >
-                <div className='relative'>
+                <div
+                  className='relative'
+                  style={{
+                    transform: `translateX(${dragOffset}px)`,
+                    transition: isTransitioning
+                      ? 'transform 0.3s ease-out'
+                      : 'none',
+                  }}
+                >
                   <img
                     src={images[currentSlide].src}
                     alt={images[currentSlide].alt}
-                    className='w-full h-auto'
+                    className='w-full h-auto select-none'
+                    draggable={false}
                   />
 
                   {/* Overlay gradient */}
