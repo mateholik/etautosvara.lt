@@ -219,7 +219,7 @@ const Auth = () => {
         {/* Footer */}
         <div className='text-center mt-8'>
           <p className='text-gray-400 text-sm'>
-            © 2024 ET Auto Švara. Visos teisės saugomos.
+            © {new Date().getFullYear()} ET Auto Švara. Visos teisės saugomos.
           </p>
         </div>
       </div>
