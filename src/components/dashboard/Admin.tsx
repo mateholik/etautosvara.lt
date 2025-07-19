@@ -2,6 +2,7 @@
 import { supabase } from '@/supabase-client';
 import { useEffect, useState, useRef } from 'react';
 import { Button } from '@/components/ui/Button';
+import AuthenticatedImage from '@/components/AuthenticatedImage';
 
 type Client = {
   id: number;
@@ -10,6 +11,7 @@ type Client = {
   email: string;
   phone: string | null;
   text: string | null;
+  image_url: string | null;
 };
 
 type FormData = {
@@ -17,6 +19,7 @@ type FormData = {
   email: string;
   phone: string;
   text: string;
+  image: File | null;
 };
 
 export default function Admin() {
@@ -26,15 +29,19 @@ export default function Admin() {
     email: '',
     phone: '',
     text: '',
+    image: null,
   });
   const [editingClient, setEditingClient] = useState<Client | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
   const [message, setMessage] = useState<{
     type: 'success' | 'error';
     text: string;
   } | null>(null);
   const [showForm, setShowForm] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const fetchClients = async () => {
     try {
@@ -57,9 +64,94 @@ export default function Admin() {
   };
 
   const resetForm = () => {
-    setFormData({ name: '', email: '', phone: '', text: '' });
+    setFormData({ name: '', email: '', phone: '', text: '', image: null });
     setEditingClient(null);
     setShowForm(false);
+    setImagePreview(null);
+    setUploadProgress(0);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      showMessage('error', 'Prašome pasirinkti nuotrauką');
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      showMessage('error', 'Nuotrauka per didelė. Maksimalus dydis: 5MB');
+      return;
+    }
+
+    setFormData({ ...formData, image: file });
+
+    // Create preview
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setImagePreview(e.target?.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const uploadImage = async (
+    file: File,
+    clientId?: number
+  ): Promise<string | null> => {
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}-${Math.random()
+        .toString(36)
+        .substring(2)}.${fileExt}`;
+      const filePath = `cars/${fileName}`;
+
+      setUploadProgress(10);
+
+      const { error: uploadError } = await supabase.storage
+        .from('cars')
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: false,
+        });
+
+      if (uploadError) throw uploadError;
+
+      setUploadProgress(100);
+
+      // Return the file path instead of public URL (for private bucket)
+      return filePath;
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      throw error;
+    }
+  };
+
+  const deleteImage = async (imagePath: string) => {
+    try {
+      // If it's a full URL, extract the file path, otherwise use as-is
+      let filePath = imagePath;
+      if (imagePath.includes('supabase')) {
+        const url = new URL(imagePath);
+        const pathParts = url.pathname.split('/');
+        filePath = pathParts.slice(-2).join('/'); // Get 'cars/filename.ext'
+      }
+
+      const { error } = await supabase.storage.from('cars').remove([filePath]);
+
+      if (error) {
+        console.error('Error deleting image:', error);
+        // Don't throw error as it's not critical
+      }
+    } catch (error) {
+      console.error('Error deleting image:', error);
+      // Don't throw error as it's not critical
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -70,9 +162,22 @@ export default function Admin() {
     }
 
     setIsLoading(true);
+    setUploadProgress(0);
 
     try {
+      let imageUrl: string | null = null;
+
+      // Upload image if provided
+      if (formData.image) {
+        imageUrl = await uploadImage(formData.image);
+      }
+
       if (editingClient) {
+        // If updating and there's a new image, delete the old one
+        if (formData.image && editingClient.image_url) {
+          await deleteImage(editingClient.image_url);
+        }
+
         // Update existing client
         const { error } = await supabase
           .from('clients')
@@ -81,6 +186,7 @@ export default function Admin() {
             email: formData.email.trim(),
             phone: formData.phone.trim() || null,
             text: formData.text.trim() || null,
+            image_url: imageUrl || editingClient.image_url,
           })
           .eq('id', editingClient.id);
 
@@ -95,6 +201,7 @@ export default function Admin() {
                   ...formData,
                   phone: formData.phone || null,
                   text: formData.text || null,
+                  image_url: imageUrl || editingClient.image_url,
                 }
               : client
           )
@@ -108,6 +215,7 @@ export default function Admin() {
             email: formData.email.trim(),
             phone: formData.phone.trim() || null,
             text: formData.text.trim() || null,
+            image_url: imageUrl,
           })
           .select()
           .single();
@@ -129,6 +237,7 @@ export default function Admin() {
       );
     } finally {
       setIsLoading(false);
+      setUploadProgress(0);
     }
   };
 
@@ -139,13 +248,17 @@ export default function Admin() {
       email: client.email,
       phone: client.phone || '',
       text: client.text || '',
+      image: null,
     });
+    // Don't set image preview for existing clients to avoid confusion
+    setImagePreview(null);
     setShowForm(true);
   };
 
   const handleAddNew = () => {
     setEditingClient(null);
-    setFormData({ name: '', email: '', phone: '', text: '' });
+    setFormData({ name: '', email: '', phone: '', text: '', image: null });
+    setImagePreview(null);
     setShowForm(true);
   };
 
@@ -313,6 +426,69 @@ export default function Admin() {
                   />
                 </div>
 
+                {/* Image Upload */}
+                <div>
+                  <label
+                    htmlFor='image'
+                    className='block text-sm font-medium text-primary mb-2'
+                  >
+                    Automobilio nuotrauka
+                  </label>
+                  <input
+                    id='image'
+                    type='file'
+                    ref={fileInputRef}
+                    accept='image/*'
+                    onChange={handleImageChange}
+                    className='w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-colors text-primary file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-accent file:text-white file:cursor-pointer hover:file:bg-red-700'
+                  />
+                  <p className='text-xs text-muted mt-1'>
+                    Palaikomi formatai: JPG, PNG, WebP. Maksimalus dydis: 5MB
+                  </p>
+
+                  {/* Image Preview */}
+                  {imagePreview && (
+                    <div className='mt-3'>
+                      <img
+                        src={imagePreview}
+                        alt='Nuotraukos peržiūra'
+                        className='w-full h-32 object-cover rounded-lg border border-border'
+                      />
+                    </div>
+                  )}
+
+                  {/* Existing image for edit mode */}
+                  {editingClient &&
+                    editingClient.image_url &&
+                    !imagePreview && (
+                      <div className='mt-3'>
+                        <p className='text-xs text-muted mb-2'>
+                          Dabartinė nuotrauka:
+                        </p>
+                        <AuthenticatedImage
+                          path={editingClient.image_url}
+                          alt='Dabartinė nuotrauka'
+                          className='w-full h-32 object-cover rounded-lg border border-border'
+                        />
+                      </div>
+                    )}
+
+                  {/* Upload Progress */}
+                  {uploadProgress > 0 && uploadProgress < 100 && (
+                    <div className='mt-3'>
+                      <div className='w-full bg-gray-200 rounded-full h-2'>
+                        <div
+                          className='bg-accent h-2 rounded-full transition-all duration-300'
+                          style={{ width: `${uploadProgress}%` }}
+                        ></div>
+                      </div>
+                      <p className='text-xs text-muted mt-1'>
+                        Įkeliama nuotrauka... {uploadProgress}%
+                      </p>
+                    </div>
+                  )}
+                </div>
+
                 <div className='flex gap-3 pt-4'>
                   <Button
                     type='submit'
@@ -358,11 +534,10 @@ export default function Admin() {
                   className='p-6 border rounded-lg transition-all duration-200 border-border hover:border-accent/50 hover:shadow-md bg-white'
                 >
                   <div className='md:flex items-start justify-between mb-4 space-y-8'>
-                    <div className='flex-1'>
+                    <div className='flex-1 mb-0'>
                       <h3 className='text-lg font-semibold text-primary mb-3'>
                         {client.name}
                       </h3>
-
                       <div className='space-y-2'>
                         {/* Email */}
                         <div className='flex items-center space-x-2'>
@@ -399,7 +574,6 @@ export default function Admin() {
                           </div>
                         )}
                       </div>
-
                       {/* Date */}
                       <div className='mt-4 pt-3 border-t border-gray-100'>
                         <div className='flex items-center space-x-2'>
@@ -419,13 +593,23 @@ export default function Admin() {
                           </span>
                         </div>
                       </div>
+                      {/* Car Image */}
+                      {client.image_url && (
+                        <div className='md:w-1/2 mt-4'>
+                          <AuthenticatedImage
+                            path={client.image_url}
+                            alt={`${client.name} automobilis`}
+                            className='w-full max-w-xs h-32 object-cover rounded-lg border border-border'
+                          />
+                        </div>
+                      )}
                     </div>
 
                     <Button
                       variant='ghost'
                       size='sm'
                       onClick={() => handleEdit(client)}
-                      className='md:ml-4 text-accent hover:bg-accent hover:text-white shrink-0 self-start'
+                      className='md:ml-4 text-accent hover:bg-accent hover:text-white shrink-0 self-start mt-4 md:mt-0'
                     >
                       ✏️ Redaguoti
                     </Button>
