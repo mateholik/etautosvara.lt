@@ -210,7 +210,7 @@ const Services: React.FC = () => {
                 </ul>
               </CardContent>
 
-              <CardFooter>
+              {/* <CardFooter>
                 <Button
                   onClick={() => handleBookService()}
                   variant='primary'
@@ -219,7 +219,7 @@ const Services: React.FC = () => {
                 >
                   Užsisakyti
                 </Button>
-              </CardFooter>
+              </CardFooter> */}
             </Card>
           ))}
         </div>

@@ -20,23 +20,22 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     },
     ref
   ) => {
-    const baseStyles = 'rounded-xl transition-all duration-200';
+    const baseStyles =
+      'rounded-2xl transition-all duration-300 overflow-hidden shadow-sm backdrop-blur-md';
 
     const variants = {
-      default: 'bg-white border border-border',
-      elevated: 'bg-white shadow-lg hover:shadow-xl',
-      bordered: 'bg-white border-2 border-border',
+      default: 'bg-slate-100/80',
+      elevated: 'bg-slate-100/80',
+      bordered: 'bg-slate-100/80',
     };
 
     const paddings = {
       sm: 'p-4',
-      md: 'p-6',
-      lg: 'p-8',
+      md: 'p-8',
+      lg: 'p-12',
     };
 
-    const hoverStyles = hover
-      ? 'hover:shadow-xl hover:scale-105 cursor-pointer'
-      : '';
+    const hoverStyles = '';
 
     return (
       <div
@@ -73,7 +72,10 @@ const CardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h3
     ref={ref}
-    className={cn('text-xl font-bold text-primary', className)}
+    className={cn(
+      'text-2xl font-extrabold text-primary drop-shadow-sm tracking-tight',
+      className
+    )}
     {...props}
   />
 ));
@@ -83,7 +85,11 @@ const CardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn('text-muted mt-2', className)} {...props} />
+  <p
+    ref={ref}
+    className={cn('text-secondary mt-2 text-base font-medium', className)}
+    {...props}
+  />
 ));
 CardDescription.displayName = 'CardDescription';
 
