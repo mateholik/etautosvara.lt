@@ -17,16 +17,18 @@ export default function Home() {
   return (
     <>
       <Header />
+
       <Hero />
-      <Hero2 />
+      {/* <Hero2 /> */}
       <Services />
-      <FAQ />
-      <MercedesShowcase />
-      <MocaiShowcase />
       <VideoShowcase />
+      <FAQ />
+      {/* <MercedesShowcase />
+      <MocaiShowcase /> */}
+
       <BeforeAfter />
-      <Testimonials />
-      <Contact />
+      {/* <Testimonials /> */}
+      {/* <Contact /> */}
     </>
   );
 }
