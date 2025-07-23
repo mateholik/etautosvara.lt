@@ -15,20 +15,18 @@ import VideoShowcase from '@/components/VideoShowcase';
 
 export default function Home() {
   return (
-    <main className='min-h-screen bg-background'>
+    <>
       <Header />
       <Hero />
       <Hero2 />
-      <About />
       <Services />
       <FAQ />
       <MercedesShowcase />
       <MocaiShowcase />
       <VideoShowcase />
-      <WhyUs />
       <BeforeAfter />
       <Testimonials />
       <Contact />
-    </main>
+    </>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Script from 'next/script';
+import Header from '@/components/Header';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -212,7 +213,11 @@ export default function RootLayout({
             });
           `}
         </Script>
-        {children}
+
+        <main className='min-h-screen bg-background'>
+          <Header />
+          {children}
+        </main>
       </body>
     </html>
   );

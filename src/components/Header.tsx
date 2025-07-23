@@ -5,10 +5,13 @@ import { Button } from './ui/Button';
 import { Bars3Icon, XMarkIcon, PhoneIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import { scrollToSection } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,35 +25,40 @@ const Header: React.FC = () => {
   const navigationItems = [
     {
       name: 'Apie mus',
-      href: 'about',
+      href: '/apie-mus',
       ariaLabel: 'Sužinoti apie mūsų komandą',
     },
-    { name: 'Paslaugos', href: 'services', ariaLabel: 'Peržiūrėti paslaugas' },
     {
-      name: 'Kodėl mes',
-      href: 'why-us',
-      ariaLabel: 'Sužinoti kodėl pasirinkti mus',
+      name: 'Paslaugos',
+      href: '/paslaugos',
+      ariaLabel: 'Peržiūrėti paslaugas',
     },
+    // {
+    //   name: 'Kodėl mes',
+    //   href: 'why-us',
+    //   ariaLabel: 'Sužinoti kodėl pasirinkti mus',
+    // },
     {
       name: 'Prieš/Po',
-      href: 'before-after',
+      href: '/pries-po',
       ariaLabel: 'Peržiūrėti prieš ir po nuotraukas',
     },
-    {
-      name: 'Atsiliepimai',
-      href: 'testimonials',
-      ariaLabel: 'Skaityti klientų atsiliepimus',
-    },
+    // {
+    //   name: 'Atsiliepimai',
+    //   href: 'testimonials',
+    //   ariaLabel: 'Skaityti klientų atsiliepimus',
+    // },
     {
       name: 'DUK',
-      href: 'faq',
+      href: '/duk',
       ariaLabel: 'Dažnai užduodami klausimai',
     },
-    { name: 'Kontaktai', href: 'contact', ariaLabel: 'Susisiekti su mumis' },
+    { name: 'Kontaktai', href: '/kontaktai', ariaLabel: 'Susisiekti su mumis' },
   ];
 
   const handleNavClick = (href: string) => {
-    scrollToSection(href);
+    // scrollToSection(href);
+    router.push(href);
     setIsMobileMenuOpen(false);
   };
 
@@ -101,7 +109,7 @@ const Header: React.FC = () => {
 
           {/* Logo - Center */}
           <button
-            onClick={() => handleNavClick('hero')}
+            onClick={() => handleNavClick('/')}
             aria-label='ET Auto Švara - grįžti į pagrindinį puslapį'
           >
             <Image
