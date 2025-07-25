@@ -2,13 +2,23 @@
 
 import React, { useState } from 'react';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
 interface FAQItem {
   question: string;
   answer: string;
 }
 
-const FAQ: React.FC = () => {
+type FAQProps = {
+  visibleAmount?: number;
+  showAllCta?: boolean;
+  showBanner?: boolean;
+};
+export default function FAQ({
+  visibleAmount = 9,
+  showAllCta = false,
+  showBanner = true,
+}: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const faqItems: FAQItem[] = [
@@ -18,24 +28,26 @@ const FAQ: React.FC = () => {
         'Priklausomai nuo paslaugos: cheminis interjero valymas 8-15 val., kėbulo poliravimas 16-32 val., pilnas detailing procesas gali užtrukti iki 40 valandų.',
     },
     {
-      question: 'Ar reikia iš anksto užsisakyti laiką?',
-      answer:
-        'Taip, rekomenduojame užsisakyti laiką iš anksto. Skambinkite +370 6 06 47 967 arba užpildykite kontaktų formą. Taip užtikrinsime, kad galėsime jums skirti reikiamą dėmesį ir laiką.',
-    },
-    {
       question: 'Kokius valymo produktus naudojate?',
       answer:
         'Naudojame tik aukščiausios kokybės profesionalius valymo produktus ir chemijos preparatus. Visi produktai yra saugūs automobilio dangoms ir aplinkai, sertifikuoti tarptautiniu mastu. Vaško dangos padengimas SOFT99. Keramikinėms dandoms SONAX.',
     },
     {
+      question: 'Ar teikiate garantiją savo darbui?',
+      answer: 'Taip, jeigu automobilio priežiūra ir toliau atliekame mes',
+    },
+    {
+      question: 'Ar reikia iš anksto užsisakyti laiką?',
+      answer:
+        'Taip, rekomenduojame užsisakyti laiką iš anksto. Skambinkite +370 6 06 47 967 arba užpildykite kontaktų formą. Taip užtikrinsime, kad galėsime jums skirti reikiamą dėmesį ir laiką.',
+    },
+
+    {
       question: 'Ar galite atvykti į mano vietą?',
       answer:
         'Ne, paslaugos teikiamos tik adresu Saulėtoji g. 8, Ližiškės, Vilnius',
     },
-    {
-      question: 'Ar teikiate garantiją savo darbui?',
-      answer: 'Taip, jeigu automobilio priežiūra ir toliau atliekame mes',
-    },
+
     {
       question: 'Kaip dažnai reikėtų valyti automobilį?',
       answer:
@@ -78,7 +90,7 @@ const FAQ: React.FC = () => {
         {/* FAQ Items */}
         <div className='max-w-4xl mx-auto'>
           <div className='space-y-4'>
-            {faqItems.map((item, index) => (
+            {faqItems.slice(0, visibleAmount).map((item, index) => (
               <div
                 key={index}
                 className='bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden'
@@ -113,39 +125,50 @@ const FAQ: React.FC = () => {
           </div>
         </div>
 
-        {/* Contact CTA */}
-        <div className='text-center mt-12'>
-          <div className='bg-white rounded-2xl p-8 shadow-sm border border-gray-200'>
-            <h3 className='text-2xl font-bold text-primary mb-4'>
-              Neradote atsakymo?
-            </h3>
-            <p className='text-gray-600 mb-6'>
-              Susisiekite su mumis ir mielai atsakysime į visus jūsų klausimus
-            </p>
-            <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-              <a
-                href='tel:+370606047967'
-                className='bg-accent hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center'
-              >
-                📞 Skambinti dabar
-              </a>
-              <button
-                onClick={() => {
-                  const element = document.getElementById('contact');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                className='border-2 border-accent text-accent hover:bg-accent hover:text-white px-8 py-3 rounded-lg font-medium transition-colors'
-              >
-                Rašyti žinutę
-              </button>
+        {showAllCta && (
+          <div className='flex justify-center mt-12'>
+            <Link
+              href='/duk'
+              className='bg-accent hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center'
+            >
+              Visi klausimai
+            </Link>
+          </div>
+        )}
+
+        {/* Contact Banner */}
+        {showBanner && (
+          <div className='text-center mt-12'>
+            <div className='bg-white rounded-2xl p-8 shadow-sm border border-gray-200'>
+              <h3 className='text-2xl font-bold text-primary mb-4'>
+                Neradote atsakymo?
+              </h3>
+              <p className='text-gray-600 mb-6'>
+                Susisiekite su mumis ir mielai atsakysime į visus jūsų klausimus
+              </p>
+              <div className='flex flex-col sm:flex-row gap-4 justify-center'>
+                <a
+                  href='tel:+370606047967'
+                  className='bg-accent hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center'
+                >
+                  📞 Skambinti dabar
+                </a>
+                <button
+                  onClick={() => {
+                    const element = document.getElementById('contact');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className='border-2 border-accent text-accent hover:bg-accent hover:text-white px-8 py-3 rounded-lg font-medium transition-colors'
+                >
+                  Rašyti žinutę
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );
-};
-
-export default FAQ;
+}

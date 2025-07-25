@@ -27,22 +27,22 @@ const Hero: React.FC = () => {
         <div className='max-w-4xl mx-auto'>
           {/* Main Heading */}
           <h1 className='text-3xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-white mb-6 animate-fade-in leading-tight'>
-            <span className='block mb-1'>Profesionalus</span>
-            <span className='text-accent'>automobilio valymas</span>
+            <span className='block mb-1'>Profesionali</span>
+            <span className='text-accent'>automobilių priežiūra</span>
           </h1>
 
           {/* Detailing Studio Badge */}
           <div className='mb-6 md:mb-8 animate-fade-in'>
-            <span className='inline-block bg-accent/10 backdrop-blur-sm border border-accent/20 rounded-full px-3 py-1.5 md:px-4 md:py-2 text-accent font-medium text-xs md:text-xs uppercase tracking-wider'>
+            <span className='inline-block bg-accent/10 backdrop-blur-sm border border-accent/20 rounded-full px-3 py-1.5 md:px-4 md:py-2 text-white font-medium text-xs md:text-xl uppercase tracking-wider'>
               Detailing Studio
             </span>
           </div>
 
           {/* Subheading */}
-          <p className='text-lg md:text-lg lg:text-xl xl:text-2xl text-gray-300 mb-0 animate-fade-in max-w-3xl mx-auto leading-relaxed px-4'>
+          {/* <p className='text-lg md:text-lg lg:text-xl xl:text-2xl text-gray-300 mb-0 animate-fade-in max-w-3xl mx-auto leading-relaxed px-4'>
             Kokybė, kuri matoma. <br /> Patikimas partneris jūsų automobilio
             priežiūrai.
-          </p>
+          </p> */}
         </div>
       </div>
 

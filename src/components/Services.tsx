@@ -1,13 +1,7 @@
 'use client';
 
 import React from 'react';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from './ui/Card';
+import { Card, CardHeader, CardTitle, CardContent } from './ui/Card';
 import { Button } from './ui/Button';
 import {
   SparklesIcon,
@@ -18,8 +12,8 @@ import {
   BeakerIcon,
   TruckIcon,
   FilmIcon,
-  WrenchIcon,
 } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
 interface Service {
   id: number;
@@ -30,7 +24,16 @@ interface Service {
   features: string[];
 }
 
-const Services: React.FC = () => {
+type ServicesProps = {
+  showDetails?: boolean;
+  visibleAmount?: number;
+  showAllCta?: boolean;
+};
+export default function Services({
+  showDetails = true,
+  visibleAmount = 9,
+  showAllCta = false,
+}: ServicesProps) {
   const services: Service[] = [
     {
       id: 4,
@@ -52,7 +55,7 @@ const Services: React.FC = () => {
     },
     {
       id: 6,
-      title: 'Hibridinių/nano/keramikinių dangų padengimas',
+      title: 'Keramikinių dangų padengimas',
       description:
         'Aukščiausios kokybės apsauginių dangų padengimas ilgalaikei automobilio apsaugai.',
       price: 'nuo 250 €',
@@ -86,19 +89,19 @@ const Services: React.FC = () => {
       ],
     },
 
-    {
-      id: 3,
-      title: 'Nano dangos dengimas',
-      description:
-        'Pažangiausia nano technologija, kuri formuoja apsauginę plėvelę ant automobilio paviršiaus.',
-      price: 'nuo 250 €',
-      icon: <ShieldCheckIcon className='w-8 h-8' />,
-      features: [
-        'Hidrofobinis efektas',
-        'Apsauga nuo purvo',
-        'Lengvas valymas',
-      ],
-    },
+    // {
+    //   id: 3,
+    //   title: 'Nano dangos dengimas',
+    //   description:
+    //     'Pažangiausia nano technologija, kuri formuoja apsauginę plėvelę ant automobilio paviršiaus.',
+    //   price: 'nuo 250 €',
+    //   icon: <ShieldCheckIcon className='w-8 h-8' />,
+    //   features: [
+    //     'Hidrofobinis efektas',
+    //     'Apsauga nuo purvo',
+    //     'Lengvas valymas',
+    //   ],
+    // },
 
     {
       id: 5,
@@ -159,7 +162,7 @@ const Services: React.FC = () => {
 
         {/* Services Grid */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-          {services.map((service) => (
+          {services.slice(0, visibleAmount).map((service) => (
             <Card
               key={service.id}
               variant='elevated'
@@ -183,56 +186,35 @@ const Services: React.FC = () => {
               <CardContent className='flex-grow'>
                 <p className='text-muted mb-4'>{service.description}</p>
 
-                <ul className='space-y-2'>
-                  {service.features.map((feature, index) => (
-                    <li
-                      key={index}
-                      className='flex items-center text-sm text-muted'
-                    >
-                      <span className='text-accent mr-2'>✓</span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+                {showDetails && (
+                  <ul className='space-y-2'>
+                    {service.features.map((feature, index) => (
+                      <li
+                        key={index}
+                        className='flex items-center text-sm text-muted'
+                      >
+                        <span className='text-accent mr-2'>✓</span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </CardContent>
-
-              {/* <CardFooter>
-                <Button
-                  onClick={() => handleBookService()}
-                  variant='primary'
-                  size='md'
-                  className='w-full'
-                >
-                  Užsisakyti
-                </Button>
-              </CardFooter> */}
             </Card>
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <div className='text-center mt-16'>
-          <div className='bg-secondary rounded-2xl p-8 md:p-12'>
-            <h3 className='text-2xl md:text-3xl font-bold text-primary mb-4'>
-              Neradote tinkamos paslaugos?
-            </h3>
-            <p className='text-muted mb-6 max-w-xl mx-auto'>
-              Susisiekite su mumis ir aptarsime jūsų poreikius. Individualiems
-              projektams sudarome specialias sąlygas.
-            </p>
-            <Button
-              onClick={() => handleBookService()}
-              variant='primary'
-              size='lg'
-              className='mx-auto'
+        {showAllCta && (
+          <div className='flex justify-center mt-12'>
+            <Link
+              href='/paslaugos'
+              className='bg-accent hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center'
             >
-              Susisiekti dabar
-            </Button>
+              Visos paslaugos
+            </Link>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );
-};
-
-export default Services;
+}

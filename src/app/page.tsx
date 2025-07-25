@@ -12,6 +12,7 @@ import Contact from '@/components/Contact';
 import MercedesShowcase from '@/components/MercedesShowcase';
 import MocaiShowcase from '@/components/MocaiShowcase';
 import VideoShowcase from '@/components/VideoShowcase';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -20,9 +21,10 @@ export default function Home() {
 
       <Hero />
       {/* <Hero2 /> */}
-      <Services />
+      <Services visibleAmount={3} showAllCta={true} />
+
       <VideoShowcase />
-      <FAQ />
+      <FAQ visibleAmount={3} showAllCta={true} showBanner={false} />
       {/* <MercedesShowcase />
       <MocaiShowcase /> */}
 
