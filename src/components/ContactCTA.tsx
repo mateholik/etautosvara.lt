@@ -5,6 +5,7 @@ import {
 } from '@heroicons/react/24/outline';
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
+import { configs } from '@/lib/config';
 
 interface ContactOption {
   id: string;
@@ -24,7 +25,7 @@ const ContactCTA = () => {
       name: 'WhatsApp',
       icon: '/icons/whatsapp.svg',
       color: '#25D366',
-      url: 'https://wa.me/+370606047967',
+      url: `https://wa.me/${configs.phone.replace(/\s+/g, '')}`,
     },
     {
       id: 'messenger',
@@ -38,7 +39,7 @@ const ContactCTA = () => {
       name: 'Viber',
       icon: '/icons/viber.svg',
       color: '#665CAC',
-      url: 'viber://contact?number=%2B370606047967',
+      url: 'viber://contact?number=%2B370 6 06 47 967',
     },
   ];
 
