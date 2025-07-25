@@ -15,7 +15,7 @@ const FAQ: React.FC = () => {
     {
       question: 'Kiek laiko užtrunka automobilio valymas?',
       answer:
-        'Priklausomai nuo paslaugos: greitas išorės valymas - 1-2 val., cheminis interjero valymas - 3-4 val., kėbulo poliravimas - 4-6 val., o pilnas detailing procesas gali užtrukti iki 8 valandų.',
+        'Priklausomai nuo paslaugos: cheminis interjero valymas 8-15 val., kėbulo poliravimas 16-32 val., pilnas detailing procesas gali užtrukti iki 40 valandų.',
     },
     {
       question: 'Ar reikia iš anksto užsisakyti laiką?',
@@ -25,37 +25,31 @@ const FAQ: React.FC = () => {
     {
       question: 'Kokius valymo produktus naudojate?',
       answer:
-        'Naudojame tik aukščiausios kokybės profesionalius valymo produktus ir chemijos preparatus. Visi produktai yra saugūs automobilio dangoms ir aplinkai, sertifikuoti tarptautiniu mastu.',
+        'Naudojame tik aukščiausios kokybės profesionalius valymo produktus ir chemijos preparatus. Visi produktai yra saugūs automobilio dangoms ir aplinkai, sertifikuoti tarptautiniu mastu. Vaško dangos padengimas SOFT99. Keramikinėms dandoms SONAX.',
     },
     {
       question: 'Ar galite atvykti į mano vietą?',
       answer:
-        'Taip, teikiame mobilias paslaugas Vilniuje, Kairėnuose ir Ližiškėse. Papildomas mokestis už atvykimą priklauso nuo atstumo. Susisiekite su mumis dėl tikslios kainos.',
-    },
-    {
-      question: 'Kiek kainuoja automobilio valymas?',
-      answer:
-        'Kainos priklauso nuo paslaugos: išorės valymas nuo 50€, cheminis interjero valymas nuo 150€, kėbulo poliravimas nuo 250€, žibintų poliravimas nuo 25€. Tikslią kainą pateikiame po automobilio apžiūros.',
+        'Ne, paslaugos teikiamos tik adresu Saulėtoji g. 8, Ližiškės, Vilnius',
     },
     {
       question: 'Ar teikiate garantiją savo darbui?',
-      answer:
-        'Taip, teikiame kokybės garantiją visoms savo paslaugoms. Jei nepatenkinti rezultatu, grįžkite per 7 dienas ir pataisysime nemokamai. Mūsų tikslas - 100% klientų pasitenkinimas.',
+      answer: 'Taip, jeigu automobilio priežiūra ir toliau atliekame mes',
     },
     {
       question: 'Kaip dažnai reikėtų valyti automobilį?',
       answer:
-        'Rekomenduojame: išorės valymas kas 2-3 savaites, interjero valymas kas 1-2 mėnesius, kėbulo poliravimas 2-3 kartus per metus, žibintų poliravimas kas 6 mėnesius arba pagal poreikį.',
+        'Rekomenduojame: išorės valymas kas 2-3 savaites, interjero valymas kas 1-2 mėnesius, kėbulo poliravimas 2-3 kartus per metus, žibintų poliravimas kas 6 mėnesius arba pagal poreikį. Cheminis valymas 2 kartus į metus',
     },
     {
       question: 'Ar galite pašalinti stiprius kvapus iš salono?',
       answer:
-        'Taip, specializuojamės kvapų šalinimo srityje. Naudojame ozono generatorius ir specialius kvapų neutralizatorius. Efektyviai pašaliname cigarečių, gyvūnų, maisto ir kitus kvapus.',
+        'Taip, specializuojamės kvapų šalinimo srityje, bet reikėtų situaciją įvartinti apžiūros metu. Efektyviai pašaliname cigarečių, gyvūnų, maisto ir kitus kvapus.',
     },
     {
       question: 'Kiek laiko išlieka poliravimo efektas?',
       answer:
-        'Kėbulo poliravimo efektas išlieka 3-6 mėnesius, priklausomai nuo automobilio naudojimo intensyvumo ir saugojimo sąlygų. Keraminės dangos gali išlikti iki 12 mėnesių.',
+        'Kėbulo poliravimo efektas išlieka 3-6 mėnesius, priklausomai nuo automobilio naudojimo intensyvumo ir saugojimo sąlygų. Keraminės dangos gali išlikti iki 12-24 mėnesiųб priklausomai nuo naudojimo',
     },
     {
       question: 'Ar dirbate žiemos metu?',

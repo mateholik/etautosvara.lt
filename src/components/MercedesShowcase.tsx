@@ -232,7 +232,7 @@ const MercedesShowcase: React.FC = () => {
               </div>
 
               <h2 className='text-4xl lg:text-5xl font-bold text-white leading-tight'>
-                Istorinių Automobilių
+                Retro Automobilių
                 <span className='block text-accent'>Detailing'as</span>
               </h2>
 

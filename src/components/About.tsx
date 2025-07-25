@@ -40,8 +40,8 @@ const About: React.FC = () => {
               Padėsime Jūsų automobiliui atrodyti vėl kaip naujam:{' '}
               <span className='text-white font-medium'>
                 atliekame kėbulo poliravimo darbus, pasirūpinsime ilgalaike
-                apsauga, padengsime kėbulą Jūsų automobiliui tinkamiausiais
-                apsauginėmis plėvelėmis bei nepriekaištingai išvalysime saloną.
+                apsauga, padengsime kėbulą Jūsų automobiliui tinkamiausia danga
+                bei nepriekaištingai išvalysime saloną.
               </span>
             </p>
           </div>

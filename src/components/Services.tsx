@@ -33,23 +33,37 @@ interface Service {
 const Services: React.FC = () => {
   const services: Service[] = [
     {
-      id: 1,
-      title: 'Automobilio vaškavimas',
+      id: 4,
+      title: 'Automobilio kėbulo poliravimas',
       description:
-        'Aukščiausios kokybės vaško dangos padengimas, kuris apsaugo automobilio lakų nuo išorinių poveikių.',
-      price: 'nuo 80 €',
-      icon: <SparklesIcon className='w-8 h-8' />,
-      features: [
-        'Apsauga nuo UV spindulių',
-        'Vandeniui atsparus',
-        'Ilgalaikis poveikis',
-      ],
+        'Profesionalus kėbulo poliravimas, šalinant įbrėžimus ir grąžinant blizgesį.',
+      price: 'nuo 250 €',
+      icon: <PaintBrushIcon className='w-8 h-8' />,
+      features: ['Įbrėžimų šalinimas', 'Blizgesio atkūrimas', 'Lako apsauga'],
+    },
+    {
+      id: 7,
+      title: 'Cheminis interjero valymas',
+      description:
+        'Giluminis automobilio salono valymas naudojant profesionalius chemijos produktus.',
+      price: 'nuo 250 €',
+      icon: <TruckIcon className='w-8 h-8' />,
+      features: ['Dėmių šalinimas', 'Dezinfekavimas', 'Kvapų neutralizavimas'],
+    },
+    {
+      id: 6,
+      title: 'Hibridinių/nano/keramikinių dangų padengimas',
+      description:
+        'Aukščiausios kokybės apsauginių dangų padengimas ilgalaikei automobilio apsaugai.',
+      price: 'nuo 250 €',
+      icon: <BeakerIcon className='w-8 h-8' />,
+      features: ['Ilgalaikė apsauga', 'Profesionalus padengimas'],
     },
     {
       id: 2,
       title: 'Žibintų poliravimas',
       description:
-        'Priekinio ir galinio žibintų poliravimas, grąžinant jiems pradinį skaidrumą ir blizgesį.',
+        'Priekinių ir galinių žibintų poliravimas, grąžinant jiems pradinį skaidrumą ir blizgesį.',
       price: 'nuo 25 € už vnt.',
       icon: <LightBulbIcon className='w-8 h-8' />,
       features: [
@@ -59,11 +73,25 @@ const Services: React.FC = () => {
       ],
     },
     {
+      id: 1,
+      title: 'Automobilio vaškavimas',
+      description:
+        'Aukščiausios kokybės vaško dangos padengimas (SOFT99), kuris apsaugo automobilio laką nuo išorinių poveikių.',
+      price: 'nuo 80 €',
+      icon: <SparklesIcon className='w-8 h-8' />,
+      features: [
+        'Apsauga nuo UV spindulių',
+        'Vandeniui atsparus',
+        'Ilgalaikis poveikis (3-6 mėn.)',
+      ],
+    },
+
+    {
       id: 3,
       title: 'Nano dangos dengimas',
       description:
         'Pažangiausia nano technologija, kuri formuoja apsauginę plėvelę ant automobilio paviršiaus.',
-      price: 'nuo 200 €',
+      price: 'nuo 250 €',
       icon: <ShieldCheckIcon className='w-8 h-8' />,
       features: [
         'Hidrofobinis efektas',
@@ -71,15 +99,7 @@ const Services: React.FC = () => {
         'Lengvas valymas',
       ],
     },
-    {
-      id: 4,
-      title: 'Automobilio kėbulo poliravimas',
-      description:
-        'Profesionalus kėbulo poliravimas, šalinant įbrėžimus ir grąžinant blizgesį.',
-      price: 'nuo 250 €',
-      icon: <PaintBrushIcon className='w-8 h-8' />,
-      features: ['Įbrėžimų šalinimas', 'Blizgesio atkūrimas', 'Lako apsauga'],
-    },
+
     {
       id: 5,
       title: 'Interjero bei kitų blizgių detalių poliravimas',
@@ -93,31 +113,10 @@ const Services: React.FC = () => {
         'Interjero atgaivinimas',
       ],
     },
-    {
-      id: 6,
-      title: 'Hibridinių/nano/keramikinių dangų aplikavimas',
-      description:
-        'Aukščiausios kokybės apsauginių dangų padengimas ilgalaikei automobilio apsaugai.',
-      price: 'nuo 250 €',
-      icon: <BeakerIcon className='w-8 h-8' />,
-      features: [
-        'Ilgalaikė apsauga',
-        'Atsparumas chemijai',
-        'Profesionalus padengimas',
-      ],
-    },
-    {
-      id: 7,
-      title: 'Cheminis interjero valymas',
-      description:
-        'Giluminis automobilio salono valymas naudojant profesionalius chemijos produktus.',
-      price: 'nuo 150 €',
-      icon: <TruckIcon className='w-8 h-8' />,
-      features: ['Dėmių šalinimas', 'Dezinfekavimas', 'Kvapų neutralizavimas'],
-    },
+
     {
       id: 8,
-      title: 'Detalus išorės valymas ir komplektas',
+      title: 'Detalus išorės valymas',
       description:
         'Išsamus automobilio išorės valymas su visais reikalingais procesais.',
       price: 'nuo 50 €',
@@ -135,19 +134,6 @@ const Services: React.FC = () => {
         'Apsauga nuo akmenėlių',
         'Savarankiškas gijimas',
         'Skaidri plėvelė',
-      ],
-    },
-    {
-      id: 10,
-      title: 'Meninis lyginimas',
-      description:
-        'Profesionalus automobilio kėbulo įdubų lyginimas be dažymo.',
-      price: 'nuo 30 € už vnt.',
-      icon: <WrenchIcon className='w-8 h-8' />,
-      features: [
-        'Be dažymo',
-        'Pradinės formos atkūrimas',
-        'Profesionalūs įrankiai',
       ],
     },
   ];
