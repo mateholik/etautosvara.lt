@@ -28,16 +28,16 @@ const ContactCTA = () => {
     {
       id: 'messenger',
       name: 'Facebook',
-      icon: '/icons/facebook.svg',
+      icon: '/icons/fb-chat.svg',
       color: '#0084FF',
-      url: 'https://www.facebook.com/etautosvara',
+      url: 'https://m.me/etautosvara',
     },
     {
       id: 'viber',
       name: 'Viber',
       icon: '/icons/viber.svg',
       color: '#665CAC',
-      url: 'viber://chat?number=+370606047967',
+      url: 'viber://contact?number=%2B370606047967',
     },
   ];
 

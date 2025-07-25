@@ -11,7 +11,6 @@ interface BeforeAfterImage {
   id: number;
   src: string;
   alt: string;
-  title: string;
 }
 
 const BeforeAfter: React.FC = () => {
@@ -29,91 +28,76 @@ const BeforeAfter: React.FC = () => {
       id: 1,
       src: '/pries-po/img_1.JPG',
       alt: 'Automobilio valymo rezultatas',
-      title: 'Kėbulo poliravimas',
     },
     {
       id: 2,
       src: '/pries-po/img_2.JPG',
       alt: 'Automobilio valymo rezultatas',
-      title: 'Interjero valymas',
     },
     {
       id: 3,
       src: '/pries-po/img_3.JPG',
       alt: 'Automobilio valymo rezultatas',
-      title: 'Žibintų poliravimas',
     },
     {
       id: 4,
       src: '/pries-po/img_4.JPG',
       alt: 'Automobilio valymo rezultatas',
-      title: 'Ratų valymas',
     },
     {
       id: 5,
       src: '/pries-po/img_5.JPG',
       alt: 'Automobilio valymo rezultatas',
-      title: 'Detailing paslaugos',
     },
     {
       id: 6,
       src: '/pries-po/img_6.JPG',
       alt: 'Automobilio valymo rezultatas',
-      title: 'Automobilio priežiūra',
     },
     {
       id: 7,
       src: '/pries-po/img_7.JPG',
       alt: 'Automobilio valymo rezultatas',
-      title: 'Profesionalus valymas',
     },
     {
       id: 8,
       src: '/pries-po/img_8.JPG',
       alt: 'Automobilio valymo rezultatas',
-      title: 'Kokybės garantija',
     },
     {
       id: 9,
       src: '/pries-po/img_9.JPG',
       alt: 'Automobilio valymo rezultatas',
-      title: 'Kėbulo apsauga',
     },
     {
       id: 10,
       src: '/pries-po/img_10.JPG',
       alt: 'Automobilio valymo rezultatas',
-      title: 'Salono valymas',
     },
     {
       id: 11,
       src: '/pries-po/img_11.JPG',
       alt: 'Automobilio valymo rezultatas',
-      title: 'Variklio valymas',
     },
     {
       id: 12,
       src: '/pries-po/img_12.JPG',
       alt: 'Automobilio valymo rezultatas',
-      title: 'Plastiko atnaujinimas',
     },
     {
       id: 13,
       src: '/pries-po/img_13.JPG',
       alt: 'Automobilio valymo rezultatas',
-      title: 'Odos kondicionavimas',
     },
     {
       id: 14,
       src: '/pries-po/img_14.JPG',
       alt: 'Automobilio valymo rezultatas',
-      title: 'Stiklų valymas',
     },
     {
       id: 15,
       src: '/pries-po/img_15.JPG',
       alt: 'Automobilio valymo rezultatas',
-      title: 'Detalizuotas valymas',
     },
   ];
 
@@ -300,13 +284,6 @@ const BeforeAfter: React.FC = () => {
                   </svg>
                 </div>
               </div>
-
-              {/* Title */}
-              <div className='absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300'>
-                <h3 className='text-white font-semibold text-sm drop-shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
-                  {image.title}
-                </h3>
-              </div>
             </div>
           ))}
         </div>
@@ -378,9 +355,9 @@ const BeforeAfter: React.FC = () => {
 
               {/* Image info */}
               <div className='absolute bottom-20 md:bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 backdrop-blur-sm rounded-lg px-4 py-2'>
-                <h3 className='text-white font-semibold text-center'>
+                {/* <h3 className='text-white font-semibold text-center'>
                   {images[currentImageIndex].title}
-                </h3>
+                </h3> */}
                 <p className='text-white/80 text-sm text-center mt-1'>
                   {currentImageIndex + 1} / {images.length}
                 </p>

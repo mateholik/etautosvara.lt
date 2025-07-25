@@ -4,6 +4,7 @@ import './globals.css';
 import Script from 'next/script';
 import Header from '@/components/Header';
 import ContactCTA from '@/components/ContactCTA';
+import Footer from '@/components/Footer';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -219,6 +220,7 @@ export default function RootLayout({
           <Header />
           {children}
           <ContactCTA />
+          <Footer />
         </main>
       </body>
     </html>

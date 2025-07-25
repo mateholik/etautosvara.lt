@@ -6,7 +6,6 @@ interface VideoItem {
   id: number;
   src: string;
   title: string;
-  description: string;
 }
 
 const VideoShowcase: React.FC = () => {
@@ -18,26 +17,22 @@ const VideoShowcase: React.FC = () => {
     {
       id: 1,
       src: '/video/video_1.MP4',
-      title: 'Išorės valymas',
-      description: 'Kėbulo valymo procesas',
+      title: 'Interjero valymas',
     },
     {
       id: 2,
       src: '/video/video_2.MP4',
-      title: 'Interjero valymas',
-      description: 'Salono valymo procesas',
+      title: 'Odos valymas putomis',
     },
     {
       id: 3,
       src: '/video/video_3.MP4',
-      title: 'Poliravimas',
-      description: 'Kėbulo poliravimo procesas',
+      title: 'Odos valymas',
     },
     {
       id: 4,
       src: '/video/video_4.MP4',
-      title: 'Galutinis rezultatas',
-      description: 'Baigtas automobilis',
+      title: 'Odos impregnavimas',
     },
   ];
 

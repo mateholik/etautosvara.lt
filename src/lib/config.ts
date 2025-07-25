@@ -103,3 +103,10 @@ export const config = {
     },
   ],
 };
+
+export const configs = {
+  phone: '+370 6 06 47 967',
+  email: 'tamaseviciuserikas@gmail.com',
+  address: 'Saulėtoji g. 8, Ližiškės, Vilnius',
+  facebookPageLink: 'https://www.facebook.com/etautosvara',
+};
