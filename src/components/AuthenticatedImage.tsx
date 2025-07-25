@@ -1,6 +1,7 @@
 'use client';
 import { supabase } from '@/supabase-client';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 interface AuthenticatedImageProps {
   path: string;
@@ -96,11 +97,13 @@ export default function AuthenticatedImage({
   }
 
   return (
-    <img
+    <Image
       src={signedUrl}
       alt={alt}
       className={className}
-      onError={(e) => {
+      fill={false}
+      unoptimized
+      onError={() => {
         console.error('Image failed to load:', signedUrl);
         setError('Image load failed');
       }}

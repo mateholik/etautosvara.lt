@@ -6,6 +6,7 @@ import {
   MapPinIcon,
   EnvelopeIcon,
 } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 
 const ContactsBlock = ({ className }: { className?: string }) => {
   const contactInfo = [
@@ -28,7 +29,16 @@ const ContactsBlock = ({ className }: { className?: string }) => {
       link: `mailto:${configs.email}`,
     },
     {
-      icon: <img src='/icons/facebook.svg' className='!w-6 !h-6' />,
+      icon: (
+        <Image
+          src='/icons/facebook.svg'
+          alt='Facebook'
+          width={24}
+          height={24}
+          className='!w-6 !h-6'
+          unoptimized
+        />
+      ),
       label: 'Facebook',
       value: 'ET Auto Švara',
       link: configs.facebookPageLink,

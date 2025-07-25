@@ -139,12 +139,6 @@ export default function Services({
     },
   ];
 
-  const handleBookService = () => {
-    const phoneNumber = '+370 6 06 47 967';
-    // Future enhancement: could include service-specific messaging
-    window.location.href = `tel:${phoneNumber}`;
-  };
-
   return (
     <section id='services' className='py-20 bg-white'>
       <div className='container mx-auto px-4'>
@@ -164,7 +158,6 @@ export default function Services({
             <Card
               key={service.id}
               variant='elevated'
-              hover={true}
               className='h-full flex flex-col'
             >
               <CardHeader>

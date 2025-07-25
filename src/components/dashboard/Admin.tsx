@@ -3,6 +3,7 @@ import { supabase } from '@/supabase-client';
 import { useEffect, useState, useRef } from 'react';
 import { Button } from '@/components/ui/Button';
 import AuthenticatedImage from '@/components/AuthenticatedImage';
+import Image from 'next/image';
 
 type Client = {
   id: number;
@@ -446,10 +447,13 @@ export default function Admin() {
                   {/* Image Preview */}
                   {imagePreview && (
                     <div className='mt-3'>
-                      <img
+                      <Image
                         src={imagePreview}
                         alt='Nuotraukos peržiūra'
                         className='w-full h-32 object-cover rounded-lg border border-border'
+                        width={400}
+                        height={128}
+                        unoptimized
                       />
                     </div>
                   )}

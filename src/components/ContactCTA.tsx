@@ -4,6 +4,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import React, { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 
 interface ContactOption {
   id: string;
@@ -86,10 +87,13 @@ const ContactCTA = () => {
                   className='w-10 h-10 rounded-full flex items-center justify-center mr-3 flex-shrink-0'
                   style={{ backgroundColor: option.color }}
                 >
-                  <img
+                  <Image
                     src={option.icon}
-                    alt='social link'
+                    alt={option.name}
+                    width={24}
+                    height={24}
                     className='w-6 h-6'
+                    unoptimized
                   />
                 </div>
 

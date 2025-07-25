@@ -5,19 +5,11 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   variant?: 'default' | 'elevated' | 'bordered';
   padding?: 'sm' | 'md' | 'lg';
-  hover?: boolean;
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
   (
-    {
-      className,
-      variant = 'default',
-      padding = 'md',
-      hover = false,
-      children,
-      ...props
-    },
+    { className, variant = 'default', padding = 'md', children, ...props },
     ref
   ) => {
     const baseStyles =

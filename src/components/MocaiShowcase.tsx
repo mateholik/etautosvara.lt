@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import {
   StarIcon,
   SparklesIcon,
@@ -247,11 +248,14 @@ const MocaiShowcase: React.FC = () => {
                       : 'none',
                   }}
                 >
-                  <img
+                  <Image
                     src={images[currentSlide].src}
                     alt={images[currentSlide].alt}
                     className='w-full h-auto select-none'
                     draggable={false}
+                    width={728}
+                    height={970}
+                    unoptimized
                   />
 
                   {/* Overlay gradient */}

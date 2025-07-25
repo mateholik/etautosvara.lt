@@ -156,7 +156,7 @@ const VideoShowcase: React.FC = () => {
                 <h3 className='text-white font-semibold text-lg mb-1'>
                   {video.title}
                 </h3>
-                <p className='text-gray-300 text-sm'>{video.description}</p>
+                {/* <p className='text-gray-300 text-sm'>{video.description}</p> */}
               </div>
 
               {/* Decorative border */}
