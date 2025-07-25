@@ -86,7 +86,11 @@ const ContactCTA = () => {
                   className='w-10 h-10 rounded-full flex items-center justify-center mr-3 flex-shrink-0'
                   style={{ backgroundColor: option.color }}
                 >
-                  <img src={option.icon} className='w-6 h-6' />
+                  <img
+                    src={option.icon}
+                    alt='social link'
+                    className='w-6 h-6'
+                  />
                 </div>
 
                 {/* Text Content */}

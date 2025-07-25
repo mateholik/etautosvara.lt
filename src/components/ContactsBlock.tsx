@@ -4,9 +4,6 @@ import { configs } from '@/lib/config';
 import {
   PhoneIcon,
   MapPinIcon,
-  ClockIcon,
-  GlobeAltIcon,
-  ExclamationCircleIcon,
   EnvelopeIcon,
 } from '@heroicons/react/24/outline';
 

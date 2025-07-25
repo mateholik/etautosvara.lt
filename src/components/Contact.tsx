@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ContactForm from './ui/ContactForm';
-import { PhoneIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { MapPinIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import ContactsBlock from './ContactsBlock';
 

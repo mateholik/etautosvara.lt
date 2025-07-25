@@ -100,10 +100,7 @@ export default function Admin() {
     reader.readAsDataURL(file);
   };
 
-  const uploadImage = async (
-    file: File,
-    clientId?: number
-  ): Promise<string | null> => {
+  const uploadImage = async (file: File): Promise<string | null> => {
     try {
       const fileExt = file.name.split('.').pop();
       const fileName = `${Date.now()}-${Math.random()

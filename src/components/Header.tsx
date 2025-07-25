@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './ui/Button';
 import { Bars3Icon, XMarkIcon, PhoneIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
-import { scrollToSection } from '@/lib/utils';
 import { useRouter, usePathname } from 'next/navigation';
 
 const Header: React.FC = () => {

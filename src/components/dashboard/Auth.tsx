@@ -40,7 +40,7 @@ const Auth = () => {
 
     try {
       if (isSignUp) {
-        const { data, error } = await supabase.auth.signUp({
+        const { error } = await supabase.auth.signUp({
           email: formData.email,
           password: formData.password,
         });
@@ -54,7 +54,7 @@ const Auth = () => {
           setFormData({ email: '', password: '' });
         }
       } else {
-        const { data, error } = await supabase.auth.signInWithPassword({
+        const { error } = await supabase.auth.signInWithPassword({
           email: formData.email,
           password: formData.password,
         });
@@ -68,7 +68,7 @@ const Auth = () => {
         }
       }
     } catch (err) {
-      setError('Įvyko nenumatyta klaida. Bandykite dar kartą.');
+      setError('Įvyko nenumatyta klaida. Bandykite dar kartą. ' + err);
     } finally {
       setIsLoading(false);
     }

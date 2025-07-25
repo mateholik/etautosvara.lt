@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -235,10 +236,11 @@ const BeforeAfter: React.FC = () => {
               onClick={() => openLightbox(index)}
             >
               <div className='relative overflow-hidden bg-gray-100 aspect-square'>
-                <img
+                <Image
                   src={image.src}
                   alt={image.alt}
-                  className='w-full h-full object-cover transition-transform duration-500 group-hover:scale-110'
+                  fill
+                  className='object-cover transition-transform duration-500 group-hover:scale-110'
                   loading='lazy'
                   style={{
                     minWidth: '100%',
@@ -247,13 +249,15 @@ const BeforeAfter: React.FC = () => {
                   }}
                   onLoad={(e) => {
                     // Ensure image is visible after load
-                    e.currentTarget.style.opacity = '1';
+                    (e.target as HTMLImageElement).style.opacity = '1';
                   }}
                   onError={(e) => {
                     console.error('Image failed to load:', image.src);
-                    e.currentTarget.style.display = 'block';
-                    e.currentTarget.style.backgroundColor = '#f3f4f6';
+                    (e.target as HTMLImageElement).style.display = 'block';
+                    (e.target as HTMLImageElement).style.backgroundColor =
+                      '#f3f4f6';
                   }}
+                  unoptimized
                 />
               </div>
 
@@ -311,11 +315,15 @@ const BeforeAfter: React.FC = () => {
                       : 'border-white/30 hover:border-white/60'
                   }`}
                 >
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className='w-full h-full object-cover'
-                  />
+                  <div className='relative w-full h-full'>
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className='object-cover'
+                      unoptimized
+                    />
+                  </div>
                 </button>
               ))}
             </div>
@@ -343,14 +351,19 @@ const BeforeAfter: React.FC = () => {
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
+                style={{ width: '100%', height: '90vh' }}
               >
-                <img
-                  src={images[currentImageIndex].src}
-                  alt={images[currentImageIndex].alt}
-                  className='max-w-full max-h-full object-contain select-none'
-                  style={{ maxHeight: '90vh', maxWidth: '100%' }}
-                  draggable={false}
-                />
+                <div className='relative w-full h-full flex items-center justify-center'>
+                  <Image
+                    src={images[currentImageIndex].src}
+                    alt={images[currentImageIndex].alt}
+                    fill
+                    className='object-contain select-none'
+                    style={{ maxHeight: '90vh', maxWidth: '100%' }}
+                    draggable={false}
+                    unoptimized
+                  />
+                </div>
               </div>
 
               {/* Image info */}
@@ -379,11 +392,15 @@ const BeforeAfter: React.FC = () => {
                       : 'border-white/30 hover:border-white/60'
                   }`}
                 >
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className='w-full h-full object-cover'
-                  />
+                  <div className='relative w-full h-full'>
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className='object-cover'
+                      unoptimized
+                    />
+                  </div>
                 </button>
               ))}
             </div>
