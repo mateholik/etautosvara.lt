@@ -108,7 +108,7 @@ export const config = {
 
 export const configs = {
   phone: '+370 6 06 47 967',
-  email: 'tamaseviciuserikas@gmail.com',
+  email: 'info@etautosvara.lt',
   address: 'Saulėtoji g. 8, Ližiškės, Vilnius',
   facebookPageLink: 'https://www.facebook.com/etautosvara',
 };
@@ -191,37 +191,37 @@ export const befoAfterImages: Image[] = [
   },
   {
     id: 16,
-    src: '/pries-po/img_16.JPG',
+    src: '/pries-po/img_16.jpg',
     alt: 'Automobilio valymo rezultatas',
   },
   {
     id: 17,
-    src: '/pries-po/img_17.JPG',
+    src: '/pries-po/img_17.jpg',
     alt: 'Automobilio valymo rezultatas',
   },
   {
     id: 18,
-    src: '/pries-po/img_18.JPG',
+    src: '/pries-po/img_18.jpg',
     alt: 'Automobilio valymo rezultatas',
   },
   {
     id: 19,
-    src: '/pries-po/img_19.JPG',
+    src: '/pries-po/img_19.jpg',
     alt: 'Automobilio valymo rezultatas',
   },
   {
     id: 20,
-    src: '/pries-po/img_20.JPG',
+    src: '/pries-po/img_20.jpg',
     alt: 'Automobilio valymo rezultatas',
   },
   {
     id: 21,
-    src: '/pries-po/img_21.JPG',
+    src: '/pries-po/img_21.jpg',
     alt: 'Automobilio valymo rezultatas',
   },
   {
     id: 22,
-    src: '/pries-po/img_22.JPG',
+    src: '/pries-po/img_22.jpg',
     alt: 'Automobilio valymo rezultatas',
   },
 ];
