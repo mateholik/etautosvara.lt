@@ -201,7 +201,7 @@ const Auth = () => {
           </form>
 
           {/* Mode Toggle */}
-          <div className='mt-6 text-center'>
+          {/* <div className='mt-6 text-center'>
             <p className='text-gray-600'>
               {isSignUp ? 'Jau turite paskyrą?' : 'Neturite paskyros?'}
             </p>
@@ -213,14 +213,7 @@ const Auth = () => {
             >
               {isSignUp ? 'Prisijungti' : 'Registruotis'}
             </button>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className='text-center mt-8'>
-          <p className='text-gray-400 text-sm'>
-            © {new Date().getFullYear()} ET Auto Švara. Visos teisės saugomos.
-          </p>
+          </div> */}
         </div>
       </div>
     </div>

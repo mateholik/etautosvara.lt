@@ -103,6 +103,8 @@ export default function AuthenticatedImage({
       className={className}
       fill={false}
       unoptimized
+      width={460}
+      height={230}
       onError={() => {
         console.error('Image failed to load:', signedUrl);
         setError('Image load failed');

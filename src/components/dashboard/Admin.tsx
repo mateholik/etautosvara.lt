@@ -293,7 +293,7 @@ export default function Admin() {
     <div className='min-h-screen bg-secondary p-6'>
       <div className='max-w-6xl mx-auto'>
         {/* Header */}
-        <div className='mb-8'>
+        <div className='mb-8 mt-10'>
           <div className='md:flex items-center justify-between space-y-4'>
             <div>
               <h1 className='text-3xl font-bold text-primary mb-2'>

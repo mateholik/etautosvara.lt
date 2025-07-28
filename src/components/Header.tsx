@@ -86,7 +86,7 @@ const Header: React.FC = () => {
         role='banner'
       >
         <nav
-          className='w-full px-4 py-4'
+          className=' py-4 container mx-auto px-4'
           role='navigation'
           aria-label='Pagrindinis navigacijos meniu'
         >
