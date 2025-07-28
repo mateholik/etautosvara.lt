@@ -7,12 +7,14 @@ import { Button } from './Button';
 interface FormData {
   name: string;
   email: string;
+  phone: string;
   message: string;
 }
 
 const ContactForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -23,21 +25,29 @@ const ContactForm: React.FC = () => {
     defaultValues: {
       name: '',
       email: '',
+      phone: '',
       message: '',
     },
   });
 
-  // Services list removed as it's not used in the simplified form
-
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setIsSubmitting(true);
+    setSubmitError(null);
 
     try {
-      // Simulate form submission
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-      // In real implementation, you would send the data to your backend
-      console.log('Form submitted:', data);
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Klaida siunčiant formą');
+      }
 
       // Track form submission for analytics
       if (typeof window !== 'undefined' && window.gtag) {
@@ -55,6 +65,9 @@ const ContactForm: React.FC = () => {
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch (error) {
       console.error('Form submission error:', error);
+      setSubmitError(
+        error instanceof Error ? error.message : 'Nežinoma klaida'
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -76,6 +89,13 @@ const ContactForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
+      {/* Error Message */}
+      {submitError && (
+        <div className='bg-red-50 border border-red-200 rounded-lg p-4'>
+          <p className='text-red-600 text-sm'>{submitError}</p>
+        </div>
+      )}
+
       {/* Name Field */}
       <div>
         <label
@@ -98,6 +118,7 @@ const ContactForm: React.FC = () => {
             errors.name ? 'border-red-500' : 'border-gray-300'
           } focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
           placeholder='Jūsų vardas'
+          disabled={isSubmitting}
         />
         {errors.name && (
           <p className='text-red-300 text-sm mt-1'>{errors.name.message}</p>
@@ -110,12 +131,13 @@ const ContactForm: React.FC = () => {
           htmlFor='email'
           className='block text-sm font-medium text-white mb-2'
         >
-          El. paštas
+          El. paštas *
         </label>
         <input
           type='email'
           id='email'
           {...register('email', {
+            required: 'El. paštas yra privalomas',
             pattern: {
               value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
               message: 'Įveskite teisingą el. pašto adresą',
@@ -125,9 +147,39 @@ const ContactForm: React.FC = () => {
             errors.email ? 'border-red-500' : 'border-gray-300'
           } focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
           placeholder='jusu@email.com'
+          disabled={isSubmitting}
         />
         {errors.email && (
           <p className='text-red-300 text-sm mt-1'>{errors.email.message}</p>
+        )}
+      </div>
+
+      {/* Phone Field */}
+      <div>
+        <label
+          htmlFor='phone'
+          className='block text-sm font-medium text-white mb-2'
+        >
+          Telefono numeris
+        </label>
+        <input
+          type='tel'
+          id='phone'
+          {...register('phone', {
+            pattern: {
+              value:
+                /^[\+]?[(]?[\+]?\d{2,3}[)]?[-\s\.]?\d{1,3}[-\s\.]?\d{2,3}[-\s\.]?\d{2,4}$/,
+              message: 'Įveskite teisingą telefono numerį',
+            },
+          })}
+          className={`w-full p-3 rounded-lg text-primary bg-white border ${
+            errors.phone ? 'border-red-500' : 'border-gray-300'
+          } focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
+          placeholder='+370 600 12345'
+          disabled={isSubmitting}
+        />
+        {errors.phone && (
+          <p className='text-red-300 text-sm mt-1'>{errors.phone.message}</p>
         )}
       </div>
 
@@ -153,6 +205,7 @@ const ContactForm: React.FC = () => {
             errors.message ? 'border-red-500' : 'border-gray-300'
           } focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent resize-vertical`}
           placeholder='Aprašykite savo poreikius...'
+          disabled={isSubmitting}
         />
         {errors.message && (
           <p className='text-red-300 text-sm mt-1'>{errors.message.message}</p>
