@@ -6,7 +6,7 @@ import { scrollToSection } from '@/lib/utils';
 
 const Hero: React.FC = () => {
   const handleScrollDown = () => {
-    scrollToSection('about');
+    scrollToSection('services');
   };
 
   return (

@@ -5,6 +5,7 @@ import ContactForm from './ui/ContactForm';
 import { MapPinIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import ContactsBlock from './ContactsBlock';
+import Link from 'next/link';
 
 const Contact: React.FC = () => {
   return (
@@ -103,17 +104,12 @@ const Contact: React.FC = () => {
               >
                 📞 Skambinti dabar
               </a>
-              <button
-                onClick={() => {
-                  const element = document.getElementById('services');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+              <Link
+                href='/paslaugos'
                 className='border-2 border-accent text-accent hover:bg-accent hover:text-white px-8 py-3 rounded-lg font-medium transition-colors'
               >
                 Žiūrėti paslaugas
-              </button>
+              </Link>
             </div>
           </div>
         </div>

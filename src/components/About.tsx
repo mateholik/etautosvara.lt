@@ -7,6 +7,8 @@ import {
   ClockIcon,
   HeartIcon,
 } from '@heroicons/react/24/outline';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const About: React.FC = () => {
   return (
@@ -39,7 +41,7 @@ const About: React.FC = () => {
             <p className='text-lg text-gray-300 leading-relaxed text-center'>
               Padėsime Jūsų automobiliui atrodyti vėl kaip naujam:{' '}
               <span className='text-white font-medium'>
-                atliekame kėbulo poliravimo darbus, pasirūpinsime ilgalaike
+                atliksime kėbulo poliravimo darbus, pasirūpinsime ilgalaike
                 apsauga, padengsime kėbulą Jūsų automobiliui tinkamiausia danga
                 bei nepriekaištingai išvalysime saloną.
               </span>
@@ -110,19 +112,23 @@ const About: React.FC = () => {
                 >
                   📞 Susisiekti dabar
                 </a>
-                <button
-                  onClick={() => {
-                    const element = document.getElementById('services');
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
+                <Link
+                  href='/paslaugos'
                   className='border-2 border-accent text-accent hover:bg-accent hover:text-white px-8 py-3 rounded-lg font-medium transition-colors'
                 >
                   Žiūrėti paslaugas
-                </button>
+                </Link>
               </div>
             </div>
+          </div>
+
+          <div className='flex justify-center mt-16'>
+            <Image
+              alt='sertifikatas'
+              width='600'
+              height={800}
+              src='/sertifikatas.jpg'
+            />
           </div>
         </div>
       </div>

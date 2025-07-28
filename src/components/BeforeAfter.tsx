@@ -7,6 +7,7 @@ import {
   ChevronRightIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
 interface BeforeAfterImage {
   id: number;
@@ -98,6 +99,41 @@ const BeforeAfter: React.FC = () => {
     {
       id: 15,
       src: '/pries-po/img_15.JPG',
+      alt: 'Automobilio valymo rezultatas',
+    },
+    {
+      id: 16,
+      src: '/pries-po/img_16.JPG',
+      alt: 'Automobilio valymo rezultatas',
+    },
+    {
+      id: 17,
+      src: '/pries-po/img_17.JPG',
+      alt: 'Automobilio valymo rezultatas',
+    },
+    {
+      id: 18,
+      src: '/pries-po/img_18.JPG',
+      alt: 'Automobilio valymo rezultatas',
+    },
+    {
+      id: 19,
+      src: '/pries-po/img_19.JPG',
+      alt: 'Automobilio valymo rezultatas',
+    },
+    {
+      id: 20,
+      src: '/pries-po/img_20.JPG',
+      alt: 'Automobilio valymo rezultatas',
+    },
+    {
+      id: 21,
+      src: '/pries-po/img_21.JPG',
+      alt: 'Automobilio valymo rezultatas',
+    },
+    {
+      id: 22,
+      src: '/pries-po/img_22.JPG',
       alt: 'Automobilio valymo rezultatas',
     },
   ];
@@ -424,17 +460,12 @@ const BeforeAfter: React.FC = () => {
               >
                 📞 Skambinti dabar
               </a>
-              <button
-                onClick={() => {
-                  const element = document.getElementById('services');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+              <Link
                 className='border-2 border-accent text-accent hover:bg-accent hover:text-white px-8 py-3 rounded-lg font-medium transition-colors'
+                href='/paslaugos'
               >
                 Žiūrėti paslaugas
-              </button>
+              </Link>
             </div>
           </div>
         </div>
