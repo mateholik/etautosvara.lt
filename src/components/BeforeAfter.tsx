@@ -7,136 +7,30 @@ import {
   ChevronRightIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-import Link from 'next/link';
 
-interface BeforeAfterImage {
+type Image = {
   id: number;
   src: string;
   alt: string;
-}
+};
 
-const BeforeAfter: React.FC = () => {
+type BeforeAfterProps = {
+  images: Image[];
+  title: string;
+  subTitle: string;
+};
+
+export default function BeforeAfter({
+  images = [],
+  title,
+  subTitle,
+}: BeforeAfterProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
-
-  // Array of before/after images from pries-po folder
-  // All 16 images included
-  const images: BeforeAfterImage[] = [
-    {
-      id: 1,
-      src: '/pries-po/img_1.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 2,
-      src: '/pries-po/img_2.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 3,
-      src: '/pries-po/img_3.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 4,
-      src: '/pries-po/img_4.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 5,
-      src: '/pries-po/img_5.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 6,
-      src: '/pries-po/img_6.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 7,
-      src: '/pries-po/img_7.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 8,
-      src: '/pries-po/img_8.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 9,
-      src: '/pries-po/img_9.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 10,
-      src: '/pries-po/img_10.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 11,
-      src: '/pries-po/img_11.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 12,
-      src: '/pries-po/img_12.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 13,
-      src: '/pries-po/img_13.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 14,
-      src: '/pries-po/img_14.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 15,
-      src: '/pries-po/img_15.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 16,
-      src: '/pries-po/img_16.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 17,
-      src: '/pries-po/img_17.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 18,
-      src: '/pries-po/img_18.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 19,
-      src: '/pries-po/img_19.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 20,
-      src: '/pries-po/img_20.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 21,
-      src: '/pries-po/img_21.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-    {
-      id: 22,
-      src: '/pries-po/img_22.JPG',
-      alt: 'Automobilio valymo rezultatas',
-    },
-  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -247,18 +141,15 @@ const BeforeAfter: React.FC = () => {
         {/* Section Header */}
         <div className='text-center mb-16'>
           <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4'>
-            Prieš ir po
+            {title}
           </h2>
-          <p className='text-xl text-muted max-w-2xl mx-auto'>
-            Pažiūrėkite, kaip keičiasi automobiliai po mūsų profesionalių
-            paslaugų
-          </p>
+          <p className='text-xl text-muted max-w-2xl mx-auto'>{subTitle}</p>
         </div>
 
         {/* Images Gallery */}
         <div
           key={isMobile ? 'mobile' : 'desktop'}
-          className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4 mb-16 ${
+          className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4  ${
             isVisible ? 'animate-fade-in' : 'opacity-0'
           }`}
         >
@@ -442,36 +333,7 @@ const BeforeAfter: React.FC = () => {
             </div>
           </div>
         )}
-
-        {/* Bottom CTA */}
-        <div className='text-center'>
-          <div className='bg-secondary rounded-2xl p-8 md:p-12'>
-            <h3 className='text-2xl md:text-3xl font-bold text-primary mb-4'>
-              Norite tokių pačių rezultatų?
-            </h3>
-            <p className='text-muted mb-6 max-w-xl mx-auto'>
-              Susisiekite su mumis ir aptarkime, kaip galime padėti jūsų
-              automobiliui atrodyti kaip naujam.
-            </p>
-            <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-              <a
-                href='tel:+370 6 06 47 967'
-                className='bg-accent hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center'
-              >
-                📞 Skambinti dabar
-              </a>
-              <Link
-                className='border-2 border-accent text-accent hover:bg-accent hover:text-white px-8 py-3 rounded-lg font-medium transition-colors'
-                href='/paslaugos'
-              >
-                Žiūrėti paslaugas
-              </Link>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
-};
-
-export default BeforeAfter;
+}

@@ -40,8 +40,8 @@ const Header: React.FC = () => {
     //   ariaLabel: 'Sužinoti kodėl pasirinkti mus',
     // },
     {
-      name: 'Prieš/Po',
-      href: '/pries-po',
+      name: 'Atlikti darbai',
+      href: '/atlikti-darbai',
       ariaLabel: 'Peržiūrėti prieš ir po nuotraukas',
     },
     // {
