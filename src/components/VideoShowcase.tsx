@@ -34,6 +34,31 @@ const VideoShowcase: React.FC = () => {
       src: '/video/video_4.MP4',
       title: 'Odos impregnavimas',
     },
+    {
+      id: 5,
+      src: '/video/video_5.mp4',
+      title: 'Odos impregnavimas',
+    },
+    {
+      id: 6,
+      src: '/video/video_6.mp4',
+      title: 'Odos impregnavimas',
+    },
+    {
+      id: 7,
+      src: '/video/video_7.mp4',
+      title: 'Odos impregnavimas',
+    },
+    // {
+    //   id: 8,
+    //   src: '/video/video_8.mp4',
+    //   title: 'Odos impregnavimas',
+    // },
+    {
+      id: 9,
+      src: '/video/video_9.mp4',
+      title: 'Odos impregnavimas',
+    },
   ];
 
   useEffect(() => {
@@ -106,10 +131,7 @@ const VideoShowcase: React.FC = () => {
           {videos.map((video, index) => (
             <div
               key={video.id}
-              className='group relative overflow-hidden rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:scale-105'
-              style={{
-                animationDelay: `${index * 0.2}s`,
-              }}
+              className=' relative overflow-hidden rounded-2xl shadow-2xl '
             >
               {/* Video container */}
               <div className='relative aspect-[9/16] bg-black rounded-2xl overflow-hidden'>
@@ -146,21 +168,15 @@ const VideoShowcase: React.FC = () => {
                   />
                   Your browser does not support the video tag.
                 </video>
-
-                {/* Gradient overlay */}
-                <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
               </div>
 
               {/* Video info */}
-              <div className='absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent'>
+              {/* <div className='absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent'>
                 <h3 className='text-white font-semibold text-lg mb-1'>
                   {video.title}
                 </h3>
-                {/* <p className='text-gray-300 text-sm'>{video.description}</p> */}
-              </div>
-
-              {/* Decorative border */}
-              <div className='absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-r from-accent via-blue-500 to-purple-500 opacity-0 group-hover:opacity-50 transition-opacity duration-300 pointer-events-none' />
+                <p className='text-gray-300 text-sm'>{video.description}</p>
+              </div> */}
             </div>
           ))}
         </div>
