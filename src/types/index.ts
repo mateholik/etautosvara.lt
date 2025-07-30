@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 export type Image = {
   id: number;
   src: string;
@@ -14,6 +15,6 @@ export type Service = {
   title: string;
   description: string;
   price: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
   features: string[];
 };

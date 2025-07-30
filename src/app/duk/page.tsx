@@ -98,7 +98,7 @@ export default function Duk() {
   return (
     <>
       <StructuredData schema={schemas} />
-      <FAQ faqItems={faqItems} />;
+      <FAQ faqItems={faqItems} />
     </>
   );
 }

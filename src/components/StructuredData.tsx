@@ -14,7 +14,10 @@ export const StructuredData = ({ schema }: StructuredDataProps) => {
           key={index}
           type='application/ld+json'
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemaItem),
+            __html: JSON.stringify(schemaItem).replace(
+              /<\/script>/g,
+              '<\\/script>'
+            ),
           }}
         />
       ))}
