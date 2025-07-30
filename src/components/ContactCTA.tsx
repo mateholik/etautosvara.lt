@@ -117,7 +117,7 @@ const ContactCTA = () => {
         className={`w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 ${
           isOpen
             ? 'bg-gray-600 hover:bg-gray-700'
-            : 'bg-blue-600 hover:bg-blue-700 hover:scale-110'
+            : 'bg-accent hover:bg-red-700 hover:scale-110'
         }`}
         aria-label={isOpen ? 'Close contact options' : 'Open contact options'}
       >

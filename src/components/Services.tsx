@@ -10,6 +10,9 @@ import {
   BeakerIcon,
   TruckIcon,
   FilmIcon,
+  EyeDropperIcon,
+  LockClosedIcon,
+  AdjustmentsVerticalIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
@@ -48,7 +51,7 @@ export default function Services({
       description:
         'Giluminis automobilio salono valymas naudojant profesionalius chemijos produktus.',
       price: 'nuo 250 €',
-      icon: <TruckIcon className='w-8 h-8' />,
+      icon: <BeakerIcon className='w-8 h-8' />,
       features: ['Dėmių šalinimas', 'Dezinfekavimas', 'Kvapų neutralizavimas'],
     },
     {
@@ -57,7 +60,7 @@ export default function Services({
       description:
         'Aukščiausios kokybės apsauginių dangų padengimas ilgalaikei automobilio apsaugai.',
       price: 'nuo 250 €',
-      icon: <BeakerIcon className='w-8 h-8' />,
+      icon: <EyeDropperIcon className='w-8 h-8' />,
       features: ['Ilgalaikė apsauga', 'Profesionalus padengimas'],
     },
     {
@@ -107,7 +110,7 @@ export default function Services({
       description:
         'Vidaus plastikinių ir blizgių detalių atnaujinimas ir poliravimas.',
       price: 'nuo 35 € už vnt.',
-      icon: <WrenchScrewdriverIcon className='w-8 h-8' />,
+      icon: <AdjustmentsVerticalIcon className='w-8 h-8' />,
       features: [
         'Plastikinių detalių atnaujinimas',
         'Blizgių paviršių poliravimas',
@@ -130,7 +133,7 @@ export default function Services({
       description:
         'Aukščiausios kokybės apsauginės plėvelės padengimas automobilio kėbului.',
       price: 'nuo 500 €',
-      icon: <FilmIcon className='w-8 h-8' />,
+      icon: <LockClosedIcon className='w-8 h-8' />,
       features: [
         'Apsauga nuo akmenėlių',
         'Savarankiškas gijimas',
