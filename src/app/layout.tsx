@@ -10,65 +10,6 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-export const metadata: Metadata = {
-  title:
-    'ET Auto Švara - Profesionalus automobilio valymas | Vilnius | Kairėnai',
-  description:
-    'Profesionalus automobilio valymas Vilniuje. Cheminis salono valymas, kėbulo poliravimas, žibintų poliravimas, keraminės dangos. Skambinkite: +370 6 06 47 967',
-  keywords:
-    'automobilio valymas, cheminis salono valymas, kėbulo poliravimas, žibintų poliravimas, keraminės dangos, Vilnius, ET Auto Švara',
-  authors: [{ name: 'ET Auto Švara' }],
-  creator: 'ET Auto Švara',
-  publisher: 'ET Auto Švara',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  metadataBase: new URL('https://etautosvara.lt'),
-  alternates: {
-    canonical: '/',
-    languages: {
-      'lt-LT': '/',
-    },
-  },
-  openGraph: {
-    title: 'ET Auto Švara - Profesionalus automobilio valymas',
-    description:
-      'Profesionalus automobilio valymas Vilniuje. Cheminis salono valymas, kėbulo poliravimas, žibintų poliravimas, keraminės dangos.',
-    url: 'https://etautosvara.lt',
-    siteName: 'ET Auto Švara',
-    locale: 'lt_LT',
-    type: 'website',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'ET Auto Švara - Profesionalus automobilio valymas',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'ET Auto Švara - Profesionalus automobilio valymas',
-    description:
-      'Profesionalus automobilio valymas Vilniuje. Cheminis salono valymas, kėbulo poliravimas, žibintų poliravimas, keraminės dangos.',
-    images: ['/og-image.jpg'],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-};
-
 // Structured Data for LocalBusiness
 const structuredData = {
   '@context': 'https://schema.org',
