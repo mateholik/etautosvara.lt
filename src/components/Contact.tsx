@@ -6,7 +6,6 @@ import { MapPinIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import ContactsBlock from './ContactsBlock';
 import Link from 'next/link';
-import { config } from 'process';
 import { configs } from '@/lib/config';
 
 const Contact: React.FC = () => {

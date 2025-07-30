@@ -287,7 +287,7 @@ export default function ClientsList() {
 
   useEffect(() => {
     fetchClients();
-  }, []);
+  }, [fetchClients]);
 
   return (
     <div className='min-h-screen bg-secondary p-6'>
