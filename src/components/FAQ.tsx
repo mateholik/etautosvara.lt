@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { configs } from '@/lib/config';
 
 interface FAQItem {
   question: string;
@@ -38,14 +39,12 @@ export default function FAQ({
     },
     {
       question: 'Ar reikia iš anksto užsisakyti laiką?',
-      answer:
-        'Taip, rekomenduojame užsisakyti laiką iš anksto. Skambinkite +370 6 06 47 967 arba užpildykite kontaktų formą. Taip užtikrinsime, kad galėsime jums skirti reikiamą dėmesį ir laiką.',
+      answer: `Taip, rekomenduojame užsisakyti laiką iš anksto. Skambinkite ${configs.phone} arba užpildykite kontaktų formą. Taip užtikrinsime, kad galėsime jums skirti reikiamą dėmesį ir laiką.`,
     },
 
     {
       question: 'Ar galite atvykti į mano vietą?',
-      answer:
-        'Ne, paslaugos teikiamos tik adresu Saulėtoji g. 8, Ližiškės, Vilnius',
+      answer: `Ne, paslaugos teikiamos tik adresu ${configs.address}`,
     },
 
     {
@@ -148,7 +147,7 @@ export default function FAQ({
               </p>
               <div className='flex flex-col sm:flex-row gap-4 justify-center'>
                 <a
-                  href='tel:+370606047967'
+                  href={`tel:${configs.phone}`}
                   className='bg-accent hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center'
                 >
                   📞 Skambinti dabar

@@ -6,6 +6,8 @@ import { MapPinIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import ContactsBlock from './ContactsBlock';
 import Link from 'next/link';
+import { config } from 'process';
+import { configs } from '@/lib/config';
 
 const Contact: React.FC = () => {
   return (
@@ -55,7 +57,7 @@ const Contact: React.FC = () => {
                   allowFullScreen
                   loading='lazy'
                   referrerPolicy='no-referrer-when-downgrade'
-                  title='ET Auto Švara lokacija - Saulėtoji g. 8, Ližiškės, Vilnius'
+                  title={`ET Auto Švara lokacija - ${configs.address}`}
                   className='rounded-lg'
                 />
               </div>
@@ -71,9 +73,7 @@ const Contact: React.FC = () => {
               </div>
             </div>
             <div className='mt-4 text-center'>
-              <p className='text-gray-300 mb-4'>
-                Saulėtoji g. 8, Ližiškės, Vilnius
-              </p>
+              <p className='text-gray-300 mb-4'>{configs.address}</p>
               <a
                 href='https://maps.google.com?q=Saulėtoji+g.+8,+Ližiškės,+Vilnius'
                 target='_blank'
@@ -99,7 +99,7 @@ const Contact: React.FC = () => {
             </p>
             <div className='flex flex-col sm:flex-row gap-4 justify-center'>
               <a
-                href='tel:+370606047967'
+                href={`tel:${configs.phone}`}
                 className='bg-accent hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center'
               >
                 📞 Skambinti dabar

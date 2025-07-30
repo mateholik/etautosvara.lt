@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent } from './ui/Card';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { configs } from '@/lib/config';
 
 interface Testimonial {
   id: number;
@@ -230,7 +231,7 @@ const Testimonials: React.FC = () => {
               Švara.
             </p>
             <a
-              href='tel:+370 6 06 47 967'
+              href={`tel:${configs.phone}`}
               className='bg-accent hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center'
             >
               📞 Užsisakyti paslaugą

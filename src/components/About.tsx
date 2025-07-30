@@ -9,6 +9,7 @@ import {
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import Image from 'next/image';
+import { configs } from '@/lib/config';
 
 const About: React.FC = () => {
   return (
@@ -107,7 +108,7 @@ const About: React.FC = () => {
               </p>
               <div className='flex flex-col sm:flex-row gap-4 justify-center'>
                 <a
-                  href='tel:+370606047967'
+                  href={`tel:${configs.phone}`}
                   className='bg-accent hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center'
                 >
                   📞 Susisiekti dabar

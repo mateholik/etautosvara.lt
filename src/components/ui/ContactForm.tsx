@@ -175,7 +175,7 @@ const ContactForm: React.FC = () => {
           className={`w-full p-3 rounded-lg text-primary bg-white border ${
             errors.phone ? 'border-red-500' : 'border-gray-300'
           } focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
-          placeholder='+370 600 12345'
+          placeholder='+37060012345'
           disabled={isSubmitting}
         />
         {errors.phone && (

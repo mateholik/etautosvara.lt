@@ -5,6 +5,7 @@ import { Button } from './ui/Button';
 import { Bars3Icon, XMarkIcon, PhoneIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
+import { configs } from '@/lib/config';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -65,7 +66,8 @@ const Header: React.FC = () => {
   };
 
   const handlePhoneClick = () => {
-    window.location.href = 'tel:+370606047967';
+    window.location.href = `tel:${configs.phone}`;
+
     // Track phone clicks
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', 'phone_call', {
@@ -147,7 +149,7 @@ const Header: React.FC = () => {
                 variant='primary'
                 size='sm'
                 className='flex items-center justify-center w-10 h-10 p-0'
-                aria-label='Skambinti telefonu +370 6 06 47 967'
+                aria-label={`Skambinti telefonu ${configs.phone}`}
               >
                 <PhoneIcon className='w-5 h-5' aria-hidden='true' />
               </Button>
@@ -202,10 +204,10 @@ const Header: React.FC = () => {
                     variant='primary'
                     size='sm'
                     className='w-full flex items-center justify-center gap-2'
-                    aria-label='Skambinti telefonu +370 6 06 47 967'
+                    aria-label={`Skambinti telefonu ${configs.phone}`}
                   >
                     <PhoneIcon className='w-4 h-4' aria-hidden='true' />
-                    +370 6 06 47 967
+                    {configs.phone}
                   </Button>
                 </div>
               </div>
