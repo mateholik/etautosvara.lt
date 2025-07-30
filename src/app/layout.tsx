@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Script from 'next/script';
 import Header from '@/components/Header';
-import ContactCTA from '@/components/ContactCTA';
 import Footer from '@/components/Footer';
 
 const inter = Inter({
@@ -219,7 +218,7 @@ export default function RootLayout({
         <main className='min-h-screen bg-background'>
           <Header />
           {children}
-          <ContactCTA />
+
           <Footer />
         </main>
       </body>

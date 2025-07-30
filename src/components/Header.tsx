@@ -11,6 +11,7 @@ const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const isHomepage = pathname === '/';
+  const isAdmin = pathname === '/admin';
 
   const router = useRouter();
 

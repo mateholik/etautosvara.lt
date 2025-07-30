@@ -3,10 +3,10 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/supabase-client';
 import { User } from '@supabase/supabase-js';
-import Admin from '@/components/dashboard/Admin';
+import ClientsList from '@/components/dashboard/ClientsList';
 import Auth from '@/components/dashboard/Auth';
 
-export default function Dashboard() {
+export default function Admin() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -46,5 +46,7 @@ export default function Dashboard() {
   }
 
   // Render Admin if user is authenticated, otherwise render Auth
-  return <div className='min-h-screen'>{user ? <Admin /> : <Auth />}</div>;
+  return (
+    <div className='min-h-screen'>{user ? <ClientsList /> : <Auth />}</div>
+  );
 }

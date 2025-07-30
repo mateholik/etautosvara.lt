@@ -23,7 +23,7 @@ type FormData = {
   image: File | null;
 };
 
-export default function Admin() {
+export default function ClientsList() {
   const [clientsList, setClientsList] = useState<Client[]>([]);
   const [formData, setFormData] = useState<FormData>({
     name: '',
