@@ -1,59 +1,43 @@
 import { MetadataRoute } from 'next';
 
-export const dynamic = 'force-static';
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://etautosvara.lt';
-  const currentDate = new Date().toISOString();
-
   return [
     {
-      url: baseUrl,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
+      url: 'https://etautosvara.lt',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: `${baseUrl}/#about`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#services`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#why-us`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/#before-after`,
-      lastModified: currentDate,
+      url: 'https://etautosvara.lt/paslaugos',
+      lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#testimonials`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/#faq`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/#contact`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
       priority: 0.9,
     },
+    {
+      url: 'https://etautosvara.lt/duk',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://etautosvara.lt/atlikti-darbai',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://etautosvara.lt/kontaktai',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://etautosvara.lt/apie-mus',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    // Add other pages...
   ];
 }
