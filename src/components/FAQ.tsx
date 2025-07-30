@@ -152,17 +152,6 @@ export default function FAQ({
                 >
                   📞 Skambinti dabar
                 </a>
-                <button
-                  onClick={() => {
-                    const element = document.getElementById('contact');
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                  className='border-2 border-accent text-accent hover:bg-accent hover:text-white px-8 py-3 rounded-lg font-medium transition-colors'
-                >
-                  Rašyti žinutę
-                </button>
               </div>
             </div>
           </div>
