@@ -176,31 +176,9 @@ const VideoShowcase: React.FC = () => {
                   Your browser does not support the video tag.
                 </video>
               </div>
-
-              {/* Video info */}
-              {/* <div className='absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent'>
-                <h3 className='text-white font-semibold text-lg mb-1'>
-                  {video.title}
-                </h3>
-                <p className='text-gray-300 text-sm'>{video.description}</p>
-              </div> */}
             </div>
           ))}
         </div>
-
-        {/* Bottom info */}
-        {/* <div className='text-center mt-16'>
-          <div className='bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10'>
-            <h3 className='text-2xl font-bold text-white mb-4'>
-              Profesionalus procesas
-            </h3>
-            <p className='text-gray-300 max-w-3xl mx-auto'>
-              Mūsų komanda naudoja pažangiausias technologijas ir metodus, kad
-              kiekvienas automobilis būtų išvalytas iki tobulybės. Pažiūrėkite,
-              kaip mes dirbame ir kodėl mūsų klientai mums pasitiki.
-            </p>
-          </div>
-        </div> */}
       </div>
 
       {/* Floating particles - Fixed positions to avoid hydration mismatch */}

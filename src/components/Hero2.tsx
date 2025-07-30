@@ -4,7 +4,7 @@ import React from 'react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { scrollToSection } from '@/lib/utils';
 
-const Hero: React.FC = () => {
+const Hero2: React.FC = () => {
   const handleScrollDown = () => {
     scrollToSection('about');
   };
@@ -78,4 +78,4 @@ const Hero: React.FC = () => {
   );
 };
 
-export default Hero;
+export default Hero2;

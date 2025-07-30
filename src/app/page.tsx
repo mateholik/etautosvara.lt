@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
+import Hero2 from '@/components/Hero2';
 import Services from '@/components/Services';
 import BeforeAfter from '@/components/BeforeAfter';
 import FAQ from '@/components/FAQ';
@@ -12,7 +13,7 @@ export default function Home() {
     <>
       <Header />
       <Hero />
-      {/* <Hero2 /> */}
+      <Hero2 />
       <Services visibleAmount={3} showAllCta={true} />
       <VideoShowcase />
       <FAQ visibleAmount={3} showAllCta={true} showBanner={false} />
