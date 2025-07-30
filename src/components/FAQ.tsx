@@ -4,70 +4,21 @@ import React, { useState } from 'react';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { configs } from '@/lib/config';
-
-interface FAQItem {
-  question: string;
-  answer: string;
-}
+import { FAQItem } from '@/types';
 
 type FAQProps = {
   visibleAmount?: number;
   showAllCta?: boolean;
   showBanner?: boolean;
+  faqItems: FAQItem[];
 };
 export default function FAQ({
   visibleAmount = 9,
   showAllCta = false,
   showBanner = true,
+  faqItems = [],
 }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const faqItems: FAQItem[] = [
-    {
-      question: 'Kiek laiko užtrunka automobilio valymas?',
-      answer:
-        'Priklausomai nuo paslaugos: cheminis interjero valymas 8-15 val., kėbulo poliravimas 16-32 val., pilnas detailing procesas gali užtrukti iki 40 valandų.',
-    },
-    {
-      question: 'Kokius valymo produktus naudojate?',
-      answer:
-        'Naudojame tik aukščiausios kokybės profesionalius valymo produktus ir chemijos preparatus. Visi produktai yra saugūs automobilio dangoms ir aplinkai, sertifikuoti tarptautiniu mastu. Vaško dangos padengimas - SOFT99. Keramikinėms dangoms - SONAX.',
-    },
-    {
-      question: 'Ar teikiate garantiją savo darbui?',
-      answer: 'Taip, jeigu automobilio priežiūrą ir toliau atliekame mes.',
-    },
-    {
-      question: 'Ar reikia iš anksto užsisakyti laiką?',
-      answer: `Taip, rekomenduojame užsisakyti laiką iš anksto. Skambinkite ${configs.phone} arba užpildykite kontaktų formą. Taip užtikrinsime, kad galėsime jums skirti reikiamą dėmesį ir laiką.`,
-    },
-
-    {
-      question: 'Ar galite atvykti į mano vietą?',
-      answer: `Ne, paslaugos teikiamos tik adresu ${configs.address}`,
-    },
-
-    {
-      question: 'Kaip dažnai reikėtų valyti automobilį?',
-      answer:
-        'Rekomenduojame: išorės valymas kas 2-3 savaites, interjero valymas kas 1-2 mėnesius, kėbulo poliravimas 2-3 kartus per metus, žibintų poliravimas kas 6 mėnesius arba pagal poreikį. Cheminis valymas 2 kartus į metus',
-    },
-    {
-      question: 'Ar galite pašalinti stiprius kvapus iš salono?',
-      answer:
-        'Taip, specializuojamės kvapų šalinimo srityje, bet reikėtų situaciją įvartinti apžiūros metu. Efektyviai pašaliname cigarečių, gyvūnų, maisto ir kitus kvapus.',
-    },
-    {
-      question: 'Kiek laiko išlieka poliravimo efektas?',
-      answer:
-        'Kėbulo poliravimo efektas išlieka 3-6 mėnesius, priklausomai nuo automobilio naudojimo intensyvumo ir saugojimo sąlygų. Keraminės dangos gali išlikti iki 12-24 mėnesiųб priklausomai nuo naudojimo',
-    },
-    {
-      question: 'Ar dirbate žiemos metu?',
-      answer:
-        'Taip, dirbame visus metus. Žiemos metu ypač svarbu reguliariai valyti automobilį nuo druskos ir reagentų. Turime šildomas patalpas, todėl kokybė nekenčia net šaltuoju metų laiku.',
-    },
-  ];
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);

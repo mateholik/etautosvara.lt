@@ -5,25 +5,17 @@ import { Card, CardHeader, CardTitle, CardContent } from './ui/Card';
 import {
   SparklesIcon,
   LightBulbIcon,
-  WrenchScrewdriverIcon,
   PaintBrushIcon,
   BeakerIcon,
-  TruckIcon,
-  FilmIcon,
   EyeDropperIcon,
   LockClosedIcon,
   AdjustmentsVerticalIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { Service } from '@/types';
 
-interface Service {
-  id: number;
-  title: string;
-  description: string;
-  price: string;
-  icon: React.ReactNode;
-  features: string[];
-}
+import { getPageSchemas } from '@/lib/structured-data';
+import { StructuredData } from '@/components/StructuredData';
 
 type ServicesProps = {
   showDetails?: boolean;
@@ -142,73 +134,88 @@ export default function Services({
     },
   ];
 
+  const schemas = getPageSchemas('services', {
+    services: services.map((item) => ({
+      name: item.title,
+      description: item.description,
+      price: item.price,
+    })),
+    breadcrumbs: [
+      { name: 'Pagrindinis', url: 'https://etautosvara.lt' },
+      { name: 'Paslaugos', url: 'https://etautosvara.lt/paslaugos' },
+    ],
+  });
+
   return (
-    <section id='services' className='py-20 bg-white'>
-      <div className='container mx-auto px-4'>
-        {/* Section Header */}
-        <div className='text-center mb-16'>
-          <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4'>
-            Mūsų paslaugos
-          </h2>
-          <p className='text-xl text-muted max-w-2xl mx-auto'>
-            Teikiame visas automobilio priežiūros paslaugas aukščiausiu lygiu
-          </p>
-        </div>
-
-        {/* Services Grid */}
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-          {services.slice(0, visibleAmount).map((service) => (
-            <Card
-              key={service.id}
-              variant='elevated'
-              className='h-full flex flex-col'
-            >
-              <CardHeader>
-                <div className='flex items-center mb-4'>
-                  <div className='p-3 bg-accent/10 rounded-lg text-accent'>
-                    {service.icon}
-                  </div>
-                </div>
-                <CardTitle className='text-xl font-bold text-primary'>
-                  {service.title}
-                </CardTitle>
-                <div className='text-2xl font-bold text-accent mt-2'>
-                  {service.price}
-                </div>
-              </CardHeader>
-
-              <CardContent className='flex-grow'>
-                <p className='text-muted mb-4'>{service.description}</p>
-
-                {showDetails && (
-                  <ul className='space-y-2'>
-                    {service.features.map((feature, index) => (
-                      <li
-                        key={index}
-                        className='flex items-center text-sm text-muted'
-                      >
-                        <span className='text-accent mr-2'>✓</span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {showAllCta && (
-          <div className='flex justify-center mt-12'>
-            <Link
-              href='/paslaugos'
-              className='bg-accent hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center'
-            >
-              Visos paslaugos
-            </Link>
+    <>
+      <StructuredData schema={schemas} />
+      <section id='services' className='py-20 bg-white'>
+        <div className='container mx-auto px-4'>
+          {/* Section Header */}
+          <div className='text-center mb-16'>
+            <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4'>
+              Mūsų paslaugos
+            </h2>
+            <p className='text-xl text-muted max-w-2xl mx-auto'>
+              Teikiame visas automobilio priežiūros paslaugas aukščiausiu lygiu
+            </p>
           </div>
-        )}
-      </div>
-    </section>
+
+          {/* Services Grid */}
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+            {services.slice(0, visibleAmount).map((service) => (
+              <Card
+                key={service.id}
+                variant='elevated'
+                className='h-full flex flex-col'
+              >
+                <CardHeader>
+                  <div className='flex items-center mb-4'>
+                    <div className='p-3 bg-accent/10 rounded-lg text-accent'>
+                      {service.icon}
+                    </div>
+                  </div>
+                  <CardTitle className='text-xl font-bold text-primary'>
+                    {service.title}
+                  </CardTitle>
+                  <div className='text-2xl font-bold text-accent mt-2'>
+                    {service.price}
+                  </div>
+                </CardHeader>
+
+                <CardContent className='flex-grow'>
+                  <p className='text-muted mb-4'>{service.description}</p>
+
+                  {showDetails && (
+                    <ul className='space-y-2'>
+                      {service.features.map((feature, index) => (
+                        <li
+                          key={index}
+                          className='flex items-center text-sm text-muted'
+                        >
+                          <span className='text-accent mr-2'>✓</span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {showAllCta && (
+            <div className='flex justify-center mt-12'>
+              <Link
+                href='/paslaugos'
+                className='bg-accent hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center'
+              >
+                Visos paslaugos
+              </Link>
+            </div>
+          )}
+        </div>
+      </section>
+    </>
   );
 }

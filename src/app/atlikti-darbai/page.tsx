@@ -5,6 +5,9 @@ import { befoAfterImages } from '@/lib/config';
 // app/atlikti-darbai/page.tsx - Before/After Gallery Page Metadata
 import type { Metadata } from 'next';
 
+import { getPageSchemas } from '@/lib/structured-data';
+import { StructuredData } from '@/components/StructuredData';
+
 export const metadata: Metadata = {
   title:
     'Atlikti darbai - ET Auto Švara | Prieš ir po nuotraukos, darbo eigos pavyzdžiai',
@@ -90,8 +93,15 @@ export default function AtliktiDarbai() {
     src: `/darbu-pavyzdziai/img_${i + 1}.JPG`,
     alt: 'Darbų pavyzdys',
   }));
+  const schemas = getPageSchemas('default', {
+    breadcrumbs: [
+      { name: 'Pagrindinis', url: 'https://etautosvara.lt' },
+      { name: 'Atlikti darbai', url: 'https://etautosvara.lt/atlikti-darbai' },
+    ],
+  });
   return (
     <>
+      <StructuredData schema={schemas} />
       <BeforeAfter
         images={befoAfterImages}
         title='Prieš ir po'

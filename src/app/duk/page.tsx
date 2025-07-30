@@ -2,8 +2,12 @@ import React from 'react';
 
 import FAQ from '@/components/FAQ';
 
+import { getPageSchemas } from '@/lib/structured-data';
+import { StructuredData } from '@/components/StructuredData';
+
 // app/duk/page.tsx - FAQ Page Metadata
 import type { Metadata } from 'next';
+import { faqItems } from '@/lib/config';
 
 export const metadata: Metadata = {
   title: 'DUK - Dažnai užduodami klausimai | ET Auto Švara Vilnius',
@@ -84,5 +88,17 @@ export const metadata: Metadata = {
 };
 
 export default function Duk() {
-  return <FAQ />;
+  const schemas = getPageSchemas('faq', {
+    breadcrumbs: [
+      { name: 'Pagrindinis', url: 'https://etautosvara.lt' },
+      { name: 'DUK', url: 'https://etautosvara.lt/duk' },
+    ],
+    faqs: faqItems,
+  });
+  return (
+    <>
+      <StructuredData schema={schemas} />
+      <FAQ faqItems={faqItems} />;
+    </>
+  );
 }

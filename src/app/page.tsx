@@ -6,9 +6,12 @@ import Services from '@/components/Services';
 import BeforeAfter from '@/components/BeforeAfter';
 import FAQ from '@/components/FAQ';
 import VideoShowcase from '@/components/VideoShowcase';
-import { befoAfterImages } from '@/lib/config';
+import { befoAfterImages, faqItems } from '@/lib/config';
 // app/page.tsx - Homepage Metadata
 import type { Metadata } from 'next';
+
+import { getPageSchemas } from '@/lib/structured-data';
+import { StructuredData } from '@/components/StructuredData';
 
 export const metadata: Metadata = {
   title:
@@ -84,14 +87,21 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  const schemas = getPageSchemas('home');
   return (
     <>
+      <StructuredData schema={schemas} />
       <Header />
       <Hero />
       {/* <Hero2 /> */}
       <Services visibleAmount={3} showAllCta={true} />
       <VideoShowcase />
-      <FAQ visibleAmount={3} showAllCta={true} showBanner={false} />
+      <FAQ
+        faqItems={faqItems}
+        visibleAmount={3}
+        showAllCta={true}
+        showBanner={false}
+      />
       <BeforeAfter
         images={befoAfterImages}
         title='Prieš ir po'

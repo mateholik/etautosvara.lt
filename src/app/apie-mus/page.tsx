@@ -1,6 +1,9 @@
 import About from '@/components/About';
 import type { Metadata } from 'next';
 
+import { getPageSchemas } from '@/lib/structured-data';
+import { StructuredData } from '@/components/StructuredData';
+
 export const metadata: Metadata = {
   title:
     'Apie mus - ET Auto Švara | Profesionalūs automobilio valymo specialistai Vilniuje',
@@ -75,5 +78,16 @@ export const metadata: Metadata = {
 };
 
 export default function ApieMus() {
-  return <About />;
+  const schemas = getPageSchemas('about', {
+    breadcrumbs: [
+      { name: 'Pagrindinis', url: 'https://etautosvara.lt' },
+      { name: 'Apie mus', url: 'https://etautosvara.lt/apie-mus' },
+    ],
+  });
+  return (
+    <>
+      <StructuredData schema={schemas} />
+      <About />
+    </>
+  );
 }

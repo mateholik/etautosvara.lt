@@ -3,6 +3,9 @@ import Contact from '@/components/Contact';
 // app/kontaktai/page.tsx - Contact Page Metadata
 import type { Metadata } from 'next';
 
+import { getPageSchemas } from '@/lib/structured-data';
+import { StructuredData } from '@/components/StructuredData';
+
 export const metadata: Metadata = {
   title: 'Kontaktai - Susisiekite su mumis | ET Auto Švara Vilnius',
   description:
@@ -83,5 +86,17 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <Contact />;
+  const schemas = getPageSchemas('contact', {
+    breadcrumbs: [
+      { name: 'Pagrindinis', url: 'https://etautosvara.lt' },
+      { name: 'Kontaktai', url: 'https://etautosvara.lt/kontaktai' },
+    ],
+  });
+
+  return (
+    <>
+      <StructuredData schema={schemas} />
+      <Contact />
+    </>
+  );
 }
