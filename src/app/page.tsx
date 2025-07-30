@@ -20,6 +20,8 @@ export default function Home() {
         images={befoAfterImages}
         title='Prieš ir po'
         subTitle='Pažiūrėkite, kaip keičiasi automobiliai po mūsų profesionalių paslaugų'
+        visibleAmount={10}
+        showAllCta={true}
       />
     </>
   );

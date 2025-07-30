@@ -7,6 +7,7 @@ import {
   ChevronRightIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
 type Image = {
   id: number;
@@ -15,15 +16,19 @@ type Image = {
 };
 
 type BeforeAfterProps = {
+  visibleAmount?: number;
   images: Image[];
   title: string;
   subTitle: string;
+  showAllCta?: boolean;
 };
 
 export default function BeforeAfter({
   images = [],
   title,
   subTitle,
+  visibleAmount = 200,
+  showAllCta = false,
 }: BeforeAfterProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -153,7 +158,7 @@ export default function BeforeAfter({
             isVisible ? 'animate-fade-in' : 'opacity-0'
           }`}
         >
-          {images.map((image, index) => (
+          {images.slice(0, visibleAmount).map((image, index) => (
             <div
               key={image.id}
               className='group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer'
@@ -331,6 +336,17 @@ export default function BeforeAfter({
                 </button>
               ))}
             </div>
+          </div>
+        )}
+
+        {showAllCta && (
+          <div className='flex justify-center mt-12'>
+            <Link
+              href='/atlikti-darbai'
+              className='bg-accent hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center'
+            >
+              Daugiau darbų
+            </Link>
           </div>
         )}
       </div>

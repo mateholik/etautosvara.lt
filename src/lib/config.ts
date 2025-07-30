@@ -209,11 +209,7 @@ export const befoAfterImages: Image[] = [
     src: '/pries-po/img_19.jpg',
     alt: 'Automobilio valymo rezultatas',
   },
-  {
-    id: 20,
-    src: '/pries-po/img_20.jpg',
-    alt: 'Automobilio valymo rezultatas',
-  },
+
   {
     id: 21,
     src: '/pries-po/img_21.jpg',

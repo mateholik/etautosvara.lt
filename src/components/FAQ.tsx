@@ -30,11 +30,11 @@ export default function FAQ({
     {
       question: 'Kokius valymo produktus naudojate?',
       answer:
-        'Naudojame tik aukščiausios kokybės profesionalius valymo produktus ir chemijos preparatus. Visi produktai yra saugūs automobilio dangoms ir aplinkai, sertifikuoti tarptautiniu mastu. Vaško dangos padengimas SOFT99. Keramikinėms dandoms SONAX.',
+        'Naudojame tik aukščiausios kokybės profesionalius valymo produktus ir chemijos preparatus. Visi produktai yra saugūs automobilio dangoms ir aplinkai, sertifikuoti tarptautiniu mastu. Vaško dangos padengimas - SOFT99. Keramikinėms dangoms - SONAX.',
     },
     {
       question: 'Ar teikiate garantiją savo darbui?',
-      answer: 'Taip, jeigu automobilio priežiūra ir toliau atliekame mes',
+      answer: 'Taip, jeigu automobilio priežiūrą ir toliau atliekame mes.',
     },
     {
       question: 'Ar reikia iš anksto užsisakyti laiką?',

@@ -25,6 +25,11 @@ const VideoShowcase: React.FC = () => {
       title: 'Odos valymas putomis',
     },
     {
+      id: 6,
+      src: '/video/video_6.mp4',
+      title: 'Odos impregnavimas',
+    },
+    {
       id: 3,
       src: '/video/video_3.MP4',
       title: 'Odos valymas',
@@ -34,21 +39,17 @@ const VideoShowcase: React.FC = () => {
       src: '/video/video_4.MP4',
       title: 'Odos impregnavimas',
     },
+
     {
-      id: 5,
-      src: '/video/video_5.mp4',
+      id: 10,
+      src: '/video/video_10.mp4',
       title: 'Odos impregnavimas',
     },
-    {
-      id: 6,
-      src: '/video/video_6.mp4',
-      title: 'Odos impregnavimas',
-    },
-    {
-      id: 7,
-      src: '/video/video_7.mp4',
-      title: 'Odos impregnavimas',
-    },
+    // {
+    //   id: 7,
+    //   src: '/video/video_7.mp4',
+    //   title: 'Odos impregnavimas',
+    // },
     // {
     //   id: 8,
     //   src: '/video/video_8.mp4',
@@ -57,6 +58,11 @@ const VideoShowcase: React.FC = () => {
     {
       id: 9,
       src: '/video/video_9.mp4',
+      title: 'Odos impregnavimas',
+    },
+    {
+      id: 5,
+      src: '/video/video_5.mp4',
       title: 'Odos impregnavimas',
     },
   ];
@@ -117,8 +123,9 @@ const VideoShowcase: React.FC = () => {
             Valymo procesas
           </h2>
           <p className='text-xl text-gray-300 max-w-2xl mx-auto mb-8'>
-            Pažiūrėkite, kaip vyksta profesionalus automobilio valymas.
-            Kiekvienas žingsnis kruopščiai atliekamas.
+            Mūsų komanda naudoja pažangiausias technologijas ir metodus, kad
+            kiekvienas automobilis būtų išvalytas iki tobulybės. Pažiūrėkite,
+            kaip mes dirbame ir kodėl mūsų klientai mumis pasitiki.
           </p>
         </div>
 
@@ -182,7 +189,7 @@ const VideoShowcase: React.FC = () => {
         </div>
 
         {/* Bottom info */}
-        <div className='text-center mt-16'>
+        {/* <div className='text-center mt-16'>
           <div className='bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10'>
             <h3 className='text-2xl font-bold text-white mb-4'>
               Profesionalus procesas
@@ -193,7 +200,7 @@ const VideoShowcase: React.FC = () => {
               kaip mes dirbame ir kodėl mūsų klientai mums pasitiki.
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Floating particles - Fixed positions to avoid hydration mismatch */}
