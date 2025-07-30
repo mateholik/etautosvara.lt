@@ -4,7 +4,7 @@ import React from 'react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { scrollToSection } from '@/lib/utils';
 
-const Hero: React.FC = () => {
+const HeroOption1: React.FC = () => {
   const handleScrollDown = () => {
     scrollToSection('services');
   };
@@ -24,25 +24,22 @@ const Hero: React.FC = () => {
 
       {/* Content Container */}
       <div className='relative z-10 container mx-auto px-4 py-12 md:py-16 text-center'>
-        <div className='max-w-4xl mx-auto'>
-          {/* Main Heading */}
-          <h1 className='text-3xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-white mb-6 animate-fade-in leading-tight'>
-            <span className='block mb-1'>Profesionali</span>
-            <span className='text-accent'>automobilių priežiūra</span>
-          </h1>
-
-          {/* Detailing Studio Badge */}
-          <div className='mb-6 md:mb-8 animate-fade-in'>
-            <span className='inline-block bg-accent/10 backdrop-blur-sm border border-accent/20 rounded-full px-3 py-1.5 md:px-4 md:py-2 text-white font-medium text-xs md:text-xl uppercase tracking-wider'>
+        <div className='max-w-5xl mx-auto'>
+          {/* Detailing Studio Badge - Smaller, Supporting Role */}
+          <div className='mb-4 animate-fade-in'>
+            <span className='inline-block bg-accent/15 backdrop-blur-sm border border-accent/30 rounded-full px-4 py-1.5 text-accent font-semibold text-sm uppercase tracking-wider'>
               Detailing Studio
             </span>
           </div>
 
-          {/* Subheading */}
-          {/* <p className='text-lg md:text-lg lg:text-xl xl:text-2xl text-gray-300 mb-0 animate-fade-in max-w-3xl mx-auto leading-relaxed px-4'>
-            Kokybė, kuri matoma. <br /> Patikimas partneris jūsų automobilio
-            priežiūrai.
-          </p> */}
+          {/* Main Value Proposition - Dominant */}
+          <h1 className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 animate-fade-in leading-tight'>
+            <span className='block mb-2'>Profesionali</span>
+            <span className='text-accent block'>automobilių priežiūra</span>
+            <span className='block text-2xl md:text-3xl lg:text-4xl font-medium text-gray-300 mt-4'>
+              Jūsų automobilis nusipelno geriausio
+            </span>
+          </h1>
         </div>
       </div>
 
@@ -63,4 +60,4 @@ const Hero: React.FC = () => {
   );
 };
 
-export default Hero;
+export default HeroOption1;
