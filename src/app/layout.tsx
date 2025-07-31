@@ -123,9 +123,10 @@ export default function RootLayout({
         <link rel='icon' href='/favicon.png' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <meta name='theme-color' content='#1a1a1a' />
+
         <meta
           name='google-site-verification'
-          content='YOUR_GOOGLE_SITE_VERIFICATION_CODE'
+          content='pPi18SfYFwGxN5jOdWPbXx5Kc1oXvaYMcEWU56AA6mc'
         />
         <script
           type='application/ld+json'
