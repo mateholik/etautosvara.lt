@@ -36,7 +36,7 @@ export const metadata: Metadata = {
       'Susipažinkite su mūsų komanda ir patirtimi automobilio estetikos srityje. Keraminės dangos, PPF plėvelės, profesionalus kėbulo poliravimas Vilniuje.',
     images: [
       {
-        url: '/og.jpg',
+        url: 'https://etautosvara.lt/og.jpg',
         width: 1200,
         height: 630,
         alt: 'ET Auto Švara komanda - automobilio estetikos specialistai',
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     title: 'Apie ET Auto Švara - Profesionalūs automobilio valymo specialistai',
     description:
       'Automobilio estetikos specialistų komanda su daugiamate patirtimi. Keraminės dangos, PPF plėvelės, kėbulo poliravimas Vilniuje. Skambinkite: +370 606 47 967',
-    images: ['/og.jpg'],
+    images: ['https://etautosvara.lt/og.jpg'],
   },
 
   alternates: {

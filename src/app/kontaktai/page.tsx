@@ -43,7 +43,7 @@ export const metadata: Metadata = {
       'Susisiekite su ET Auto Švara profesionalaus automobilio valymo paslaugoms. Telefonas: +370 606 47 967. Adresas: Saulėtoji g. 8, Ližiškės, Vilnius. Užsisakykite paslaugą lengvai.',
     images: [
       {
-        url: '/og.jpg',
+        url: 'https://etautosvara.lt/og.jpg',
         width: 1200,
         height: 630,
         alt: 'ET Auto Švara kontaktai - automobilio valymas Vilnius',
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     title: 'Kontaktai - ET Auto Švara Vilnius',
     description:
       'Susisiekite dėl profesionalaus automobilio valymo: ☎️ +370 606 47 967 📧 info@etautosvara.lt 📍 Saulėtoji g. 8, Ližiškės, Vilnius',
-    images: ['/og.jpg'],
+    images: ['https://etautosvara.lt/og.jpg'],
   },
 
   alternates: {

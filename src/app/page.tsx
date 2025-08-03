@@ -14,10 +14,9 @@ import { getPageSchemas } from '@/lib/structured-data';
 import { StructuredData } from '@/components/StructuredData';
 
 export const metadata: Metadata = {
-  title:
-    'ET Auto Švara - Profesionalus automobilio valymas Vilniuje | Detailing Studio',
+  title: 'Profesionali automobilių priežiūra Vilniuje | Detailing Studio',
   description:
-    'Premium automobilio valymas Vilniuje ⭐ Cheminis salono valymas nuo 250€, kėbulo poliravimas, keraminės dangos. Profesionalūs specialistai, garantija. ☎️ +370 606 47 967',
+    'Premium automobilio valymas Vilniuje ⭐ Cheminis salono valymas nuo 250€, kėbulo poliravimas, keraminės dangos. Profesionalūs specialistai. ☎️ +370 606 47 967',
   keywords: [
     'automobilio valymas Vilnius',
     'detailing studio Vilnius',
@@ -40,12 +39,12 @@ export const metadata: Metadata = {
     locale: 'lt_LT',
     url: 'https://etautosvara.lt',
     siteName: 'ET Auto Švara',
-    title: 'ET Auto Švara - Detailing Studio Vilniuje',
+    title: 'Profesionali automobilių priežiūra Vilniuje | Detailing Studio',
     description:
-      'Profesionalus automobilio valymas ir priežiūra Vilniuje. Cheminis salono valymas, kėbulo poliravimas, keraminės dangos. Geriausių specialistų komanda.',
+      'Premium automobilio valymas Vilniuje ⭐ Cheminis salono valymas nuo 250€, kėbulo poliravimas, keraminės dangos. Profesionalūs specialistai. ☎️ +370 606 47 967',
     images: [
       {
-        url: '/og.jpg',
+        url: 'https://etautosvara.lt/og.jpg',
         width: 1200,
         height: 630,
         alt: 'ET Auto Švara - Profesionalus automobilio valymas Vilniuje',
@@ -58,10 +57,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@etautosvara',
     creator: '@etautosvara',
-    title: 'ET Auto Švara - Detailing Studio Vilniuje',
+    title: 'Profesionali automobilių priežiūra Vilniuje | Detailing Studio',
     description:
-      'Profesionalus automobilio valymas Vilniuje. Cheminis salono valymas nuo 250€, kėbulo poliravimas, keraminės dangos. Skambinkite: +370 606 47 967',
-    images: ['/og.jpg'],
+      'Premium automobilio valymas Vilniuje ⭐ Cheminis salono valymas nuo 250€, kėbulo poliravimas, keraminės dangos. Profesionalūs specialistai. ☎️ +370 606 47 967',
+    images: ['https://etautosvara.lt/og.jpg'],
   },
 
   alternates: {

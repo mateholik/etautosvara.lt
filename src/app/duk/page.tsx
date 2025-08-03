@@ -46,7 +46,7 @@ export const metadata: Metadata = {
       'Atsakymai į populiariausius klausimus apie automobilio valymą, kėbulo poliravimą, cheminio valymo trukmę, kainas. Sužinokite viską apie mūsų paslaugas.',
     images: [
       {
-        url: '/og.jpg',
+        url: 'https://etautosvara.lt/og.jpg',
         width: 1200,
         height: 630,
         alt: 'ET Auto Švara DUK - dažnai užduodami klausimai',
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     title: 'Dažnai užduodami klausimai - ET Auto Švara',
     description:
       'Atsakymai į populiariausius klausimus apie automobilio valymą: trukmė, kainos nuo 25€, garantija, valymo produktai. Susisiekite: +370 606 47 967',
-    images: ['/og.jpg'],
+    images: ['https://etautosvara.lt/og.jpg'],
   },
 
   alternates: {

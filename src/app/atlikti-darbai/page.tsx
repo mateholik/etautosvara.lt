@@ -46,7 +46,7 @@ export const metadata: Metadata = {
       'Realūs mūsų darbo rezultatai: prieš ir po nuotraukos automobilio valymo, kėbulo poliravimo, cheminio valymo. Darbo eigos pavyzdžiai su skaidriomis kainomis nuo 25€.',
     images: [
       {
-        url: '/og.jpg',
+        url: 'https://etautosvara.lt/og.jpg',
         width: 1200,
         height: 630,
         alt: 'ET Auto Švara atlikti darbai - automobilio valymo rezultatai',
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     title: 'Atlikti darbai - Automobilio valymo rezultatai',
     description:
       'Realūs darbo rezultatai: prieš ir po nuotraukos automobilio valymo, kėbulo poliravimo, cheminio valymo. Žibintų poliravimas nuo 25€, keraminės dangos nuo 250€.',
-    images: ['/og.jpg'],
+    images: ['https://etautosvara.lt/og.jpg'],
   },
 
   alternates: {

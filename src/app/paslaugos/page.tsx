@@ -43,7 +43,7 @@ export const metadata: Metadata = {
       'Automobilio priežiūros paslaugos su skaidriomis kainomis: kėbulo poliravimas nuo 250€, cheminis valymas nuo 250€, žibintų poliravimas nuo 25€, vaškavimas nuo 80€. Retro automobilių ir motociklų detailing Vilniuje.',
     images: [
       {
-        url: '/og.jpg',
+        url: 'https://etautosvara.lt/og.jpg',
         width: 1200,
         height: 630,
         alt: 'ET Auto Švara paslaugos - Automobilio priežiūra Vilniuje',
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     title: 'Automobilio priežiūros paslaugos - ET Auto Švara',
     description:
       'Automobilio detailing paslaugos su aiškiomis kainomis: kėbulo poliravimas nuo 250€, cheminis valymas nuo 250€, žibintų poliravimas nuo 25€, vaškavimas nuo 80€, PPF plėvelės nuo 500€.',
-    images: ['/og.jpg'],
+    images: ['https://etautosvara.lt/og.jpg'],
   },
 
   alternates: {

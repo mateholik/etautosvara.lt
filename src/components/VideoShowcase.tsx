@@ -10,7 +10,9 @@ interface VideoItem {
 
 const VideoShowcase: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [loadedVideos, setLoadedVideos] = useState<Set<number>>(new Set());
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const videoContainerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   // Array of cleaning process videos
   const videos: VideoItem[] = [
@@ -67,12 +69,43 @@ const VideoShowcase: React.FC = () => {
     },
   ];
 
+  // Lazy loading for individual videos
+  useEffect(() => {
+    const videoObservers: IntersectionObserver[] = [];
+
+    videoContainerRefs.current.forEach((container, index) => {
+      if (container) {
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              const videoId = videos[index].id;
+              setLoadedVideos((prev) => new Set(prev).add(videoId));
+              observer.disconnect(); // Stop observing once loaded
+            }
+          },
+          {
+            rootMargin: '100px', // Start loading 100px before entering viewport
+            threshold: 0.1,
+          }
+        );
+
+        observer.observe(container);
+        videoObservers.push(observer);
+      }
+    });
+
+    return () => {
+      videoObservers.forEach((observer) => observer.disconnect());
+    };
+  }, [videos]);
+
+  // Section visibility and video playback control
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          // Simple autoplay for all browsers
+          // Simple autoplay for all loaded videos
           videoRefs.current.forEach((video) => {
             if (video) {
               video.muted = true; // Ensure muted for autoplay
@@ -141,40 +174,61 @@ const VideoShowcase: React.FC = () => {
               className=' relative overflow-hidden rounded-2xl shadow-2xl '
             >
               {/* Video container */}
-              <div className='relative aspect-[9/16] bg-black rounded-2xl overflow-hidden'>
-                <video
-                  ref={(el) => {
-                    videoRefs.current[index] = el;
-                  }}
-                  className='w-full h-full object-cover'
-                  loop
-                  muted
-                  playsInline
-                  autoPlay
-                  preload='metadata'
-                  webkit-playsinline='true'
-                  x5-playsinline='true'
-                  x5-video-player-type='h5'
-                  x5-video-player-fullscreen='true'
-                  x5-video-orientation='portrait'
-                  controls={false}
-                  disablePictureInPicture
-                  disableRemotePlayback
-                  onError={(e) => {
-                    console.error('Video error:', e);
-                  }}
-                >
-                  <source src={video.src} type='video/mp4' />
-                  <source
-                    src={video.src.replace('.MP4', '.webm')}
-                    type='video/webm'
-                  />
-                  <source
-                    src={video.src.replace('.MP4', '.mov')}
-                    type='video/quicktime'
-                  />
-                  Your browser does not support the video tag.
-                </video>
+              <div
+                ref={(el) => {
+                  videoContainerRefs.current[index] = el;
+                }}
+                className='relative aspect-[9/16] bg-black rounded-2xl overflow-hidden'
+              >
+                {loadedVideos.has(video.id) ? (
+                  <video
+                    ref={(el) => {
+                      videoRefs.current[index] = el;
+                    }}
+                    className='w-full h-full object-cover'
+                    loop
+                    muted
+                    playsInline
+                    autoPlay
+                    preload='none'
+                    webkit-playsinline='true'
+                    x5-playsinline='true'
+                    x5-video-player-type='h5'
+                    x5-video-player-fullscreen='true'
+                    x5-video-orientation='portrait'
+                    controls={false}
+                    disablePictureInPicture
+                    disableRemotePlayback
+                    onError={(e) => {
+                      console.error('Video error:', e);
+                    }}
+                  >
+                    <source src={video.src} type='video/mp4' />
+                    <source
+                      src={video.src.replace('.MP4', '.webm')}
+                      type='video/webm'
+                    />
+                    <source
+                      src={video.src.replace('.MP4', '.mov')}
+                      type='video/quicktime'
+                    />
+                    Your browser does not support the video tag.
+                  </video>
+                ) : (
+                  // Placeholder while video is not loaded
+                  <div className='w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center'>
+                    <div className='text-white/30 text-center'>
+                      <svg
+                        className='w-12 h-12 mx-auto mb-2'
+                        fill='currentColor'
+                        viewBox='0 0 20 20'
+                      >
+                        <path d='M8 5v10l7-5-7-5z' />
+                      </svg>
+                      <p className='text-xs'>Loading...</p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           ))}
