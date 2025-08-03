@@ -90,7 +90,6 @@ export default function Home() {
   return (
     <>
       <StructuredData schema={schemas} />
-      <Header />
       <Hero />
       {/* <Hero2 /> */}
       <Services visibleAmount={3} showAllCta={true} />

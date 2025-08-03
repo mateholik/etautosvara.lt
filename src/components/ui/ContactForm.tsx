@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button } from './Button';
 
@@ -15,6 +15,7 @@ const ContactForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const formRef = useRef<HTMLDivElement>(null); // Add this ref
 
   const {
     register,
@@ -61,6 +62,14 @@ const ContactForm: React.FC = () => {
       setIsSubmitted(true);
       reset();
 
+      // Scroll to success message
+      setTimeout(() => {
+        formRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+      }, 100);
+
       // Reset success message after 5 seconds
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch (error) {
@@ -68,6 +77,14 @@ const ContactForm: React.FC = () => {
       setSubmitError(
         error instanceof Error ? error.message : 'Nežinoma klaida'
       );
+
+      // Scroll to error message
+      setTimeout(() => {
+        formRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+      }, 100);
     } finally {
       setIsSubmitting(false);
     }
@@ -75,7 +92,10 @@ const ContactForm: React.FC = () => {
 
   if (isSubmitted) {
     return (
-      <div className='bg-green-50 border border-green-200 rounded-lg p-6 text-center'>
+      <div
+        ref={formRef}
+        className='bg-green-50 border border-green-200 rounded-lg p-6 text-center'
+      >
         <div className='text-green-600 text-4xl mb-4'>✅</div>
         <h3 className='text-xl font-bold text-green-800 mb-2'>
           Ačiū už jūsų užklausą!
@@ -88,144 +108,147 @@ const ContactForm: React.FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
-      {/* Error Message */}
-      {submitError && (
-        <div className='bg-red-50 border border-red-200 rounded-lg p-4'>
-          <p className='text-red-600 text-sm'>{submitError}</p>
+    <div ref={formRef}>
+      <form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
+        {/* Error Message */}
+        {submitError && (
+          <div className='bg-red-50 border border-red-200 rounded-lg p-4'>
+            <p className='text-red-600 text-sm'>{submitError}</p>
+          </div>
+        )}
+
+        {/* Name Field */}
+        <div>
+          <label
+            htmlFor='name'
+            className='block text-sm font-medium text-white mb-2'
+          >
+            Vardas *
+          </label>
+          <input
+            type='text'
+            id='name'
+            {...register('name', {
+              required: 'Vardas yra privalomas',
+              minLength: {
+                value: 2,
+                message: 'Vardas turi būti bent 2 simbolių ilgio',
+              },
+            })}
+            className={`w-full p-3 rounded-lg text-primary bg-white border ${
+              errors.name ? 'border-red-500' : 'border-gray-300'
+            } focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
+            placeholder='Jūsų vardas'
+            disabled={isSubmitting}
+          />
+          {errors.name && (
+            <p className='text-red-300 text-sm mt-1'>{errors.name.message}</p>
+          )}
         </div>
-      )}
 
-      {/* Name Field */}
-      <div>
-        <label
-          htmlFor='name'
-          className='block text-sm font-medium text-white mb-2'
-        >
-          Vardas *
-        </label>
-        <input
-          type='text'
-          id='name'
-          {...register('name', {
-            required: 'Vardas yra privalomas',
-            minLength: {
-              value: 2,
-              message: 'Vardas turi būti bent 2 simbolių ilgio',
-            },
-          })}
-          className={`w-full p-3 rounded-lg text-primary bg-white border ${
-            errors.name ? 'border-red-500' : 'border-gray-300'
-          } focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
-          placeholder='Jūsų vardas'
+        {/* Email Field */}
+        <div>
+          <label
+            htmlFor='email'
+            className='block text-sm font-medium text-white mb-2'
+          >
+            El. paštas *
+          </label>
+          <input
+            type='email'
+            id='email'
+            {...register('email', {
+              required: 'El. paštas yra privalomas',
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: 'Įveskite teisingą el. pašto adresą',
+              },
+            })}
+            className={`w-full p-3 rounded-lg text-primary bg-white border ${
+              errors.email ? 'border-red-500' : 'border-gray-300'
+            } focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
+            placeholder='jusu@email.com'
+            disabled={isSubmitting}
+          />
+          {errors.email && (
+            <p className='text-red-300 text-sm mt-1'>{errors.email.message}</p>
+          )}
+        </div>
+
+        {/* Phone Field */}
+        <div>
+          <label
+            htmlFor='phone'
+            className='block text-sm font-medium text-white mb-2'
+          >
+            Telefono numeris
+          </label>
+          <input
+            type='tel'
+            id='phone'
+            {...register('phone', {
+              pattern: {
+                value:
+                  /^[\+]?[(]?[\+]?\d{2,3}[)]?[-\s\.]?\d{1,3}[-\s\.]?\d{2,3}[-\s\.]?\d{2,4}$/,
+                message: 'Įveskite teisingą telefono numerį',
+              },
+            })}
+            className={`w-full p-3 rounded-lg text-primary bg-white border ${
+              errors.phone ? 'border-red-500' : 'border-gray-300'
+            } focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
+            placeholder='+37060012345'
+            disabled={isSubmitting}
+          />
+          {errors.phone && (
+            <p className='text-red-300 text-sm mt-1'>{errors.phone.message}</p>
+          )}
+        </div>
+
+        {/* Message Field */}
+        <div>
+          <label
+            htmlFor='message'
+            className='block text-sm font-medium text-white mb-2'
+          >
+            Žinutė *
+          </label>
+          <textarea
+            id='message'
+            {...register('message', {
+              required: 'Žinutė yra privaloma',
+              minLength: {
+                value: 10,
+                message: 'Žinutė turi būti bent 10 simbolių ilgio',
+              },
+            })}
+            rows={4}
+            className={`w-full p-3 rounded-lg text-primary bg-white border ${
+              errors.message ? 'border-red-500' : 'border-gray-300'
+            } focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent resize-vertical`}
+            placeholder='Aprašykite savo poreikius...'
+            disabled={isSubmitting}
+          />
+          {errors.message && (
+            <p className='text-red-300 text-sm mt-1'>
+              {errors.message.message}
+            </p>
+          )}
+        </div>
+
+        {/* Submit Button */}
+        <Button
+          type='submit'
+          variant='primary'
+          size='lg'
+          className='w-full'
+          isLoading={isSubmitting}
           disabled={isSubmitting}
-        />
-        {errors.name && (
-          <p className='text-red-300 text-sm mt-1'>{errors.name.message}</p>
-        )}
-      </div>
-
-      {/* Email Field */}
-      <div>
-        <label
-          htmlFor='email'
-          className='block text-sm font-medium text-white mb-2'
         >
-          El. paštas *
-        </label>
-        <input
-          type='email'
-          id='email'
-          {...register('email', {
-            required: 'El. paštas yra privalomas',
-            pattern: {
-              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-              message: 'Įveskite teisingą el. pašto adresą',
-            },
-          })}
-          className={`w-full p-3 rounded-lg text-primary bg-white border ${
-            errors.email ? 'border-red-500' : 'border-gray-300'
-          } focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
-          placeholder='jusu@email.com'
-          disabled={isSubmitting}
-        />
-        {errors.email && (
-          <p className='text-red-300 text-sm mt-1'>{errors.email.message}</p>
-        )}
-      </div>
+          {isSubmitting ? 'Siunčiama...' : 'Siųsti užklausą'}
+        </Button>
 
-      {/* Phone Field */}
-      <div>
-        <label
-          htmlFor='phone'
-          className='block text-sm font-medium text-white mb-2'
-        >
-          Telefono numeris
-        </label>
-        <input
-          type='tel'
-          id='phone'
-          {...register('phone', {
-            pattern: {
-              value:
-                /^[\+]?[(]?[\+]?\d{2,3}[)]?[-\s\.]?\d{1,3}[-\s\.]?\d{2,3}[-\s\.]?\d{2,4}$/,
-              message: 'Įveskite teisingą telefono numerį',
-            },
-          })}
-          className={`w-full p-3 rounded-lg text-primary bg-white border ${
-            errors.phone ? 'border-red-500' : 'border-gray-300'
-          } focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent`}
-          placeholder='+37060012345'
-          disabled={isSubmitting}
-        />
-        {errors.phone && (
-          <p className='text-red-300 text-sm mt-1'>{errors.phone.message}</p>
-        )}
-      </div>
-
-      {/* Message Field */}
-      <div>
-        <label
-          htmlFor='message'
-          className='block text-sm font-medium text-white mb-2'
-        >
-          Žinutė *
-        </label>
-        <textarea
-          id='message'
-          {...register('message', {
-            required: 'Žinutė yra privaloma',
-            minLength: {
-              value: 10,
-              message: 'Žinutė turi būti bent 10 simbolių ilgio',
-            },
-          })}
-          rows={4}
-          className={`w-full p-3 rounded-lg text-primary bg-white border ${
-            errors.message ? 'border-red-500' : 'border-gray-300'
-          } focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent resize-vertical`}
-          placeholder='Aprašykite savo poreikius...'
-          disabled={isSubmitting}
-        />
-        {errors.message && (
-          <p className='text-red-300 text-sm mt-1'>{errors.message.message}</p>
-        )}
-      </div>
-
-      {/* Submit Button */}
-      <Button
-        type='submit'
-        variant='primary'
-        size='lg'
-        className='w-full'
-        isLoading={isSubmitting}
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? 'Siunčiama...' : 'Siųsti užklausą'}
-      </Button>
-
-      {/* Privacy Notice */}
-      <p className='text-sm text-gray-300 text-center'>
+        {/* Privacy Notice */}
+        {/* <p className='text-sm text-gray-300 text-center'>
         Paspaudę &quot;Siųsti užklausą&quot; sutinkate su{' '}
         <a
           href='#'
@@ -238,8 +261,9 @@ const ContactForm: React.FC = () => {
           asmens duomenų tvarkymu
         </a>
         .
-      </p>
-    </form>
+      </p> */}
+      </form>
+    </div>
   );
 };
 

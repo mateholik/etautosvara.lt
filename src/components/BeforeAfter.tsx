@@ -80,11 +80,15 @@ export default function BeforeAfter({
     setCurrentImageIndex(index);
     setLightboxOpen(true);
     document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
   };
 
   const closeLightbox = () => {
     setLightboxOpen(false);
     document.body.style.overflow = 'unset';
+    document.body.style.position = 'unset';
+    document.body.style.width = 'unset';
   };
 
   const goToPrevious = useCallback(() => {
@@ -303,11 +307,8 @@ export default function BeforeAfter({
                 {/* <h3 className='text-white font-semibold text-center'>
                   {images[currentImageIndex].title}
                 </h3> */}
-                <p className='text-white/80 text-sm text-center mt-1'>
+                <p className='text-white/80 text-xs text-center mt-1'>
                   {currentImageIndex + 1} / {images.length}
-                </p>
-                <p className='text-white/60 text-xs text-center mt-1 md:hidden'>
-                  👆 Swipe left/right to navigate
                 </p>
               </div>
             </div>
