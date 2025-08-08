@@ -1,15 +1,11 @@
 import React from 'react';
-import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-// import Hero2 from '@/components/Hero2';
 import Services from '@/components/Services';
 import BeforeAfter from '@/components/BeforeAfter';
 import FAQ from '@/components/FAQ';
 import VideoShowcase from '@/components/VideoShowcase';
 import { befoAfterImages, faqItems } from '@/lib/config';
-// app/page.tsx - Homepage Metadata
 import type { Metadata } from 'next';
-
 import { getPageSchemas } from '@/lib/structured-data';
 import { StructuredData } from '@/components/StructuredData';
 
@@ -28,6 +24,8 @@ export const metadata: Metadata = {
     'automobilių priežiūra Ližiškės',
     'žibintų poliravimas',
     'automobilio vaškavimas',
+    'kairenai',
+    'galgiai',
   ].join(', '),
 
   authors: [{ name: 'ET Auto Švara' }],
@@ -91,7 +89,6 @@ export default function Home() {
     <>
       <StructuredData schema={schemas} />
       <Hero />
-      {/* <Hero2 /> */}
       <Services visibleAmount={3} showAllCta={true} />
       <VideoShowcase />
       <FAQ
