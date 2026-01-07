@@ -32,12 +32,12 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Contact Form */}
-          <div>
+          {/* <div>
             <h3 className='text-2xl font-bold mb-8'>Užsisakykite paslaugą</h3>
             <div className='bg-gray-800 rounded-xl p-6'>
               <ContactForm />
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Map Section */}
