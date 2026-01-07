@@ -66,15 +66,6 @@ const Header: React.FC = () => {
 
   const handlePhoneClick = () => {
     window.location.href = `tel:${configs.phone}`;
-
-    // Track phone clicks
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'phone_call', {
-        event_category: 'contact',
-        event_label: 'header_phone',
-        value: 1,
-      });
-    }
   };
 
   return (

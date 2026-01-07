@@ -50,15 +50,6 @@ const ContactForm: React.FC = () => {
         throw new Error(result.error || 'Klaida siunčiant formą');
       }
 
-      // Track form submission for analytics
-      if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('event', 'form_submit', {
-          event_category: 'contact',
-          event_label: 'contact_form',
-          value: 1,
-        });
-      }
-
       setIsSubmitted(true);
       reset();
 

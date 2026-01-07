@@ -44,16 +44,6 @@ const ContactsBlock = ({ className }: { className?: string }) => {
       link: configs.facebookPageLink,
     },
   ];
-  const handlePhoneClick = (phoneNumber: string) => {
-    // Track phone clicks for analytics
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'phone_call', {
-        event_category: 'contact',
-        event_label: phoneNumber,
-        value: 1,
-      });
-    }
-  };
   return (
     <div className={`space-y-6 mb-8 ${className}`}>
       {contactInfo.map((item, index) => (
@@ -73,11 +63,6 @@ const ContactsBlock = ({ className }: { className?: string }) => {
                     ? 'noopener noreferrer'
                     : undefined
                 }
-                onClick={() => {
-                  if (item.link?.startsWith('tel:')) {
-                    handlePhoneClick(item.value);
-                  }
-                }}
               >
                 {item.value}
               </a>
