@@ -7,8 +7,11 @@ import Image from 'next/image';
 import ContactsBlock from './ContactsBlock';
 import Link from 'next/link';
 import { configs } from '@/lib/config';
+import { usePathname } from 'next/navigation';
 
 const Contact: React.FC = () => {
+  const pathname = usePathname() || '/';
+
   return (
     <section id='contact' className='py-20 bg-primary text-white'>
       <div className='container mx-auto px-4'>
@@ -28,7 +31,7 @@ const Contact: React.FC = () => {
             <h3 className='text-2xl font-bold mb-8'>Susisiekite su mumis</h3>
 
             {/* Contact Details */}
-            <ContactsBlock />
+            <ContactsBlock trackingLocation='contact_section' />
           </div>
 
           {/* Contact Form */}
@@ -100,6 +103,9 @@ const Contact: React.FC = () => {
               <a
                 href={`tel:${configs.phone}`}
                 className='bg-accent hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center'
+                data-event='call_click'
+                data-location='contact_cta'
+                data-page-path={pathname}
               >
                 📞 Skambinti dabar
               </a>

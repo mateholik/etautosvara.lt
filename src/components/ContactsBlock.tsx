@@ -7,8 +7,19 @@ import {
   EnvelopeIcon,
 } from '@heroicons/react/24/outline';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
-const ContactsBlock = ({ className }: { className?: string }) => {
+type ContactsBlockProps = {
+  className?: string;
+  trackingLocation?: string;
+};
+
+const ContactsBlock = ({
+  className,
+  trackingLocation = 'contacts_block',
+}: ContactsBlockProps) => {
+  const pathname = usePathname() || '/';
+
   const contactInfo = [
     {
       icon: <PhoneIcon className='w-6 h-6' />,
@@ -62,6 +73,15 @@ const ContactsBlock = ({ className }: { className?: string }) => {
                   item.link.startsWith('http')
                     ? 'noopener noreferrer'
                     : undefined
+                }
+                data-event={
+                  item.link.startsWith('tel:') ? 'call_click' : undefined
+                }
+                data-location={
+                  item.link.startsWith('tel:') ? trackingLocation : undefined
+                }
+                data-page-path={
+                  item.link.startsWith('tel:') ? pathname : undefined
                 }
               >
                 {item.value}

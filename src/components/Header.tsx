@@ -94,6 +94,9 @@ const Header: React.FC = () => {
                       className='text-white hover:text-accent transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary rounded-md px-2 py-1 text-sm'
                       role='menuitem'
                       aria-label={item.ariaLabel}
+                      data-event='nav_click'
+                      data-nav-item={item.name}
+                      data-page-path={pathname}
                     >
                       {item.name}
                     </button>
@@ -128,6 +131,9 @@ const Header: React.FC = () => {
                       className='text-white hover:text-accent transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary rounded-md px-2 py-1 text-sm'
                       role='menuitem'
                       aria-label={item.ariaLabel}
+                      data-event='nav_click'
+                      data-nav-item={item.name}
+                      data-page-path={pathname}
                     >
                       {item.name}
                     </button>
@@ -140,6 +146,9 @@ const Header: React.FC = () => {
                 size='sm'
                 className='flex items-center justify-center w-10 h-10 p-0'
                 aria-label={`Skambinti telefonu ${configs.phone}`}
+                data-event='call_click'
+                data-location='header_desktop_icon'
+                data-page-path={pathname}
               >
                 <PhoneIcon className='w-5 h-5' aria-hidden='true' />
               </Button>
@@ -180,6 +189,9 @@ const Header: React.FC = () => {
                         className='block w-full text-left px-4 py-3 text-white hover:text-accent hover:bg-white/10 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary'
                         role='menuitem'
                         aria-label={item.ariaLabel}
+                        data-event='nav_click'
+                        data-nav-item={item.name}
+                        data-page-path={pathname}
                       >
                         {item.name}
                       </button>
@@ -195,6 +207,9 @@ const Header: React.FC = () => {
                     size='sm'
                     className='w-full flex items-center justify-center gap-2'
                     aria-label={`Skambinti telefonu ${configs.phone}`}
+                    data-event='call_click'
+                    data-location='header_mobile_phone'
+                    data-page-path={pathname}
                   >
                     <PhoneIcon className='w-4 h-4' aria-hidden='true' />
                     {configs.phone}

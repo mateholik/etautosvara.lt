@@ -8,6 +8,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 type Image = {
   id: number;
@@ -36,6 +37,7 @@ export default function BeforeAfter({
   const [isMobile, setIsMobile] = useState(false);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+  const pathname = usePathname() || '/';
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -166,6 +168,11 @@ export default function BeforeAfter({
                 animationDelay: `${index * 0.05}s`,
               }}
               onClick={() => openLightbox(index)}
+              data-event='image_open'
+              data-gallery-section={title}
+              data-image-name={image.alt || `image-${image.id}`}
+              data-image-index={index}
+              data-page-path={pathname}
             >
               <div className='relative overflow-hidden bg-gray-100 aspect-square'>
                 <Image

@@ -6,6 +6,7 @@ import {
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { configs } from '@/lib/config';
+import { usePathname } from 'next/navigation';
 
 interface ContactOption {
   id: string;
@@ -18,6 +19,7 @@ interface ContactOption {
 const ContactCTA = () => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname() || '/';
 
   const contactOptions: ContactOption[] = [
     {
@@ -80,6 +82,9 @@ const ContactCTA = () => {
               style={{
                 animationDelay: `${index * 100}ms`,
               }}
+              data-event='contact_option'
+              data-channel={option.id}
+              data-page-path={pathname}
             >
               {/* Contact Card */}
               <div className='bg-slate-700 hover:bg-slate-600 transition-colors duration-200 rounded-lg shadow-lg flex items-center p-3 mr-0 min-w-48'>

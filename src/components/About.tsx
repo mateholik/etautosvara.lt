@@ -10,8 +10,11 @@ import {
 import Link from 'next/link';
 import Image from 'next/image';
 import { configs } from '@/lib/config';
+import { usePathname } from 'next/navigation';
 
 const About: React.FC = () => {
+  const pathname = usePathname() || '/';
+
   return (
     <section id='about' className='py-20 bg-primary text-white'>
       <div className='container mx-auto px-4'>
@@ -110,6 +113,9 @@ const About: React.FC = () => {
                 <a
                   href={`tel:${configs.phone}`}
                   className='bg-accent hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center'
+                  data-event='call_click'
+                  data-location='about_section'
+                  data-page-path={pathname}
                 >
                   📞 Susisiekti dabar
                 </a>

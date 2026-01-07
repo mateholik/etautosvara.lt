@@ -5,6 +5,7 @@ import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { configs } from '@/lib/config';
 import { FAQItem } from '@/types';
+import { usePathname } from 'next/navigation';
 
 type FAQProps = {
   visibleAmount?: number;
@@ -19,6 +20,7 @@ export default function FAQ({
   faqItems = [],
 }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const pathname = usePathname() || '/';
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -100,6 +102,9 @@ export default function FAQ({
                 <a
                   href={`tel:${configs.phone}`}
                   className='bg-accent hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center'
+                  data-event='call_click'
+                  data-location='faq_banner'
+                  data-page-path={pathname}
                 >
                   📞 Skambinti dabar
                 </a>
